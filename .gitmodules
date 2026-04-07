@@ -1,0 +1,20 @@
+[submodule "JobsConfigHotKeyByHammerspoon"]
+	path = JobsConfigHotKeyByHammerspoon
+	url = https://github.com/JobsKits/JobsConfigHotKeyByHammerspoon.git
+	branch = main
+[submodule "JobsMacEnvVarConfig"]
+	path = JobsMacEnvVarConfig
+	url = https://github.com/JobsKits/JobsMacEnvVarConfig.git
+	branch = main
+[submodule "SourceTree.sh"]
+	path = SourceTree.sh
+	url = https://github.com/JobsKits/SourceTree.sh.git
+	branch = main
+[submodule "JobsCodeSnippets"]
+	path = JobsCodeSnippets
+	url = https://github.com/JobsKits/JobsCodeSnippets.git
+	branch = main
+[submodule "JobsSoftware.MacOS"]
+	path = JobsSoftware.MacOS
+	url = https://github.com/JobsKits/JobsSoftware.MacOS.git
+	branch = main
