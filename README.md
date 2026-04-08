@@ -92,4 +92,10 @@
   https://www.python.org/downloads/
   ```
 
+* 关于AI（目前尚未接入脚本）
+
+  * [**Ollama**](https://ollama.com/download/mac)
   
+    ```shell
+    curl -fsSL https://ollama.com/install.sh | sh
+    ```
