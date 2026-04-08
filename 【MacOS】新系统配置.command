@@ -161,6 +161,17 @@ ensure_brew_access_or_exit() {
     exit 1
 }
 
+# 安装 Rosetta（仅 Apple Silicon，且未安装时）
+ensure_rosetta_if_needed() {
+    if [[ $(uname -m) == 'arm64' ]]; then
+        if ! /usr/bin/pgrep oahd >/dev/null 2>&1; then
+            run_cmd "安装 Rosetta 2" /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+        else
+            info_echo "检测到 Rosetta 2 已安装，跳过"
+        fi
+    fi
+}
+
 # =========================
 # 自述文件 / 启动说明
 # =========================
@@ -274,6 +285,7 @@ install_or_upgrade_homebrew() {
     arch="$(get_cpu_arch)"
 
     ensure_brew_access_or_exit
+    ensure_rosetta_if_needed
 
     if require_command brew; then
         info_echo "已检测到 Homebrew，执行更新与升级流程"
