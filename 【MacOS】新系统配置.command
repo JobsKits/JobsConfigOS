@@ -333,7 +333,10 @@ brew_install_if_needed() {
     if brew list --formula | grep -Fxq "${pkg}"; then
         info_echo "brew formula 已安装：${pkg}"
     else
-        run_cmd "安装 brew formula：${pkg}" brew install "${pkg}"
+        if ! run_cmd "安装 brew formula：${pkg}" brew install "${pkg}"; then
+            error_echo "brew formula 安装失败：${pkg}"
+            return 1
+        fi
     fi
 }
 
@@ -357,6 +360,9 @@ stage_brew_packages() {
 
     info_echo "开始安装 brew formula..."
     local formulae=(
+        git-lfs
+        gh
+        rbenv
         node
         jenv
         fvm
@@ -373,8 +379,31 @@ stage_brew_packages() {
 
     local pkg
     for pkg in "${formulae[@]}"; do
-        brew_install_if_needed "${pkg}"
+        brew_install_if_needed "${pkg}" || return 1
     done
+
+    # Git LFS 初始化
+    if require_command git && git lfs version >/dev/null 2>&1; then
+        info_echo "初始化 Git LFS..."
+        git lfs install || {
+            error_echo "Git LFS 初始化失败"
+            return 1
+        }
+
+        info_echo "配置 Git 大文件传输参数..."
+        git config --global core.compression 0 || {
+            error_echo "git config core.compression 失败"
+            return 1
+        }
+
+        git config --global http.postBuffer 524288000 || {
+            error_echo "git config http.postBuffer 失败"
+            return 1
+        }
+    else
+        error_echo "git-lfs 未正确安装，无法执行 git lfs install"
+        return 1
+    fi
 
     info_echo "开始安装 brew cask..."
     local casks=(
