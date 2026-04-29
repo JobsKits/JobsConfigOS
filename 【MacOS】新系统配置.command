@@ -375,6 +375,8 @@ stage_brew_packages() {
         hugo
         openjdk
         openjdk@17
+        yt-dlp ffmpeg
+#        --cask vlc
     )
 
     local pkg
