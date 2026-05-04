@@ -362,6 +362,7 @@ stage_brew_packages() {
     local formulae=(
         git-lfs
         gh
+        nushell
         rbenv
         node
         jenv
