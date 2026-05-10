@@ -22,3 +22,7 @@
 	path = 🌲SourceTree.sh
 	url = https://github.com/JobsKits/SourceTree.sh.git
 	branch = main
+[submodule "⚙️VScodeConfigs"]
+	path = ⚙️VScodeConfigs
+	url = https://github.com/JobsKits/VScodeConfigs.git
+	branch = main
