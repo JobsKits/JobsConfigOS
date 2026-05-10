@@ -4,7 +4,7 @@
 
 [toc]
 
-## 一、温馨提示
+## 一、前言
 
 * 做不到真正意义上的无人值守，但是可以把新系统配置流程标准化，减少重复操作，尽量平行各端环境。
 * 本仓库更适合当作 **MacOS 新系统初始化入口**：先完成基础开发环境，再通过 `JobsKits` 相关子仓同步个人工具、环境变量、编辑器配置、快捷键配置、安装脚本等内容。
@@ -159,7 +159,7 @@ pod --version
 
 ### 2.7、[**JobsKits**](https://github.com/JobsKits/)
 
-> 这一段是当前 README 的重点升级位置：不再建议手动一个个下载 [JobsKits](https://github.com/JobsKits/) 仓库，而是优先使用 `【MacOS】⏬下载配置当前Git子模块.command` 统一下载、登记、更新 Git 子模块。
+> 这一段是当前 README 的重点升级位置：不再建议手动一个个下载 [**JobsKits**](https://github.com/JobsKits/) 仓库，而是优先使用 `【MacOS】⏬下载配置当前Git子模块.command` 统一下载、登记、更新 Git 子模块。
 
 #### 2.7.1、网络要求
 
@@ -235,7 +235,29 @@ SUBMODULE_REPO_URLS=(
 
 ## 三、`【MacOS】⏬下载配置当前Git子模块.command` 详细说明
 
-### 3.1、脚本定位
+### 3.1、流程简述
+
+```mermaid
+graph TD
+    A([开始]) --> B[解析用户输入的子模块配置]
+    B --> C{是否配置了子模块URL列表？}
+    C --> |是| D[解析每个子模块的页面URL和本地路径]
+    C --> |否| E([结束])
+    D --> F{是否启用浅克隆？}
+    F --> |是| G[设置浅克隆参数]
+    F --> |否| H[使用完整克隆]
+    G --> I[执行子模块克隆或更新操作]
+    H --> I
+    I --> J{是否自动提交父仓库变更？}
+    J --> |是| K[提交.gitmodules变更]
+    J --> |否| L([结束])
+    K --> M{是否自动推送父仓库？}
+    M --> |是| N[推送父仓库到远程]
+    M --> |否| L
+    N --> L
+```
+
+### 3.2、脚本定位
 
 该脚本用于管理当前父 **Git** 仓库下的子模块。它会根据脚本顶部 `SUBMODULE_REPO_URLS` 中的配置完成以下工作：
 
@@ -251,7 +273,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.2、脚本放置位置
+### 3.3、脚本放置位置
 
 * 推荐结构：
 
@@ -274,7 +296,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.3、启动后的主菜单
+### 3.4、启动后的主菜单
 
 * 脚本使用 `fzf` 渲染主菜单：
 
@@ -313,7 +335,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.4、菜单动作：全量同步更新下载到最新
+### 3.5、菜单动作：全量同步更新下载到最新
 
 * 适合：
 
@@ -352,7 +374,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.5、菜单动作：选择指定子模块同步（可多选）
+### 3.6、菜单动作：选择指定子模块同步（可多选）
 
 * 这个二级页面不使用 `fzf` 的多选模式，而是使用类似 [**OpenClaw**](https://github.com/openclaw/openclaw) 引导菜单的键盘交互。
 
@@ -382,7 +404,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.6、菜单动作：只更新目前已有的
+### 3.7、菜单动作：只更新目前已有的
 
 * 适合日常增量更新。
 
@@ -399,7 +421,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.7、菜单动作：添加并同步一个新的 Git 地址
+### 3.8、菜单动作：添加并同步一个新的 Git 地址
 
 * 适合临时添加一个新 **JobsKits** 子仓并立即同步。
 
@@ -428,7 +450,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.8、[**Homebrew**](https://brew.sh/)/[**fzf**](https://junegunn.GitHub .io/fzf/) 自检
+### 3.9、[**Homebrew**](https://brew.sh/)/[**fzf**](https://junegunn.GitHub .io/fzf/) 自检
 
 * 脚本在第一次使用 `fzf` 前会自检。
 
@@ -470,7 +492,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.9、HTTPS / SSH 自动适配
+### 3.10、HTTPS / SSH 自动适配
 
 > 设计目标：同一个脚本换到另一台电脑，只要父仓 `origin` 协议不同，子仓同步协议就自动跟着变，不需要每次运行前手动拼一长串环境变量。
 
@@ -510,7 +532,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.10、`.gitmodules` 管理策略
+### 3.11、`.gitmodules` 管理策略
 
 * 脚本会对 `.gitmodules` 做“查漏补缺”，不是无脑重写整个文件。
 
@@ -560,7 +582,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.11、子仓同步策略
+### 3.12、子仓同步策略
 
 * 默认优先分支：
 
@@ -604,7 +626,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.12、父仓处理策略
+### 3.13、父仓处理策略
 
 > 脚本把自身所在目录视为父仓
 
@@ -656,9 +678,9 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.13、安全机制
+### 3.14、安全机制
 
-#### 3.13.1、子仓有未提交内容时不更新、不删除
+#### 3.14.1、子仓有未提交内容时不更新、不删除
 
 * 脚本检查
 
@@ -695,7 +717,7 @@ SUBMODULE_REPO_URLS=(
 
   <font color=red size=15>**脚本不会替用户丢弃改动**</font>
 
-#### 3.13.2、非 Git 非空目录默认不删
+#### 3.14.2、非 Git 非空目录默认不删
 
 * 如果目标目录存在，但不是 Git 工作区，也不是空目录，脚本默认拒绝覆盖或删除。
 
@@ -709,7 +731,7 @@ SUBMODULE_REPO_URLS=(
 
 ---
 
-### 3.14、环境变量开关
+### 3.15、环境变量开关
 
 | 变量 | 默认值 | 说明 |
 |---|---:|---|
@@ -754,7 +776,7 @@ SUBMODULE_SHALLOW_CLONE=0 SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当
 
 ---
 
-### 3.15、📔日志文件
+### 3.16、📔日志文件
 
 * 脚本每次运行都会写日志到：`/tmp/【MacOS】⏬下载配置当前Git子模块.log`
 
@@ -764,7 +786,7 @@ SUBMODULE_SHALLOW_CLONE=0 SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当
 
 ---
 
-### 3.16、常见使用场景
+### 3.17、常见使用场景
 
 #### 场景 1：新 Mac 第一次拉完整配置
 
@@ -818,7 +840,7 @@ SUBMODULE_SHALLOW_CLONE=0 SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当
 
 ---
 
-### 3.17、失败排查顺序
+### 3.18、失败排查顺序
 
 按下面顺序查，别一上来改脚本：
 
@@ -871,15 +893,15 @@ SUBMODULE_SHALLOW_CLONE=0 SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当
 
 ---
 
-### 3.18、<font color=red>F</font><font color=blue>A</font><font color=green>Q</font>
+### 3.19、<font color=red>F</font><font color=blue>A</font><font color=green>Q</font>
 
-#### 3.18.1、为什么 `.gitmodules` 里还是 HTTPS，但父仓是 SSH？
+#### 3.19.1、为什么 `.gitmodules` 里还是 HTTPS，但父仓是 SSH？
 
 * 这是正常设计。
 
   `.gitmodules` 是跨机器共享配置。脚本不会因为当前机器父仓是 SSH，就强行把已有合法 HTTPS 条目改成 SSH。实际同步时，脚本会把子仓 `origin` 改成当前机器应该使用的协议。
 
-#### 3.18.2、为什么删除了 `SUBMODULE_REPO_URLS` 的一行，`.gitmodules` 没自动删？
+#### 3.19.2、为什么删除了 `SUBMODULE_REPO_URLS` 的一行，`.gitmodules` 没自动删？
 
 * 为了安全，默认不删旧 `.gitmodules` 配置。
 
@@ -889,19 +911,19 @@ SUBMODULE_SHALLOW_CLONE=0 SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当
   PRUNE_STALE_GITMODULES=1 ./【MacOS】⏬下载配置当前Git子模块.command
   ```
 
-#### 3.18.3、为什么子仓有改动时脚本直接中断？
+#### 3.19.3、为什么子仓有改动时脚本直接中断？
 
 * 因为脚本无法判断这些改动是临时垃圾，还是正在写的重要内容。直接覆盖或删除会有丢数据风险，所以脚本只报错，不替用户决定。
 
-#### 3.18.4、为什么“只更新目前已有的”没有下载缺失子仓？
+#### 3.19.4、为什么“只更新目前已有的”没有下载缺失子仓？
 
 * 这个选项定义上就是只更新本地已经存在的已配置 Git 子目录。需要补齐全部项目时，选择“全量同步更新下载到最新”。
 
-#### 3.18.5、为什么添加新 Git 地址后，下次运行没了？
+#### 3.19.5、为什么添加新 Git 地址后，下次运行没了？
 
 * 菜单里的“添加并同步一个新的 Git 地址”只是本次运行临时追加。长期保留需要把脚本提示的页面 URL 加入 `SUBMODULE_REPO_URLS`。
 
-#### 3.18.6、为什么脚本要碰 [**Homebrew**](https://brew.sh/) / [**fzf**](https://junegunn.GitHub .io/fzf/)？
+#### 3.19.6、为什么脚本要碰 [**Homebrew**](https://brew.sh/) / [**fzf**](https://junegunn.GitHub .io/fzf/)？
 
 * 主菜单依赖 `fzf`。新 MacOS 常见问题是没有 `fzf`、[**Homebrew**](https://brew.sh/) 不在 PATH、双击 `.command` 时环境变量不完整。脚本会先补 PATH，再自检 `fzf`；`fzf` 不可用时，才进入 [**Homebrew**](https://brew.sh/) 检查和安装流程。
 
