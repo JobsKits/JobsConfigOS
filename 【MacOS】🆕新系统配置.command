@@ -377,6 +377,8 @@ stage_brew_packages() {
         openjdk
         openjdk@17
         yt-dlp ffmpeg
+        go-task/tap/go-task
+        uv
 #        --cask vlc
     )
 
