@@ -1,5 +1,5 @@
-[submodule "🔽JobsSoftware.MacOS"]
-	path = 🔽JobsSoftware.MacOS
+[submodule "⏬JobsSoftware.MacOS"]
+	path = ⏬JobsSoftware.MacOS
 	url = https://github.com/JobsKits/JobsSoftware.MacOS.git
 	branch = main
 [submodule "🌍JobsMacEnvVarConfig"]

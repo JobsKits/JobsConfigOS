@@ -379,7 +379,8 @@ stage_brew_packages() {
         yt-dlp ffmpeg
         go-task/tap/go-task
         uv
-#        --cask vlc
+        --cask trex
+        --cask vlc
     )
 
     local pkg
