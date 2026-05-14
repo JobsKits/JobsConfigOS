@@ -120,6 +120,25 @@ get_cpu_arch() {
     [[ "$(uname -m)" == "arm64" ]] && echo "arm64" || echo "x86_64"
 }
 
+# 查找 Homebrew 可执行文件
+# 说明：双击 .command 时，PATH 经常拿不到 /opt/homebrew/bin 或 /usr/local/bin。
+find_brew_bin() {
+    if command -v brew >/dev/null 2>&1; then
+        command -v brew
+        return 0
+    fi
+
+    local candidate
+    for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+        if [[ -x "${candidate}" ]]; then
+            echo "${candidate}"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 # 检测当前是否是双击启动
 is_double_click_launch() {
     [[ -z "${TERM_PROGRAM:-}" ]] && return 0
@@ -264,6 +283,11 @@ setup_brew_shellenv() {
     local target_file="${HOME}/.zprofile"
     local shellenv_line="eval \"\$(${brew_bin} shellenv)\""
 
+    if [[ ! -x "${brew_bin}" ]]; then
+        error_echo "Homebrew 可执行文件不存在或不可执行：${brew_bin}"
+        return 1
+    fi
+
     if [[ ! -f "${target_file}" ]]; then
         touch "${target_file}"
     fi
@@ -282,37 +306,45 @@ setup_brew_shellenv() {
 
 install_or_upgrade_homebrew() {
     local arch
+    local brew_bin
     arch="$(get_cpu_arch)"
 
     ensure_brew_access_or_exit
     ensure_rosetta_if_needed
 
-    if require_command brew; then
-        info_echo "已检测到 Homebrew，执行更新与升级流程"
+    # 先找现有 Homebrew。双击 .command 时 PATH 可能不完整，不能只靠 command -v brew。
+    if brew_bin="$(find_brew_bin)"; then
+        setup_brew_shellenv "${brew_bin}" || return 1
+        info_echo "已检测到 Homebrew：${brew_bin}，执行更新与升级流程"
         run_cmd "brew update（更新软件列表）" brew update
         run_cmd "brew upgrade（升级已安装软件）" brew upgrade
         run_cmd "brew cleanup（清理旧版本缓存）" brew cleanup
+        run_cmd "brew doctor（检查 Homebrew 健康状态）" brew doctor
+        run_cmd "brew -v（输出 Homebrew 版本）" brew -v
         return 0
     fi
 
     warn_echo "未检测到 Homebrew，开始安装（芯片架构：${arch}）"
 
-    if [[ "${arch}" == "arm64" ]]; then
-        run_sh \
-            "安装 Homebrew（Apple Silicon）" \
-            '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-        setup_brew_shellenv "/opt/homebrew/bin/brew"
+    run_sh \
+        "安装 Homebrew" \
+        '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+
+    if brew_bin="$(find_brew_bin)"; then
+        setup_brew_shellenv "${brew_bin}" || return 1
+    elif [[ "${arch}" == "arm64" ]]; then
+        setup_brew_shellenv "/opt/homebrew/bin/brew" || return 1
     else
-        run_sh \
-            "安装 Homebrew（Intel）" \
-            '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-        setup_brew_shellenv "/usr/local/bin/brew"
+        setup_brew_shellenv "/usr/local/bin/brew" || return 1
     fi
 
     if require_command brew; then
         success_echo "Homebrew 安装成功"
         run_cmd "brew update（更新软件列表）" brew update
         run_cmd "brew upgrade（升级已安装软件）" brew upgrade
+        run_cmd "brew cleanup（清理旧版本缓存）" brew cleanup
+        run_cmd "brew doctor（检查 Homebrew 健康状态）" brew doctor
+        run_cmd "brew -v（输出 Homebrew 版本）" brew -v
     else
         error_echo "Homebrew 安装后仍未检测到 brew 命令，后续流程将受到影响"
         return 1
@@ -327,10 +359,25 @@ stage_homebrew() {
 # =========================
 # 阶段 5：brew 安装开发工具
 # =========================
+brew_formula_installed() {
+    local pkg="$1"
+    local short_name="${pkg:t}"
+
+    brew list --formula --versions "${pkg}" >/dev/null 2>&1 && return 0
+    brew list --formula --versions "${short_name}" >/dev/null 2>&1 && return 0
+
+    return 1
+}
+
+brew_cask_installed() {
+    local pkg="$1"
+    brew list --cask --versions "${pkg}" >/dev/null 2>&1
+}
+
 brew_install_if_needed() {
     local pkg="$1"
 
-    if brew list --formula | grep -Fxq "${pkg}"; then
+    if brew_formula_installed "${pkg}"; then
         info_echo "brew formula 已安装：${pkg}"
     else
         if ! run_cmd "安装 brew formula：${pkg}" brew install "${pkg}"; then
@@ -343,10 +390,13 @@ brew_install_if_needed() {
 brew_install_cask_if_needed() {
     local pkg="$1"
 
-    if brew list --cask | grep -Fxq "${pkg}"; then
+    if brew_cask_installed "${pkg}"; then
         info_echo "brew cask 已安装：${pkg}"
     else
-        run_cmd "安装 brew cask：${pkg}" brew install --cask "${pkg}"
+        if ! run_cmd "安装 brew cask：${pkg}" brew install --cask "${pkg}"; then
+            error_echo "brew cask 安装失败：${pkg}"
+            return 1
+        fi
     fi
 }
 
@@ -376,11 +426,11 @@ stage_brew_packages() {
         hugo
         openjdk
         openjdk@17
-        yt-dlp ffmpeg
+        yt-dlp
+        ffmpeg
         go-task/tap/go-task
         uv
-        --cask trex
-        --cask vlc
+        fzf
     )
 
     local pkg
@@ -415,10 +465,12 @@ stage_brew_packages() {
     local casks=(
         hammerspoon
         flutter
+        trex
+        vlc
     )
 
     for pkg in "${casks[@]}"; do
-        brew_install_cask_if_needed "${pkg}"
+        brew_install_cask_if_needed "${pkg}" || return 1
     done
 
     run_cmd "brew cleanup（清理旧版本与缓存）" brew cleanup

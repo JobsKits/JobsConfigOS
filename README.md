@@ -1,30 +1,136 @@
-# `MacOS`新系统配置
+# `MacOS` 新系统配置
 
 ![Jobs倾情奉献](https://picsum.photos/1500/400 "Jobs出品，必属精品")
 
 [toc]
 
+---
+
 ## 一、前言
 
-* 做不到真正意义上的无人值守，但是可以把新系统配置流程标准化，减少重复操作，尽量平行各端环境。
-* 本仓库更适合当作 **MacOS 新系统初始化入口**：先完成基础开发环境，再通过 `JobsKits` 相关子仓同步个人工具、环境变量、编辑器配置、快捷键配置、安装脚本等内容。
-* 涉及 [**GitHub**](https://github.com/)  的步骤需要网络可达。中国大陆网络环境下，访问  [**GitHub**](https://github.com/) 可能出现阻塞、超时、拉取失败等情况，需要提前准备可用网络环境；网络不可达时，脚本应该明确报错，而不是静默失败。
-* `【MacOS】⏬下载配置当前Git子模块.command` 是本仓库里用于统一下载、登记、更新 **Git** 子模块的核心脚本。它不是普通批量 `git clone` 下载器，而是围绕父 Git 仓库、`.gitmodules` 和 **submodule** **gitlink** 工作。
+这个仓库适合作为 **macOS 新系统初始化入口**。目标不是做到真正无人值守，而是把新系统配置流程标准化：先装基础工具链，再安装开发工具，最后同步 JobsKits 相关仓库和个人环境配置。
+
+当前脚本入口：
+
+```shell
+./'【MacOS】🆕新系统配置.command'
+```
+
+脚本当前主流程共 8 个阶段：
+
+| 阶段 | 配置项 | 作用 |
+|---:|---|---|
+| 1 | Command Line Tools（CLT） | 提供 `git`、`clang`、基础编译工具链 |
+| 2 | Xcode 模拟器配件 | 清理缓存并下载 iOS 模拟器平台组件 |
+| 3 | oh-my-zsh | 安装 zsh 常用增强环境 |
+| 4 | Homebrew | 安装或升级 macOS 包管理器 |
+| 5 | brew 安装开发工具 | 安装常用 CLI、语言环境、图形应用 |
+| 6 | npm | 安装 `quicktype` 等 Node 全局工具 |
+| 7 | gem / CocoaPods | 通过 RubyGems 安装 `cocoapods` |
+| 8 | Jobs | 同步 `JobsSoftware.MacOS`、`JobsMacEnvVarConfig` 并执行环境配置 |
+
+脚本结束后会打开部分手动下载页面：
+
+* Visual Studio Code
+* Android Studio
+* Python Downloads
 
 ---
 
-## 二、工作流程
+## 二、总流程图
 
-### 2.1、<font color=red>C</font>ommand <font color=red>L</font>ine <font color=red>T</font>ools（CLT）
+```mermaid
+flowchart TD
+    A([开始运行 新系统配置脚本]) --> B[显示 README / 启动说明]
+    B --> C{用户按回车继续?}
+    C -- 否 / Ctrl+C --> Z([退出])
+    C -- 是 --> D[阶段1: 安装 CLT]
+    D --> E[阶段2: 配置 Xcode 模拟器配件]
+    E --> F[阶段3: 安装 oh-my-zsh]
+    F --> G[阶段4: 安装或升级 Homebrew]
+    G --> H[阶段5: brew 安装开发工具]
+    H --> I[阶段6: npm 安装 quicktype]
+    I --> J[阶段7: gem 安装 CocoaPods]
+    J --> K[阶段8: 同步 JobsKits 仓库并执行环境配置]
+    K --> L[打开手动下载页面]
+    L --> M[输出日志路径和失败项提醒]
+    M --> N([结束])
+```
 
-新系统第一步先装 Apple 命令行工具，否则后续 `git`、编译工具链、部分包管理器都可能不完整。
+---
+
+## 三、运行方式
+
+### 3.1、授权并运行
+
+```shell
+chmod +x '【MacOS】🆕新系统配置.command'
+./'【MacOS】🆕新系统配置.command'
+```
+
+也可以双击 `.command` 文件运行。
+
+### 3.2、运行前检查
+
+```shell
+pwd
+ls -la
+```
+
+建议把脚本放在你自己的系统配置仓库根目录。这样 README、脚本、日志说明、后续仓库同步逻辑都更容易管理。
+
+### 3.3、日志文件
+
+日志会写入 `/tmp`：
+
+```shell
+/tmp/【MacOS】🆕新系统配置.log
+```
+
+脚本真实日志文件名来自脚本文件名去掉扩展名后拼接 `.log`。
+
+排查失败时先看终端最后一个 `✖`，再看日志：
+
+```shell
+cat /tmp/【MacOS】🆕新系统配置.log
+```
+
+---
+
+## 四、系统配置阶段
+
+### 4.1、阶段 1：Command Line Tools（CLT）
+
+#### 4.1.1、目的
+
+新系统第一步先装 Apple 命令行工具，否则后续 `git`、`clang`、编译工具链、Homebrew、RubyGems、CocoaPods 都可能不完整。
+
+#### 4.1.2、流程图
+
+```mermaid
+flowchart TD
+    A([开始配置 CLT]) --> B[执行 xcode-select --install]
+    B --> C{系统是否弹出安装窗口?}
+    C -- 是 --> D[按系统提示完成安装]
+    C -- 否 / 已安装 --> E[继续下一步]
+    D --> E[执行 sudo xcodebuild -license accept]
+    E --> F{License 是否接受成功?}
+    F -- 是 --> G[检查 xcode-select / git / clang]
+    F -- 否 --> H[查看 sudo 权限或 Xcode 状态]
+    G --> I{工具链是否可用?}
+    I -- 是 --> J([CLT 配置完成])
+    I -- 否 --> K[重新安装 CLT 或安装完整 Xcode]
+    H --> K
+```
+
+#### 4.1.3、脚本执行命令
 
 ```shell
 xcode-select --install
 sudo xcodebuild -license accept
 ```
 
-检查：
+#### 4.1.4、检查命令
 
 ```shell
 xcode-select -p
@@ -32,75 +138,233 @@ git --version
 clang --version
 ```
 
+#### 4.1.5、常见问题
+
+* `xcode-select --install` 提示已安装：正常，继续后续流程。
+* `sudo xcodebuild -license accept` 失败：通常是未安装完整 Xcode、权限不足，或系统弹窗没有处理完。
+* `git --version` 不可用：优先回到 CLT 安装，不要直接改后面的脚本。
+
 ---
 
-### 2.2、Xcode 模拟器配件
+### 4.2、阶段 2：Xcode 模拟器配件
 
-清理 **Xcode** / **Simulator** 缓存后，重新下载 iOS 平台支持包：
+#### 4.2.1、目的
+
+清理 Xcode / Simulator 缓存，并重新下载 iOS 平台支持包。适合新系统、新 Xcode、模拟器异常、平台组件缺失等场景。
+
+#### 4.2.2、流程图
+
+```mermaid
+flowchart TD
+    A([开始配置 Xcode 模拟器配件]) --> B[删除 Xcode 缓存]
+    B --> C[删除 CoreSimulator 缓存]
+    C --> D[执行 xcodebuild -downloadPlatform iOS -verbose]
+    D --> E{下载是否成功?}
+    E -- 是 --> F[保留终端日志]
+    F --> G([Xcode 模拟器配件完成])
+    E -- 否 --> H[检查 Xcode 是否安装完整]
+    H --> I[检查 Apple 网络 / 代理 / 磁盘空间]
+    I --> J[修复后重新执行该阶段]
+```
+
+#### 4.2.3、脚本执行命令
 
 ```shell
 rm -rf ~/Library/Caches/com.apple.dt.Xcode
 rm -rf ~/Library/Developer/CoreSimulator/Caches
-
 xcodebuild -downloadPlatform iOS -verbose
 ```
 
-适用场景：
+#### 4.2.4、适用场景
 
-* 新系统首次安装 **Xcode** 后缺模拟器运行环境。
-* **Xcode** 升级后模拟器缓存异常。
+* 新系统首次安装 Xcode 后缺模拟器运行环境。
+* Xcode 升级后模拟器缓存异常。
 * `xcodebuild` 下载平台组件失败后需要重新拉取。
 
+#### 4.2.5、常见问题
+
+* 下载失败不一定是脚本问题，更多是 Xcode 未准备好、Apple 服务网络不稳定或磁盘空间不足。
+* 如果 Xcode 没打开过，建议先手动打开一次 Xcode，让系统完成首次初始化。
+
 ---
 
-### 2.3、[ohMyZsh](https://ohmyz.sh/)
+### 4.3、阶段 3：oh-my-zsh
 
-```shell
-sh -c "$(curl -fsSL https://raw.[**GitHub**](https://github.com/) usercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#### 4.3.1、目的
+
+安装 oh-my-zsh，作为 zsh 的常用增强配置。macOS 当前默认 Shell 通常是 `zsh`，所以这个阶段优先级比较高。
+
+#### 4.3.2、流程图
+
+```mermaid
+flowchart TD
+    A([开始配置 oh-my-zsh]) --> B[检查 raw.githubusercontent.com 是否可访问]
+    B --> C{网络是否可访问?}
+    C -- 否 --> D[提示打开 VPN / 修复网络]
+    D --> Z([结束脚本])
+    C -- 是 --> E{~/.oh-my-zsh 是否存在?}
+    E -- 是 --> F[跳过安装]
+    E -- 否 --> G[执行官方安装脚本]
+    G --> H{安装是否成功?}
+    H -- 是 --> I([oh-my-zsh 配置完成])
+    H -- 否 --> J[查看网络 / curl / zsh 交互输出]
+    J --> K[修复后重试]
+    F --> I
 ```
 
-说明：
+#### 4.3.3、脚本执行命令
 
-* **MacOS** 当前默认 Shell 通常是 `zsh`。
-* 后续 [**Homebrew**](https://brew.sh/) 环境变量一般写入 `~/.zprofile`，让新终端自动加载
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+#### 4.3.4、检查命令
+
+```shell
+ls -la ~/.oh-my-zsh
+echo $SHELL
+zsh --version
+```
+
+#### 4.3.5、常见问题
+
+* 官方安装脚本可能有交互行为，这是正常的。
+* 如果 `raw.githubusercontent.com` 不通，脚本会直接中断，不要把网络问题误判成脚本问题。
 
 ---
 
-### 2.4、[**Homebrew**](https://brew.sh/)
+### 4.4、阶段 4：Homebrew
 
-> [**Homebrew**](https://brew.sh/) 需要区分芯片架构。**Apple Silicon** 默认路径是 `/opt/Homebrew`，**Intel** 默认路径是 `/usr/local`。
+#### 4.4.1、目的
 
-手动安装命令：
+安装或升级 Homebrew。Homebrew 是后续安装 Node、Ruby、Python、fastlane、openjdk、ffmpeg、Flutter 等工具的基础。
+
+#### 4.4.2、流程图
+
+```mermaid
+flowchart TD
+    A([开始配置 Homebrew]) --> B[检查 raw.githubusercontent.com 是否可访问]
+    B --> C{网络是否可访问?}
+    C -- 否 --> D[提示修复网络]
+    D --> Z([结束脚本])
+    C -- 是 --> E{是否 Apple Silicon?}
+    E -- 是 --> F{Rosetta 2 是否已安装?}
+    F -- 否 --> G[安装 Rosetta 2]
+    F -- 是 --> H[跳过 Rosetta]
+    G --> I{brew 命令是否存在?}
+    H --> I
+    E -- 否 --> I
+    I -- 是 --> J[brew update]
+    J --> K[brew upgrade]
+    K --> L[brew cleanup]
+    L --> M([Homebrew 升级完成])
+    I -- 否 --> N[执行 Homebrew 官方安装脚本]
+    N --> O{芯片架构}
+    O -- arm64 --> P[写入 /opt/homebrew/bin/brew shellenv 到 ~/.zprofile]
+    O -- x86_64 --> Q[写入 /usr/local/bin/brew shellenv 到 ~/.zprofile]
+    P --> R[当前会话立即 eval shellenv]
+    Q --> R
+    R --> S{brew 是否可用?}
+    S -- 是 --> J
+    S -- 否 --> T[提示安装后仍未检测到 brew]
+```
+
+#### 4.4.3、脚本执行命令
+
+安装：
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-安装完成后，**Apple Silicon** 常用环境变量：
+Apple Silicon 环境变量：
 
 ```shell
-eval "$(/opt/Homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-Intel 常用环境变量：
+Intel 环境变量：
 
 ```shell
 eval "$(/usr/local/bin/brew shellenv)"
 ```
 
-常用维护命令：
+升级维护：
 
 ```shell
-brew update      # 更新 [**Homebrew**](https://brew.sh/) 自己的软件列表
-brew upgrade     # 升级已经安装的软件
-brew cleanup     # 清理旧版本缓存
-brew doctor      # 检查 [**Homebrew**](https://brew.sh/) 健康状态
-brew -v          # 查看版本
+brew update
+brew upgrade
+brew cleanup
 ```
 
-常用软件安装：
+#### 4.4.4、检查命令
 
 ```shell
+which brew
+brew --version
+brew doctor
+```
+
+#### 4.4.5、路径规则
+
+| Mac 架构 | Homebrew 默认路径 |
+|---|---|
+| Apple Silicon / `arm64` | `/opt/homebrew/bin/brew` |
+| Intel / `x86_64` | `/usr/local/bin/brew` |
+
+#### 4.4.6、常见问题
+
+* 双击 `.command` 时 PATH 可能不完整，所以脚本需要写入 `~/.zprofile` 并在当前进程立即生效。
+* Apple Silicon 上部分 Intel 兼容工具依赖 Rosetta，脚本会自动检测并安装。
+* Homebrew 不存在时是“安装”，存在时是“升级 + 清理”。这符合 `update` 类系统配置脚本的定位。
+
+---
+
+### 4.5、阶段 5：brew 安装开发工具
+
+#### 4.5.1、目的
+
+通过 Homebrew 安装新系统常用开发工具、语言环境、CLI 工具和部分图形应用。
+
+#### 4.5.2、流程图
+
+```mermaid
+flowchart TD
+    A([开始安装 brew 开发工具]) --> B{brew 是否存在?}
+    B -- 否 --> C[终止本阶段并提示先修复 Homebrew]
+    B -- 是 --> D[读取 formula 列表]
+    D --> E[逐个检查 brew list --formula]
+    E --> F{当前 formula 是否已安装?}
+    F -- 是 --> G[跳过该 formula]
+    F -- 否 --> H[执行 brew install]
+    H --> I{安装是否成功?}
+    I -- 否 --> J[记录失败并终止本阶段]
+    I -- 是 --> K{是否还有下一个 formula?}
+    G --> K
+    K -- 是 --> E
+    K -- 否 --> L[初始化 Git LFS]
+    L --> M[配置 Git 大文件传输参数]
+    M --> N[读取 cask 列表]
+    N --> O[逐个检查 brew list --cask]
+    O --> P{当前 cask 是否已安装?}
+    P -- 是 --> Q[跳过该 cask]
+    P -- 否 --> R[执行 brew install --cask]
+    R --> S{是否还有下一个 cask?}
+    Q --> S
+    S -- 是 --> O
+    S -- 否 --> T[brew cleanup]
+    T --> U([brew 开发工具安装完成])
+```
+
+#### 4.5.3、Formula 工具清单
+
+脚本意图安装的常用 formula：
+
+```shell
+brew install git-lfs
+brew install gh
+brew install nushell
+brew install rbenv
 brew install node
 brew install jenv
 brew install fvm
@@ -111,27 +375,122 @@ brew install python3
 brew install fastlane
 brew install mysql
 brew install hugo
-brew install openjdk      # 最新 Java 环境
+brew install openjdk
 brew install openjdk@17
+brew install yt-dlp
+brew install ffmpeg
+brew install go-task/tap/go-task
+brew install uv
 brew install fzf
-
-brew install --cask hammerspoon
-brew install --cask flutter
-
-brew cleanup
 ```
 
-> 注意：`【MacOS】⏬下载配置当前Git子模块.command` 在首次使用 `fzf` 前会自检 `fzf`。如果 `fzf` 不存在或不能正常响应，脚本会先自检 / 安装 [**Homebrew**](https://brew.sh/)，再通过 [**Homebrew**](https://brew.sh/) 安装或修复 `fzf`。所以在只运行该脚本的场景里，`fzf` 不一定需要提前手动安装。
+#### 4.5.4、Cask 工具清单
+
+脚本意图安装的图形应用：
+
+```shell
+brew install --cask hammerspoon
+brew install --cask flutter
+brew install --cask trex
+brew install --cask vlc
+```
+
+#### 4.5.5、Git LFS 初始化
+
+```shell
+git lfs install
+git config --global core.compression 0
+git config --global http.postBuffer 524288000
+```
+
+#### 4.5.6、检查命令
+
+```shell
+brew list --formula
+brew list --cask
+git lfs version
+gh --version
+node -v
+ruby -v
+python3 --version
+fastlane --version
+java -version
+ffmpeg -version
+```
+
+#### 4.5.7、脚本实现标准
+
+新版脚本已经把 formula 和 cask 拆成两个数组：普通命令行工具只走 `brew install`，图形应用只走 `brew install --cask`。这样可以避免把 `--cask` 当成普通 formula 名称安装。
+
+脚本中保持这种结构：
+
+```zsh
+local formulae=(
+    git-lfs
+    gh
+    nushell
+    rbenv
+    node
+    jenv
+    fvm
+    pnpm
+    ruby
+    python
+    python3
+    fastlane
+    mysql
+    hugo
+    openjdk
+    openjdk@17
+    yt-dlp
+    ffmpeg
+    go-task/tap/go-task
+    uv
+    fzf
+)
+
+local casks=(
+    hammerspoon
+    flutter
+    trex
+    vlc
+)
+```
 
 ---
 
-### 2.5、[**npm**](https://www.npmjs.com/)
+### 4.6、阶段 6：npm
+
+#### 4.6.1、目的
+
+通过 npm 安装 Node 生态的全局工具。目前脚本安装的是 `quicktype`。
+
+#### 4.6.2、流程图
+
+```mermaid
+flowchart TD
+    A([开始配置 npm]) --> B{npm 命令是否存在?}
+    B -- 否 --> C[提示 npm 不存在]
+    C --> D[回到 brew 安装 node]
+    D --> Z([本阶段跳过 / 修复后重试])
+    B -- 是 --> E[执行 sudo npm install -g quicktype]
+    E --> F{安装是否成功?}
+    F -- 是 --> G[检查 quicktype --version]
+    G --> H{quicktype 是否可用?}
+    H -- 是 --> I([npm 配置完成])
+    H -- 否 --> J[检查 npm 全局路径 / 权限]
+    F -- 否 --> K[检查 sudo 权限 / npm 源 / 网络]
+    J --> L[修复后重试]
+    K --> L
+```
+
+#### 4.6.3、脚本执行命令
 
 ```shell
 sudo npm install -g quicktype
 ```
 
-检查：
+#### 4.6.4、检查命令
 
 ```shell
 node -v
@@ -139,799 +498,190 @@ npm -v
 quicktype --version
 ```
 
+#### 4.6.5、常见问题
+
+* `npm` 不存在：优先检查 `node` 是否通过 Homebrew 安装成功。
+* `sudo npm install -g` 失败：常见原因是网络、权限、npm registry、全局目录权限。
+
 ---
 
-### 2.6、[**gem**](https://guides.rubygems.org/)
+### 4.7、阶段 7：gem / CocoaPods
+
+#### 4.7.1、目的
+
+通过 RubyGems 安装 CocoaPods。CocoaPods 是 iOS / macOS Objective-C / Swift 项目常用依赖管理工具，后续本地 pod、私有 pod、组件化仓库都会用到它。
+
+#### 4.7.2、CocoaPods 安装流程图
+
+```mermaid
+flowchart TD
+    A([开始安装 CocoaPods]) --> B{gem 命令是否存在?}
+    B -- 否 --> C[提示 gem 不存在]
+    C --> D[回到 Homebrew / Ruby 安装阶段]
+    D --> Z([本阶段跳过 / 修复后重试])
+    B -- 是 --> E[执行 sudo gem install cocoapods]
+    E --> F{安装是否成功?}
+    F -- 是 --> G[执行 pod --version]
+    F -- 否 --> H[检查 RubyGems 网络 / sudo 权限 / Ruby 环境]
+    G --> I{pod 能否输出版本?}
+    I -- 是 --> J([CocoaPods 安装完成])
+    I -- 否 --> K[检查 PATH / gem bin 目录 / CocoaPods 安装状态]
+    H --> L[修复后重试]
+    K --> L
+```
+
+#### 4.7.3、脚本执行命令
 
 ```shell
 sudo gem install cocoapods
 ```
 
-检查：
+#### 4.7.4、检查命令
 
 ```shell
 ruby -v
 gem -v
 pod --version
+which pod
 ```
 
----
+#### 4.7.5、本地 pod 编译检查建议
 
-### 2.7、[**JobsKits**](https://github.com/JobsKits/)
-
-> 这一段是当前 README 的重点升级位置：不再建议手动一个个下载 [**JobsKits**](https://github.com/JobsKits/) 仓库，而是优先使用 `【MacOS】⏬下载配置当前Git子模块.command` 统一下载、登记、更新 Git 子模块。
-
-#### 2.7.1、网络要求
-
-需要访问：
-
-```url
-https://github.com/JobsKits/
-```
-
-中国大陆网络环境下，可能无法直接访问 [**GitHub**](https://github.com/) 。脚本执行到 [**GitHub**](https://github.com/)  拉取阶段时，如果网络不可达，应该明确报错。不要把网络阻塞误判为脚本逻辑问题。
-
-常见检查命令：
+如果你做的是本地管理的 pod，想确认 pod 内部是否能编译通过，建议按这个顺序查：
 
 ```shell
-git ls-remote https://github.com/JobsKits/JobsSoftware.MacOS.git
-git ls-remote git@github.com:JobsKits/JobsSoftware.MacOS.git
+pod lib lint YourPod.podspec --allow-warnings --verbose
 ```
 
-**HTTPS** 能通说明浏览器 / **HTTPS clone** 路径可用；**SSH** 能通说明本机 **SSH Key**、[**GitHub**](https://github.com/)  账号授权和网络链路可用。
+如果是私有源 / 本地依赖更多：
 
-#### 2.7.2、推荐方式：运行子模块脚本
-
-* `cd`进入父仓目录
-
-* 授予执行权限并运行脚本：`chmod +x '【MacOS】⏬下载配置当前Git子模块.command'`
-
-<font size=5 color=red>脚本启动后会自动切换到脚本所在目录，所以关键要求是：**脚本必须放在父 Git 仓库根目录下**。</font>
-
-#### 2.7.3、当前默认纳入同步的 [**JobsKits**](https://github.com/JobsKits) 子仓
-
-脚本顶部通过 `SUBMODULE_REPO_URLS` 管理目标子仓：
-
-```zsh
-SUBMODULE_REPO_URLS=(
-  "https://github.com/JobsKits/JobsSoftware.MacOS|🔽JobsSoftware.MacOS"
-  "https://github.com/JobsKits/JobsMacEnvVarConfig|🌍JobsMacEnvVarConfig"
-  "https://github.com/JobsKits/JobsCodeSnippets|🍎JobsCodeSnippets"
-  "https://github.com/JobsKits/JobsConfigHotKeyByHammerspoon|🔨JobsConfigHotKeyByHammerspoon"
-  "https://github.com/JobsKits/JobsInstallOpenClaw|🦞JobsInstallOpenClaw"
-  "https://github.com/JobsKits/SourceTree.sh|🌲SourceTree.sh"
-  "https://github.com/JobsKits/VScodeConfigs|⚙️VScodeConfigs"
-)
+```shell
+pod lib lint YourPod.podspec \
+  --allow-warnings \
+  --verbose \
+  --no-clean
 ```
 
-数组的配置原则：
+如果是要模拟发布前校验：
 
-* 只写 [**GitHub**](https://github.com/)  浏览器页面地址。
-* 不写 `.git` 后缀。
-* 不写 **SSH** 地址。
-* 需要自定义本地目录名时，用 `|` 分隔。
-
-正确：
-
-```zsh
-"https://github.com/JobsKits/JobsGenesis"
-"https://github.com/JobsKits/JobsSoftware.MacOS|🔽JobsSoftware.MacOS"
+```shell
+pod spec lint YourPod.podspec --allow-warnings --verbose
 ```
 
-不要写：
+判断标准：
 
-```zsh
-"https://github.com/JobsKits/JobsGenesis.git"
-"git@github.com:JobsKits/JobsGenesis.git"
-```
-
-脚本会自动把页面地址**推导**成两种 clone 地址：
-
-* 页面地址：    `https://github.com/JobsKits/JobsGenesis`
-* HTTPS clone：`https://github.com/JobsKits/JobsGenesis.git`
-* SSH clone： `git@github.com:JobsKits/JobsGenesis.git`
+| 命令 | 用途 |
+|---|---|
+| `pod lib lint` | 本地开发阶段校验 podspec 和源码是否能集成编译 |
+| `pod spec lint` | 发布前更严格校验，通常更接近远程发布场景 |
+| `--no-clean` | 失败时保留临时工程，方便打开 Xcode 查错 |
+| `--verbose` | 打印完整日志，别只看最后一行报错 |
 
 ---
 
-## 三、`【MacOS】⏬下载配置当前Git子模块.command` 详细说明
+### 4.8、阶段 8：JobsKits 仓库与环境配置
 
-### 3.1、流程简述
+#### 4.8.1、目的
+
+同步 JobsKits 相关仓库到本机，并执行环境变量配置脚本。
+
+当前脚本涉及两个仓库：
+
+```shell
+https://github.com/JobsKits/JobsSoftware.MacOS.git
+https://github.com/JobsKits/JobsMacEnvVarConfig.git
+```
+
+默认本地目录：
+
+```shell
+~/Desktop/JobsKits/JobsSoftware.MacOS
+~/Desktop/JobsKits/JobsMacEnvVarConfig
+```
+
+#### 4.8.2、流程图
 
 ```mermaid
-graph TD
-    A([开始]) --> B[解析用户输入的子模块配置]
-    B --> C{是否配置了子模块URL列表？}
-    C --> |是| D[解析每个子模块的页面URL和本地路径]
-    C --> |否| E([结束])
-    D --> F{是否启用浅克隆？}
-    F --> |是| G[设置浅克隆参数]
-    F --> |否| H[使用完整克隆]
-    G --> I[执行子模块克隆或更新操作]
+flowchart TD
+    A([开始配置 JobsKits]) --> B[检查 GitHub 网络连通性]
+    B --> C{GitHub 是否可访问?}
+    C -- 否 --> D[提示网络不可达]
+    D --> Z([结束脚本])
+    C -- 是 --> E[创建 ~/Desktop/JobsKits]
+    E --> F{JobsSoftware.MacOS 是否已存在 .git?}
+    F -- 是 --> G[执行 git pull --ff-only]
+    F -- 否 --> H[git clone JobsSoftware.MacOS]
+    G --> I{JobsMacEnvVarConfig 是否已存在 .git?}
     H --> I
-    I --> J{是否自动提交父仓库变更？}
-    J --> |是| K[提交.gitmodules变更]
-    J --> |否| L([结束])
-    K --> M{是否自动推送父仓库？}
-    M --> |是| N[推送父仓库到远程]
-    M --> |否| L
-    N --> L
+    I -- 是 --> J[执行 git pull --ff-only]
+    I -- 否 --> K[git clone JobsMacEnvVarConfig]
+    J --> L{install.command 是否存在?}
+    K --> L
+    L -- 是 --> M[chmod +x install.command]
+    M --> N[执行 JobsMacEnvVarConfig/install.command]
+    N --> O([JobsKits 配置完成])
+    L -- 否 --> P[提示未找到 install.command]
 ```
 
-### 3.2、脚本定位
-
-该脚本用于管理当前父 **Git** 仓库下的子模块。它会根据脚本顶部 `SUBMODULE_REPO_URLS` 中的配置完成以下工作：
-
-* 生成 **HTTPS / SSH** 两套 clone URL。
-* 检查和补齐 `.gitmodules`。
-* 下载缺失子仓。
-* 更新已有子仓到远端最新提交。
-* 把子仓登记成标准 **Git submodule**。
-* 更新父仓里的 `.gitmodules` 和 **submodule gitlink**。
-* 根据配置决定是否自动提交、是否自动 push 父仓。
-
-重点：它不是单纯把多个仓库 clone 到本地，而是把它们纳入当前父仓的 Git 子模块体系。
-
----
-
-### 3.3、脚本放置位置
-
-* 推荐结构：
-
-  ```
-  JobsConfigOS/
-  ├── 【MacOS】⏬下载配置当前Git子模块.command
-  ├── README.md
-  ├── .git/
-  ├── .gitmodules
-  ├── 🔽JobsSoftware.MacOS/
-  ├── 🌍JobsMacEnvVarConfig/
-  ├── 🍎JobsCodeSnippets/
-  ├── 🔨JobsConfigHotKeyByHammerspoon/
-  ├── 🦞JobsInstallOpenClaw/
-  ├── 🌲SourceTree.sh/
-  └── ⚙️VScodeConfigs/
-  ```
-
-* 脚本内部会根据自身路径执行类似逻辑：`cd 脚本所在目录`。所以不要把脚本放到子目录里再运行，否则它会把那个子目录当成父仓。
-
----
-
-### 3.4、启动后的主菜单
-
-* 脚本使用 `fzf` 渲染主菜单：
-
-  ```
-  全量同步更新下载到最新
-  选择指定子模块同步（可多选）
-  只更新目前已有的
-  添加并同步一个新的 Git 地址
-  退出
-  ```
-
-* 菜单上方预览区会展示：
-
-  * 脚本目录。
-  * 当前目录。
-  * 父仓远端名。
-  * 子模块优先分支。
-  * 当前 URL 模式。
-  * `.gitmodules` 补缺 URL 模式。
-  * 是否干跑。
-  * 是否自动提交父仓。
-  * 是否自动推送父仓。
-  * 是否启用浅克隆。
-  * 当前配置的目标子 Git 列表。
-  * 每个目标子 Git 的 page / https / ssh 地址。
-  * `.gitmodules` 是否已有对应条目。
-  
-* 预览区快捷键：
-
-  | 按键       | 作用           |
-  | ---------- | -------------- |
-  | `Ctrl + K` | 预览区上滚一行 |
-  | `Ctrl + J` | 预览区下滚一行 |
-  | `Ctrl + U` | 预览区上翻页   |
-  | `Ctrl + D` | 预览区下翻页   |
-
----
-
-### 3.5、菜单动作：全量同步更新下载到最新
-
-* 适合：
-
-  * 第一次配置新 Mac。
-  * 当前父仓里子模块目录缺失较多。
-  * 想按脚本顶部数组重新刷新所有目标子仓。
-
-* 执行逻辑：
-
-  * 对 `.gitmodules` 做一次查漏补缺。
-
-  * 收集需要删除的目标目录，包括配置里的本地目录、仓库名目录、当前父仓下已经存在的 Git 子目录。
-
-  * 对每个待删除目录做安全检查。
-
-  * 删除可安全删除的目标目录。
-
-  * 按 `SUBMODULE_REPO_URLS` 重新 clone。
-
-  * 同步每个子仓到目标分支最新提交。
-
-  * 执行 `git submodule absorbgitdirs`，整理成标准 submodule 形态。
-
-  * `git add` `.gitmodules` 和对应子模块 gitlink。
-
-  * 按 `AUTO_PARENT_COMMIT` 决定是否自动提交父仓。
-
-  * 按 `AUTO_PARENT_PUSH` 决定是否自动 push 父仓。
-
-* 安全边界：
-
-  * 子仓存在未提交内容时，终止更新或删除。
-  * 非 Git 且非空目录默认不删除。
-  * 空目录可以删除。
-  * 需要强制删除非 Git 且非空目录时，必须显式设置 `FORCE_DELETE=1`。
-
----
-
-### 3.6、菜单动作：选择指定子模块同步（可多选）
-
-* 这个二级页面不使用 `fzf` 的多选模式，而是使用类似 [**OpenClaw**](https://github.com/openclaw/openclaw) 引导菜单的键盘交互。
-
-* 按键说明：
-
-  | 按键      | 作用                    |
-  | --------- | ----------------------- |
-  | `↑` / `↓` | 移动光标                |
-  | `Enter`   | 勾选 / 取消勾选当前项目 |
-  | `Space`   | 确认当前勾选并开始同步  |
-  | `←`       | 返回上一页              |
-  | `Esc`     | 停止脚本                |
-  | `j` / `k` | 兼容下移 / 上移         |
-  | `h` / `H` | 兼容返回上一页          |
-
-  第一项是 **全选**：`全选：同步 SUBMODULE_REPO_URLS 中全部项目`
-
-
-* 行为规则：
-
-  * 光标停在“全选”上按 `Enter`：全选或取消全选。
-  * 光标停在具体子仓上按 `Enter`：单独勾选或取消。
-  * 按 `Space`：同步已勾选项目。
-  * 没有勾选任何项目时按 `Space`：不会执行同步，会提示先勾选。
-  * 按 `←`：返回主菜单。
-  * 按 `Esc`：停止脚本，不再作为返回上一页。
-
----
-
-### 3.7、菜单动作：只更新目前已有的
-
-* 适合日常增量更新。
-
-* 它只处理当前本地已经存在、并且在 `SUBMODULE_REPO_URLS` 中配置过的 **Git** 子目录。
-
-* | 当前状态                      | 脚本行为                     |
-  | ----------------------------- | ---------------------------- |
-  | 存在部分已配置子 Git 目录     | 只更新这些已经存在的目录     |
-  | 一个已配置子 Git 目录都不存在 | 自动切换为全量同步           |
-  | 某个已存在子仓有未提交内容    | 终止该子仓更新               |
-  | 存在未配置的 Git 子目录       | 不作为“只更新目前已有的”目标 |
-
-  这个选项不会把所有缺失子仓都补回来。需要补齐全部项目时，使用**全量同步更新下载到最新**
-
----
-
-### 3.8、菜单动作：添加并同步一个新的 Git 地址
-
-* 适合临时添加一个新 **JobsKits** 子仓并立即同步。
-
-* 支持输入三种格式，例如：
-
-  ```
-  https://github.com/JobsKits/JobsGenesis
-  https://github.com/JobsKits/JobsGenesis.git
-  git@github.com:JobsKits/JobsGenesis.git
-  ```
-
-* 校验规则
-  * 必须能解析为 [**GitHub**](https://github.com/)  的 `owner/repo`。
-  * 根据当前 URL 模式生成 clone URL。
-  * 必须通过 `git ls-remote` 访问校验。
-  * 输入不合法或不可访问，会继续追问。
-  * 输入一个空格后回车，返回上一页。`[Space][Enter]`
-
-* 注意：这个菜单添加的新仓只在本次运行期间追加到内存配置。同步完成后，脚本会提示类似：
-
-  ```
-  "https://github.com/JobsKits/JobsGenesis"
-  ```
-
-* 需要长期保留时，把这行手动加入脚本顶部 `SUBMODULE_REPO_URLS`。
-
----
-
-### 3.9、[**Homebrew**](https://brew.sh/)/[**fzf**](https://junegunn.GitHub .io/fzf/) 自检
-
-* 脚本在第一次使用 `fzf` 前会自检。
-
-* `fzf` 健康标准：
-
-  ```zsh
-  command -v fzf
-  fzf --version
-  ```
-
-  同时满足才视为健康。
-
-* `fzf` 不健康时，脚本会：
-
-  * 查找 [**Homebrew**](https://brew.sh/)
-
-  * [**Homebrew**](https://brew.sh/) 不存在时，按当前芯片架构安装
-
-  * [**Homebrew**](https://brew.sh/) 存在时，确认 `brew --version` 能正常响应
-
-  * 询问是否执行
-
-    ```zsh
-    brew update && brew upgrade && brew cleanup && brew doctor && brew -v
-    ```
-
-  * 通过 [**Homebrew**](https://brew.sh/) 安装或重新安装 `fzf`。
-
-  * 再次检查 `fzf --version`。
-
-* [**Homebrew**](https://brew.sh/) 路径规则
-
-  | Mac 架构                | [**Homebrew**](https://brew.sh/) 路径 |
-  | ----------------------- | ------------------------------------- |
-  | Apple Silicon / `arm64` | `/opt/Homebrew/bin/brew`              |
-  | Intel / `x86_64`        | `/usr/local/bin/brew`                 |
-
-  当前脚本会把 [**Homebrew**](https://brew.sh/) shellenv 写入 `~/.zprofile`，并尽量在当前脚本进程中立即生效
-
----
-
-### 3.10、HTTPS / SSH 自动适配
-
-> 设计目标：同一个脚本换到另一台电脑，只要父仓 `origin` 协议不同，子仓同步协议就自动跟着变，不需要每次运行前手动拼一长串环境变量。
-
-* 默认配置
-
-  ```zsh
-  GIT_URL_STYLE="${GIT_URL_STYLE:-auto}"
-  ```
-
-* `auto` 模式会读取父仓远端
-
-  ```zsh
-  git remote get-url origin
-  ```
-
-* 然后判断子仓同步协议
-
-  | 父仓 origin                      | 子仓同步协议 |
-  | -------------------------------- | ------------ |
-  | `git@GitHub.com:xxx/yyy.git`     | **SSH**      |
-  | `ssh://...`                      | **SSH**      |
-  | `https://GitHub.com/xxx/yyy.git` | **HTTPS**    |
-  | 无法判断                         | **HTTPS**    |
-
-* 日常不需要手动写
-
-  ```
-  GIT_URL_STYLE=ssh ./【MacOS】⏬下载配置当前Git子模块.command
-  ```
-
-* 只有需要临时强制覆盖自动判断时，再使用
-
-  ```
-  GIT_URL_STYLE=ssh ./【MacOS】⏬下载配置当前Git子模块.command
-  GIT_URL_STYLE=https ./【MacOS】⏬下载配置当前Git子模块.command
-  ```
-
----
-
-### 3.11、`.gitmodules` 管理策略
-
-* 脚本会对 `.gitmodules` 做“查漏补缺”，不是无脑重写整个文件。
-
-  * 会自动做：
-    * `.gitmodules` 不存在时创建空文件。
-    * `SUBMODULE_REPO_URLS` 中有、`.gitmodules` 缺失的条目会补齐。
-    * `.gitmodules` 中 path 不正确时修正 path。
-    * `.gitmodules` 中 url 指向错误仓库时修正 url。
-    * `.gitmodules` 中 branch 不等于 `SUBMODULE_BRANCH` 时修正 branch。
-
-  * 不会默认做：
-    * 从 `SUBMODULE_REPO_URLS` 删除某一行后，不会立刻删除 `.gitmodules` 里的旧配置段。
-
-* 当前脚本默认值：
-
-  ```zsh
-  PRUNE_STALE_GITMODULES="${PRUNE_STALE_GITMODULES:-0}"
-  ```
-
-* 需要清理 `.gitmodules` 中已经不在配置数组里的旧子模块时，显式运行：
-
-  ```
-  PRUNE_STALE_GITMODULES=1 ./【MacOS】⏬下载配置当前Git子模块.command
-  ```
-
-* 清理旧子模块仍然遵守安全规则：
-
-  * 子仓有未提交内容：终止。
-  * 非 Git 且非空目录：默认拒绝删除。
-  * 需要删除非 Git 且非空目录：额外设置 `FORCE_DELETE=1`。
-
-* `.gitmodules` 的协议和实际同步协议
-
-  这两个概念分开处理：
-
-  * `.gitmodules` 是跨机器共享配置文件。
-  * 实际 clone / fetch / remote set-url 使用父仓 `origin` 推导出来的 HTTPS / SSH。
-
-  因此：
-
-  * `.gitmodules` 已有合法 HTTPS 地址时，不会因为当前父仓是 SSH 就强行改成 SSH。
-  * `.gitmodules` 的 URL 只要指向同一个 [**GitHub**](https://github.com/)  仓库，就视为合法。
-  * `.gitmodules` 的 URL 指向错误仓库时才修正。
-  * `.gitmodules` 缺失条目会按当前 `.gitmodules` 已有条目的协议风格补齐；文件为空时默认用 HTTPS。
-
-  这样可以减少跨机器协作时 `.gitmodules` 的无意义改动。
-
----
-
-### 3.12、子仓同步策略
-
-* 默认优先分支：
-
-  ```zsh
-  SUBMODULE_BRANCH="${SUBMODULE_BRANCH:-main}"
-  ```
-
-* 如果远端没有 `main`，脚本会尝试读取远端默认分支。
-
-  * 默认浅克隆：
-
-    ```zsh
-    SUBMODULE_SHALLOW_CLONE="${SUBMODULE_SHALLOW_CLONE:-1}"
-    SUBMODULE_DEPTH="${SUBMODULE_DEPTH:-1}"
-    ```
-  
-  * 效果类似：
-  
-    ```zsh
-    git clone --depth 1 --single-branch --shallow-submodules
-    ```
-  
-  * 默认不拉 tags：
-  
-    ```zsh
-    SUBMODULE_FETCH_TAGS="${SUBMODULE_FETCH_TAGS:-0}"
-    ```
-  
-    适用目标：配置仓、脚本仓、软件包仓。优点是快，缺点是本地历史不完整。
-  
-  * 需要完整历史：
-  
-    ```zsh
-    SUBMODULE_SHALLOW_CLONE=0 ./【MacOS】⏬下载配置当前Git子模块.command
-    ```
-  
-  * 需要 tags：
-  
-    ```zsh
-    SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当前Git子模块.command
-
----
-
-### 3.13、父仓处理策略
-
-> 脚本把自身所在目录视为父仓
-
-* 父仓不是 Git 仓库时：
-
-  ```zsh
-  git init
-  ```
-
-* 父仓没有 `origin` 时，脚本会循环要求输入远端地址，并通过 `git ls-remote` 校验可访问后添加。
-
-* 父仓分支默认使用：`main`
-
-  * 处理规则：
-
-    * 本地已有 `main`：切过去。
-    * 远端有 `main`：基于远端创建 / 跟踪。
-    * 都没有：创建本地 `main`。
-
-* 父仓存在未提交变更时，脚本会跳过（原因很直接：自动 rebase 容易带来冲突，脚本不会替用户处理父仓未提交内容。）
-
-  ```
-  git pull --rebase
-  ```
-
-  * 默认自动提交：
-
-    ```
-    AUTO_PARENT_COMMIT="${AUTO_PARENT_COMMIT:-1}"
-    ```
-
-  * 默认不自动推送：
-
-    ```
-    AUTO_PARENT_PUSH="${AUTO_PARENT_PUSH:-0}"
-    ```
-
-  * 自动提交的内容主要是：
-
-    * `.gitmodules`
-    * 子模块 gitlink
-
-  * 提交信息格式：
-
-    ```
-    chore: sync git submodules (https)
-    chore: sync git submodules (ssh)
-    ```
-
----
-
-### 3.14、安全机制
-
-#### 3.14.1、子仓有未提交内容时不更新、不删除
-
-* 脚本检查
-
-  ```zsh
-  git -C 子仓目录 status --porcelain --untracked-files=normal
-  ```
-
-  只要有输出，就认为该子仓不干净，包括：
-
-  * 已修改未提交文件。
-  * 新增未跟踪文件。
-  * staged 但未提交文件。
-
-* 处理方式由用户自己决定
-
-  ```shell
-  cd 子仓目录
-  git status
-  ```
-
-  * 保留改动
-
-    ```
-    git add .
-    git commit -m "..."
-    ```
-
-  * 明确丢弃改动
-
-    ```
-    git reset --hard
-    git clean -fd
-    ```
-
-  <font color=red size=15>**脚本不会替用户丢弃改动**</font>
-
-#### 3.14.2、非 Git 非空目录默认不删
-
-* 如果目标目录存在，但不是 Git 工作区，也不是空目录，脚本默认拒绝覆盖或删除。
-
-* 强制删除需要显式打开
-
-  > 这个开关只适合确认目录可以删除的场景，不建议作为日常默认参数。
-
-  ```zsh
-  FORCE_DELETE=1 ./【MacOS】⏬下载配置当前Git子模块.command
-  ```
-
----
-
-### 3.15、环境变量开关
-
-| 变量 | 默认值 | 说明 |
-|---|---:|---|
-| `SUBMODULE_BRANCH` | `main` | 子模块优先同步分支；远端没有时使用远端默认分支 |
-| `REMOTE_NAME` | `origin` | 父仓远端名 |
-| `DRY_RUN` | `0` | `1` 表示只打印动作，尽量不执行写操作 |
-| `FORCE_DELETE` | `0` | `1` 允许删除非 Git 且非空冲突目录 |
-| `AUTO_PARENT_COMMIT` | `1` | `1` 自动提交 `.gitmodules` / gitlink 变化 |
-| `AUTO_PARENT_PUSH` | `0` | `1` 自动 push 父仓 |
-| `GIT_URL_STYLE` | `auto` | `auto` / `https` / `ssh`；默认继承父仓 origin 协议 |
-| `PRUNE_STALE_GITMODULES` | `0` | `1` 删除 `.gitmodules` 中已不在配置数组里的旧子模块 |
-| `SUBMODULE_SHALLOW_CLONE` | `1` | `1` 启用浅克隆；`0` 完整克隆 |
-| `SUBMODULE_DEPTH` | `1` | 浅克隆深度 |
-| `SUBMODULE_FETCH_TAGS` | `0` | `1` 拉取 tags；默认不拉 |
-
-常用组合：
+#### 4.8.3、脚本执行逻辑
 
 ```shell
-# 只预览，不执行写操作
-DRY_RUN=1 ./【MacOS】⏬下载配置当前Git子模块.command
+mkdir -p ~/Desktop/JobsKits
 
-# 强制使用 SSH
-GIT_URL_STYLE=ssh ./【MacOS】⏬下载配置当前Git子模块.command
+git clone 'https://github.com/JobsKits/JobsSoftware.MacOS.git' '~/Desktop/JobsKits/JobsSoftware.MacOS'
+git clone 'https://github.com/JobsKits/JobsMacEnvVarConfig.git' '~/Desktop/JobsKits/JobsMacEnvVarConfig'
 
-# 同步完成后自动 push 父仓
-AUTO_PARENT_PUSH=1 ./【MacOS】⏬下载配置当前Git子模块.command
-
-# 清理 .gitmodules 中不再配置的旧子模块
-PRUNE_STALE_GITMODULES=1 ./【MacOS】⏬下载配置当前Git子模块.command
-
-# 完整 clone 子仓并拉 tags
-SUBMODULE_SHALLOW_CLONE=0 SUBMODULE_FETCH_TAGS=1 ./【MacOS】⏬下载配置当前Git子模块.command
+chmod +x '~/Desktop/JobsKits/JobsMacEnvVarConfig/install.command'
+~/Desktop/JobsKits/JobsMacEnvVarConfig/install.command
 ```
 
-日常推荐直接运行：
+已存在仓库时不是重新 clone，而是：
 
 ```shell
-./'【MacOS】⏬下载配置当前Git子模块.command'
+git pull --ff-only
 ```
 
-其他环境变量只在特殊场景临时打开。
+#### 4.8.4、检查命令
+
+```shell
+ls -la ~/Desktop/JobsKits
+ls -la ~/Desktop/JobsKits/JobsSoftware.MacOS
+ls -la ~/Desktop/JobsKits/JobsMacEnvVarConfig
+
+git -C ~/Desktop/JobsKits/JobsSoftware.MacOS status
+git -C ~/Desktop/JobsKits/JobsMacEnvVarConfig status
+```
+
+#### 4.8.5、常见问题
+
+* GitHub 不通时脚本会结束，不会静默失败。
+* `git pull --ff-only` 失败通常说明本地有分叉提交或未处理状态，先进入对应目录查 `git status`。
+* `install.command` 不存在时，说明仓库内容、分支或拉取状态不符合预期。
 
 ---
 
-### 3.16、📔日志文件
+## 五、手动下载环节
 
-* 脚本每次运行都会写日志到：`/tmp/【MacOS】⏬下载配置当前Git子模块.log`
+### 5.1、目的
 
-* 实际文件名来自脚本文件名去掉扩展名后拼接 `.log`。
+这些软件体积大、安装包变化快，或者图形安装更稳，因此脚本只负责打开官网，不强行自动化安装。
 
-* 排查失败时优先看终端最后一个 `❌`，需要完整记录时再看 `/tmp` 下的日志。
+### 5.2、流程图
 
----
+```mermaid
+flowchart TD
+    A([开始手动下载环节]) --> B[打开 VS Code 下载页]
+    B --> C[打开 Android Studio 下载页]
+    C --> D[打开 Python 下载页]
+    D --> E[用户在浏览器中手动下载安装]
+    E --> F{是否安装完成?}
+    F -- 是 --> G[按需配置插件 / SDK / PATH]
+    F -- 否 --> H[稍后继续手动处理]
+    G --> I([手动下载环节完成])
+    H --> I
+```
 
-### 3.17、常见使用场景
-
-#### 场景 1：新 Mac 第一次拉完整配置
-
-> 父仓是 **SSH**，子仓自动用 **SSH**；父仓是 **HTTPS**，子仓自动用 **HTTPS**。
-
-* 授权并运行脚本`【MacOS】⏬下载配置当前Git子模块.command`
-
-* 菜单选择：`全量同步更新下载到最新`
-
-#### 场景 2：日常只更新本地已有子仓
-
-* 运行脚本后选择：`只更新目前已有的`
-* 该选项不会下载所有缺失子仓，适合日常增量同步。
-
-#### 场景 3：只同步几个指定子仓
-
-* 运行脚本后选择：`选择指定子模块同步（可多选）`
-
-* 进入二级页面后：
-  * `↑` / `↓` 移动
-  * `Enter` 勾选
-  * `Space` 确认后开始同步
-  * `←` 返回主菜单
-
-#### 场景 4：临时添加一个新仓
-
-* 运行脚本后选择：`添加并同步一个新的 Git 地址`
-
-* 同步完成后，把脚本提示的配置行加入 `SUBMODULE_REPO_URLS`，下次运行才会长期保留。
-
-#### 场景 5：删除一个不再需要的子模块
-
-* 从 `SUBMODULE_REPO_URLS` 删除对应行。
-
-* 使用清理模式运行：
-
-  ```
-  PRUNE_STALE_GITMODULES=1 ./【MacOS】⏬下载配置当前Git子模块.command
-  ```
-
-* 菜单选择全量同步或只更新已有。
-
-* 检查父仓变更
-
-  ```zsh
-  git status
-  git diff --cached -- .gitmodules
-  ```
-
-**旧目录不是 Git 目录且非空时，脚本会拒绝删除。确认要删时，再额外加 `FORCE_DELETE=1`**
-
----
-
-### 3.18、失败排查顺序
-
-按下面顺序查，别一上来改脚本：
-
-1. 看终端最后一个 `❌` 报错。
-2. 看日志：
-
-   ```shell
-   cat /tmp/【MacOS】⏬下载配置当前Git子模块.log
-   ```
-
-3. 检查父仓状态：
-
-   ```shell
-   git status
-   git remote -v
-   git branch --show-current
-   ```
-
-4. 检查子仓是否有未提交内容：
-
-   ```shell
-   git -C 子仓目录 status
-   ```
-
-5. 检查父仓协议判断依据：
-
-   ```shell
-   git remote get-url origin
-   ```
-
-6. 单独检查 [**GitHub**](https://github.com/)  访问：
-
-   ```shell
-   git ls-remote https://[**GitHub**](https://github.com/) .com/JobsKits/JobsSoftware.MacOS.git
-   git ls-remote git@[**GitHub**](https://github.com/) .com:JobsKits/JobsSoftware.MacOS.git
-   ```
-
-7. 临时强制协议再试：
-
-   ```shell
-   GIT_URL_STYLE=ssh ./【MacOS】⏬下载配置当前Git子模块.command
-   GIT_URL_STYLE=https ./【MacOS】⏬下载配置当前Git子模块.command
-   ```
-
-8. 只预览脚本动作：
-
-   ```shell
-   DRY_RUN=1 ./【MacOS】⏬下载配置当前Git子模块.command
-   ```
-
----
-
-### 3.19、<font color=red>F</font><font color=blue>A</font><font color=green>Q</font>
-
-#### 3.19.1、为什么 `.gitmodules` 里还是 HTTPS，但父仓是 SSH？
-
-* 这是正常设计。
-
-  `.gitmodules` 是跨机器共享配置。脚本不会因为当前机器父仓是 SSH，就强行把已有合法 HTTPS 条目改成 SSH。实际同步时，脚本会把子仓 `origin` 改成当前机器应该使用的协议。
-
-#### 3.19.2、为什么删除了 `SUBMODULE_REPO_URLS` 的一行，`.gitmodules` 没自动删？
-
-* 为了安全，默认不删旧 `.gitmodules` 配置。
-
-* 需要清理旧配置时运行：
-
-  ```zsh
-  PRUNE_STALE_GITMODULES=1 ./【MacOS】⏬下载配置当前Git子模块.command
-  ```
-
-#### 3.19.3、为什么子仓有改动时脚本直接中断？
-
-* 因为脚本无法判断这些改动是临时垃圾，还是正在写的重要内容。直接覆盖或删除会有丢数据风险，所以脚本只报错，不替用户决定。
-
-#### 3.19.4、为什么“只更新目前已有的”没有下载缺失子仓？
-
-* 这个选项定义上就是只更新本地已经存在的已配置 Git 子目录。需要补齐全部项目时，选择“全量同步更新下载到最新”。
-
-#### 3.19.5、为什么添加新 Git 地址后，下次运行没了？
-
-* 菜单里的“添加并同步一个新的 Git 地址”只是本次运行临时追加。长期保留需要把脚本提示的页面 URL 加入 `SUBMODULE_REPO_URLS`。
-
-#### 3.19.6、为什么脚本要碰 [**Homebrew**](https://brew.sh/) / [**fzf**](https://junegunn.GitHub .io/fzf/)？
-
-* 主菜单依赖 `fzf`。新 MacOS 常见问题是没有 `fzf`、[**Homebrew**](https://brew.sh/) 不在 PATH、双击 `.command` 时环境变量不完整。脚本会先补 PATH，再自检 `fzf`；`fzf` 不可用时，才进入 [**Homebrew**](https://brew.sh/) 检查和安装流程。
-
----
-
-## 四、⏬ 手动下载
-
-这些工具目前仍保留为手动下载入口：
+### 5.3、脚本打开页面
 
 ```url
 https://code.visualstudio.com/
@@ -939,53 +689,221 @@ https://developer.android.com/studio?hl=zh-cn
 https://www.python.org/downloads/
 ```
 
-建议：
+### 5.4、建议
 
-* [**VSCode**](https://code.visualstudio.com/) 可以配合 `VScodeConfigs` 子仓恢复配置。
-* [**Android Studio**](https://developer.android.com/studio?hl=zh-cn) 体积过大，最好单独下载安装，不放进自动化脚本里硬拉。
-* [**Python**](https://www.python.org/) 可用 [**Homebrew**](https://brew.sh/) 或官网安装，具体取决于本机项目对 [**Python**](https://www.python.org/) 版本的要求。
-
----
-
-## 五、关于 AI（目前尚未接入脚本）
-
-> 这部分目前只做记录，暂不并入 `【MacOS】⏬下载配置当前Git子模块.command`。原因：AI 工具链变化快，模型体积大，且不同机器的磁盘、网络、GPU / NPU 支持差异明显，不适合和基础系统初始化强绑定。
-
-* [**Ollama**](https://ollama.com/) 
-
-  * 下载地址：
-
-    ```url
-    https://ollama.com/download/mac
-    ```
-
-  * 安装命令：
-
-    ```shell
-    curl -fsSL https://ollama.com/install.sh | sh
-    ```
-
+* VS Code 可以配合 `VScodeConfigs` 或个人配置仓恢复插件和设置。
+* Android Studio 体积大，且 SDK / 模拟器组件变化频繁，不建议硬塞进基础初始化脚本。
+* Python 可以通过 Homebrew 或官网安装，最终取决于项目对 Python 版本的要求。
 
 ---
 
-## 六、设计原则
+## 六、网络检查标准
 
-* `MacOS` 新系统配置要先保证基础工具链，再同步个人配置。
+### 6.1、GitHub 检查流程图
 
-* [**GitHub**](https://github.com/) 网络不可达时必须显式报错，不能假装成功。
+```mermaid
+flowchart TD
+    A([开始检查 GitHub 网络]) --> B[请求 https://github.com]
+    B --> C{是否可访问?}
+    C -- 是 --> D[允许进入 JobsKits / GitHub 相关阶段]
+    C -- 否 --> E[提示网络不可达]
+    E --> F[要求修复 VPN / 代理 / DNS]
+    F --> G([结束脚本，避免误判为脚本错误])
+```
 
-* [**JobsKits**](https://github.com/JobsKits) 子仓统一由 `SUBMODULE_REPO_URLS` 管理，不手动散落 **clone**。
+### 6.2、Homebrew / oh-my-zsh 检查流程图
 
-* 配置层只写 [**GitHub**](https://github.com/)  页面 URL，不混写 `.git` / **SSH**。
+```mermaid
+flowchart TD
+    A([开始检查 raw.githubusercontent.com]) --> B[请求 raw.githubusercontent.com]
+    B --> C{是否可访问?}
+    C -- 是 --> D[允许安装 Homebrew / oh-my-zsh]
+    C -- 否 --> E[提示 Homebrew / oh-my-zsh 安装源不可达]
+    E --> F[修复网络后重新运行]
+```
 
-* **HTTPS** / **SSH** 由父仓远端自动推导，减少换机器后的手动参数。
+### 6.3、手动检查命令
 
-* `.gitmodules` 合法就不乱动，缺什么补什么，错什么修什么。
+```shell
+curl -I -L https://github.com
+curl -I -L https://raw.githubusercontent.com
 
-* 子仓有未提交内容时宁可中断，也不自动覆盖。
+git ls-remote https://github.com/JobsKits/JobsSoftware.MacOS.git
+git ls-remote https://github.com/JobsKits/JobsMacEnvVarConfig.git
+```
 
-* 默认浅克隆、默认不拉 tags，优先照顾新机器上的网络成本。
+---
 
-* 默认自动 **commit**，但默认不 **push**，避免跨机器误推。
+## 七、失败排查顺序
 
-* 危险删除必须显式打开开关。
+不要一上来改脚本，先按顺序查：
+
+```mermaid
+flowchart TD
+    A([发现失败]) --> B[看终端最后一个红色错误]
+    B --> C[查看 /tmp 日志]
+    C --> D{是否网络错误?}
+    D -- 是 --> E[修复 GitHub / raw.githubusercontent.com 访问]
+    D -- 否 --> F{是否命令不存在?}
+    F -- 是 --> G[回到对应安装阶段]
+    F -- 否 --> H{是否权限错误?}
+    H -- 是 --> I[检查 sudo / 文件权限 / chmod +x]
+    H -- 否 --> J{是否 Git 仓库状态错误?}
+    J -- 是 --> K[进入仓库执行 git status]
+    J -- 否 --> L[保留日志，按失败命令单独复现]
+```
+
+### 7.1、通用排查命令
+
+```shell
+cat /tmp/【MacOS】🆕新系统配置.log
+
+which git
+git --version
+
+which brew
+brew --version
+brew doctor
+
+which node
+node -v
+npm -v
+
+which ruby
+ruby -v
+gem -v
+
+which pod
+pod --version
+```
+
+---
+
+## 八、配置项 Mermaid 编写标准
+
+以后 README 里每一个子项都按这个格式写：
+
+```markdown
+### N.x、配置项名称
+
+#### 目的
+
+说明为什么需要这个配置项。
+
+#### 流程图
+
+\```mermaid
+flowchart TD
+    A([开始]) --> B[检查前置条件]
+    B --> C{是否满足?}
+    C -- 是 --> D[执行安装 / 配置]
+    C -- 否 --> E[提示修复]
+    D --> F{是否成功?}
+    F -- 是 --> G([完成])
+    F -- 否 --> H[排查并重试]
+\```
+
+#### 命令
+
+\```shell
+xxx
+\```
+
+#### 检查
+
+\```shell
+xxx --version
+\```
+
+#### 常见问题
+
+* 只写真实问题，不写废话。
+```
+
+标准要求：
+
+* 每个配置项必须有 Mermaid 流程图。
+* 流程图必须体现：开始、前置检查、是否已安装、执行动作、成功检查、失败排查。
+* 安装类配置必须写检查命令。
+* 涉及网络的配置必须写网络失败路径。
+* 涉及删除、覆盖、升级、sudo 的配置必须写风险说明。
+* README 不要只堆命令，要让以后回看时能知道为什么这样做。
+
+---
+
+## 九、当前脚本阶段和 README 对应关系
+
+| 脚本函数 | README 章节 | Mermaid 是否已补齐 |
+|---|---|---|
+| `show_readme_and_block` | 三、运行方式 | 是 |
+| `stage_clt` | 四 / 4.1、阶段 1：CLT | 是 |
+| `stage_xcode_simulator_assets` | 四 / 4.2、阶段 2：Xcode 模拟器配件 | 是 |
+| `stage_oh_my_zsh` | 四 / 4.3、阶段 3：oh-my-zsh | 是 |
+| `stage_homebrew` | 四 / 4.4、阶段 4：Homebrew | 是 |
+| `stage_brew_packages` | 四 / 4.5、阶段 5：brew 安装开发工具 | 是 |
+| `stage_npm` | 四 / 4.6、阶段 6：npm | 是 |
+| `stage_gem` | 四 / 4.7、阶段 7：gem / CocoaPods | 是 |
+| `stage_jobs` | 四 / 4.8、阶段 8：JobsKits 仓库与环境配置 | 是 |
+| `open_manual_download_pages` | 五、手动下载环节 | 是 |
+| `finish_summary` | 七、失败排查顺序 | 是 |
+
+---
+
+## 十、设计原则
+
+* 新系统配置先保证基础工具链，再同步个人配置。
+* 网络不可达必须显式失败，不要假装成功。
+* 每个子项都要能单独理解、单独排查、单独复现。
+* Mermaid 流程图不是装饰，是为了让以后维护脚本时能看清执行分支。
+* Homebrew 已存在时，执行更新、升级、清理是合理行为。
+* `brew cleanup` 应作为常规清理动作，减少旧版本包和缓存垃圾。
+* 涉及安装、升级、删除、sudo、网络的步骤，都要在 README 写清失败路径。
+* CocoaPods 安装完成不代表本地 pod 可用，本地 pod 还要用 `pod lib lint` 单独验证。
+* GitHub 网络问题和脚本逻辑问题必须分开判断。
+* 脚本里能自动做的自动做，不能安全自动判断的要明确提示用户。
+
+---
+
+## 十一、FAQ
+
+### 11.1、为什么 README 里每个子项都要画流程图？
+
+因为新系统配置不是单条命令合集。每个配置项都有前置条件、成功路径、失败路径和检查标准。流程图能把这些分支固定下来，后面维护脚本时不容易改乱。
+
+### 11.2、CocoaPods 的安装流程核心是什么？
+
+核心是：先确认 `gem` 存在，再执行 `sudo gem install cocoapods`，最后用 `pod --version` 验证。不能只看 gem 安装结束就认为 CocoaPods 可用。
+
+### 11.3、Homebrew 已经安装了，为什么脚本还要 update / upgrade / cleanup？
+
+这是新系统配置和环境升级脚本，不是只安装缺失项。Homebrew 已存在时直接更新、升级、清理，符合这个脚本的目标。
+
+### 11.4、GitHub 不通时为什么直接结束？
+
+因为 JobsKits、oh-my-zsh、Homebrew 安装源都依赖外网。网络不通时继续跑只会制造更多误导错误，不如直接失败并提示修复网络。
+
+### 11.5、为什么手动下载不全部自动化？
+
+VS Code、Android Studio、Python 官网安装包变化快，Android Studio 还涉及 SDK、模拟器、授权协议。强行自动化不一定更稳，基础脚本只打开官网更可靠。
+
+### 11.6、本地 pod 要怎么确认真的能编译？
+
+优先执行：
+
+```shell
+pod lib lint YourPod.podspec --allow-warnings --verbose --no-clean
+```
+
+失败后打开 `--no-clean` 保留下来的临时工程，看 Xcode 编译错误，不要只看 CocoaPods 最后一行日志。
+
+---
+
+## 十二、后续建议
+
+当前 README 已经按“每个子项都有 Mermaid 流程图”的标准升级完成，并且脚本本体已经同步修复 Homebrew formula / cask 分类问题。后续继续按这个标准维护：
+
+1. 给安装 / 升级步骤增加更明确的用户交互策略。
+2. 对危险操作保留强确认，例如输入 `YES`。
+3. 保留 `brew cleanup` 作为普通清理项。
+4. 后续新增任何配置项时，先补 README 流程图，再写脚本函数。
+
