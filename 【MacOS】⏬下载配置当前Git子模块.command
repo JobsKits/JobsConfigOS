@@ -31,12 +31,13 @@ export LC_CTYPE="${LC_CTYPE:-UTF-8}"
 # 删除子仓：从 SUBMODULE_REPO_URLS 里删掉对应页面地址；默认只查漏补缺，不删除 .gitmodules 旧配置。
 SUBMODULE_REPO_URLS=(
   "https://github.com/JobsKits/JobsSoftware.MacOS|⏬JobsSoftware.MacOS"
-  "https://github.com/JobsKits/JobsMacEnvVarConfig|🌍JobsMacEnvVarConfig"
+  "https://github.com/JobsKits/JobsMacEnvVarConfigs|🌍JobsMacEnvVarConfigs"
   "https://github.com/JobsKits/JobsCodeSnippets|🍎JobsCodeSnippets"
   "https://github.com/JobsKits/JobsConfigHotKeyByHammerspoon|🔨JobsConfigHotKeyByHammerspoon"
   "https://github.com/JobsKits/JobsInstallOpenClaw|🦞JobsInstallOpenClaw"
   "https://github.com/JobsKits/SourceTree.sh|🌲SourceTree.sh"
   "https://github.com/JobsKits/VScodeConfigs|⚙️VScodeConfigs"
+  "https://github.com/JobsKits/JobsCodexConfigs|💻JobsCodexConfigs"
   # 以后新增仓库，只写浏览器页面地址即可。
   # "https://github.com/JobsKits/xxx"
 )
