@@ -431,6 +431,7 @@ stage_brew_packages() {
         go-task/tap/go-task
         uv
         fzf
+        lazygit
     )
 
     local pkg
