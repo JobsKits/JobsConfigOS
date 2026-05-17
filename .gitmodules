@@ -2,9 +2,9 @@
 	path = ⏬JobsSoftware.MacOS
 	url = https://github.com/JobsKits/JobsSoftware.MacOS.git
 	branch = main
-[submodule "🌍JobsMacEnvVarConfig"]
-	path = 🌍JobsMacEnvVarConfig
-	url = https://github.com/JobsKits/JobsMacEnvVarConfig.git
+[submodule "🌍JobsMacEnvVarConfigs"]
+	path = 🌍JobsMacEnvVarConfigs
+	url = https://github.com/JobsKits/JobsMacEnvVarConfigs.git
 	branch = main
 [submodule "🍎JobsCodeSnippets"]
 	path = 🍎JobsCodeSnippets
@@ -25,4 +25,8 @@
 [submodule "⚙️VScodeConfigs"]
 	path = ⚙️VScodeConfigs
 	url = https://github.com/JobsKits/VScodeConfigs.git
+	branch = main
+[submodule "💻JobsCodexConfigs"]
+	path = 💻JobsCodexConfigs
+	url = https://github.com/JobsKits/JobsCodexConfigs.git
 	branch = main
