@@ -70,6 +70,7 @@ readonly -a BREW_FORMULAE=(
     fzf
     lazygit
     dufs
+    git-filter-repo
 )
 # 这里配置 Homebrew@cask
 readonly -a BREW_CASKS=(

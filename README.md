@@ -31,9 +31,9 @@
 
 脚本结束后会打开部分手动下载页面：
 
-* Visual Studio Code
-* Android Studio
-* Python Downloads
+- Visual Studio Code
+- Android Studio
+- Python Downloads
 
 ---
 
@@ -140,9 +140,9 @@ clang --version
 
 #### 4.1.5、常见问题
 
-* `xcode-select --install` 提示已安装：正常，继续后续流程。
-* `sudo xcodebuild -license accept` 失败：通常是未安装完整 Xcode、权限不足，或系统弹窗没有处理完。
-* `git --version` 不可用：优先回到 CLT 安装，不要直接改后面的脚本。
+- `xcode-select --install` 提示已安装：正常，继续后续流程。
+- `sudo xcodebuild -license accept` 失败：通常是未安装完整 Xcode、权限不足，或系统弹窗没有处理完。
+- `git --version` 不可用：优先回到 CLT 安装，不要直接改后面的脚本。
 
 ---
 
@@ -177,14 +177,14 @@ xcodebuild -downloadPlatform iOS -verbose
 
 #### 4.2.4、适用场景
 
-* 新系统首次安装 Xcode 后缺模拟器运行环境。
-* Xcode 升级后模拟器缓存异常。
-* `xcodebuild` 下载平台组件失败后需要重新拉取。
+- 新系统首次安装 Xcode 后缺模拟器运行环境。
+- Xcode 升级后模拟器缓存异常。
+- `xcodebuild` 下载平台组件失败后需要重新拉取。
 
 #### 4.2.5、常见问题
 
-* 下载失败不一定是脚本问题，更多是 Xcode 未准备好、Apple 服务网络不稳定或磁盘空间不足。
-* 如果 Xcode 没打开过，建议先手动打开一次 Xcode，让系统完成首次初始化。
+- 下载失败不一定是脚本问题，更多是 Xcode 未准备好、Apple 服务网络不稳定或磁盘空间不足。
+- 如果 Xcode 没打开过，建议先手动打开一次 Xcode，让系统完成首次初始化。
 
 ---
 
@@ -228,8 +228,8 @@ zsh --version
 
 #### 4.3.5、常见问题
 
-* 官方安装脚本可能有交互行为，这是正常的。
-* 如果 `raw.githubusercontent.com` 不通，脚本会直接中断，不要把网络问题误判成脚本问题。
+- 官方安装脚本可能有交互行为，这是正常的。
+- 如果 `raw.githubusercontent.com` 不通，脚本会直接中断，不要把网络问题误判成脚本问题。
 
 ---
 
@@ -314,9 +314,9 @@ brew doctor
 
 #### 4.4.6、常见问题
 
-* 双击 `.command` 时 PATH 可能不完整，所以脚本需要写入 `~/.zprofile` 并在当前进程立即生效。
-* Apple Silicon 上部分 Intel 兼容工具依赖 Rosetta，脚本会自动检测并安装。
-* Homebrew 不存在时是“安装”，存在时是“升级 + 清理”。这符合 `update` 类系统配置脚本的定位。
+- 双击 `.command` 时 PATH 可能不完整，所以脚本需要写入 `~/.zprofile` 并在当前进程立即生效。
+- Apple Silicon 上部分 Intel 兼容工具依赖 Rosetta，脚本会自动检测并安装。
+- Homebrew 不存在时是“安装”，存在时是“升级 + 清理”。这符合 `update` 类系统配置脚本的定位。
 
 ---
 
@@ -500,8 +500,8 @@ quicktype --version
 
 #### 4.6.5、常见问题
 
-* `npm` 不存在：优先检查 `node` 是否通过 Homebrew 安装成功。
-* `sudo npm install -g` 失败：常见原因是网络、权限、npm registry、全局目录权限。
+- `npm` 不存在：优先检查 `node` 是否通过 Homebrew 安装成功。
+- `sudo npm install -g` 失败：常见原因是网络、权限、npm registry、全局目录权限。
 
 ---
 
@@ -654,9 +654,9 @@ git -C ~/Desktop/JobsKits/JobsMacEnvVarConfig status
 
 #### 4.8.5、常见问题
 
-* GitHub 不通时脚本会结束，不会静默失败。
-* `git pull --ff-only` 失败通常说明本地有分叉提交或未处理状态，先进入对应目录查 `git status`。
-* `install.command` 不存在时，说明仓库内容、分支或拉取状态不符合预期。
+- GitHub 不通时脚本会结束，不会静默失败。
+- `git pull --ff-only` 失败通常说明本地有分叉提交或未处理状态，先进入对应目录查 `git status`。
+- `install.command` 不存在时，说明仓库内容、分支或拉取状态不符合预期。
 
 ---
 
@@ -691,9 +691,9 @@ https://www.python.org/downloads/
 
 ### 5.4、建议
 
-* VS Code 可以配合 `VScodeConfigs` 或个人配置仓恢复插件和设置。
-* Android Studio 体积大，且 SDK / 模拟器组件变化频繁，不建议硬塞进基础初始化脚本。
-* Python 可以通过 Homebrew 或官网安装，最终取决于项目对 Python 版本的要求。
+- VS Code 可以配合 `VScodeConfigs` 或个人配置仓恢复插件和设置。
+- Android Studio 体积大，且 SDK / 模拟器组件变化频繁，不建议硬塞进基础初始化脚本。
+- Python 可以通过 Homebrew 或官网安装，最终取决于项目对 Python 版本的要求。
 
 ---
 
@@ -822,12 +822,12 @@ xxx --version
 
 标准要求：
 
-* 每个配置项必须有 Mermaid 流程图。
-* 流程图必须体现：开始、前置检查、是否已安装、执行动作、成功检查、失败排查。
-* 安装类配置必须写检查命令。
-* 涉及网络的配置必须写网络失败路径。
-* 涉及删除、覆盖、升级、sudo 的配置必须写风险说明。
-* README 不要只堆命令，要让以后回看时能知道为什么这样做。
+- 每个配置项必须有 Mermaid 流程图。
+- 流程图必须体现：开始、前置检查、是否已安装、执行动作、成功检查、失败排查。
+- 安装类配置必须写检查命令。
+- 涉及网络的配置必须写网络失败路径。
+- 涉及删除、覆盖、升级、sudo 的配置必须写风险说明。
+- README 不要只堆命令，要让以后回看时能知道为什么这样做。
 
 ---
 
@@ -851,16 +851,16 @@ xxx --version
 
 ## 十、设计原则
 
-* 新系统配置先保证基础工具链，再同步个人配置。
-* 网络不可达必须显式失败，不要假装成功。
-* 每个子项都要能单独理解、单独排查、单独复现。
-* Mermaid 流程图不是装饰，是为了让以后维护脚本时能看清执行分支。
-* Homebrew 已存在时，执行更新、升级、清理是合理行为。
-* `brew cleanup` 应作为常规清理动作，减少旧版本包和缓存垃圾。
-* 涉及安装、升级、删除、sudo、网络的步骤，都要在 README 写清失败路径。
-* CocoaPods 安装完成不代表本地 pod 可用，本地 pod 还要用 `pod lib lint` 单独验证。
-* GitHub 网络问题和脚本逻辑问题必须分开判断。
-* 脚本里能自动做的自动做，不能安全自动判断的要明确提示用户。
+- 新系统配置先保证基础工具链，再同步个人配置。
+- 网络不可达必须显式失败，不要假装成功。
+- 每个子项都要能单独理解、单独排查、单独复现。
+- Mermaid 流程图不是装饰，是为了让以后维护脚本时能看清执行分支。
+- Homebrew 已存在时，执行更新、升级、清理是合理行为。
+- `brew cleanup` 应作为常规清理动作，减少旧版本包和缓存垃圾。
+- 涉及安装、升级、删除、sudo、网络的步骤，都要在 README 写清失败路径。
+- CocoaPods 安装完成不代表本地 pod 可用，本地 pod 还要用 `pod lib lint` 单独验证。
+- GitHub 网络问题和脚本逻辑问题必须分开判断。
+- 脚本里能自动做的自动做，不能安全自动判断的要明确提示用户。
 
 ---
 
@@ -907,3 +907,4 @@ pod lib lint YourPod.podspec --allow-warnings --verbose --no-clean
 3. 保留 `brew cleanup` 作为普通清理项。
 4. 后续新增任何配置项时，先补 README 流程图，再写脚本函数。
 
+<a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>
