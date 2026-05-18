@@ -42,6 +42,44 @@ readonly JOBS_SOFTWARE_REPO="https://github.com/JobsKits/JobsSoftware.MacOS.git"
 readonly JOBS_ENV_REPO="https://github.com/JobsKits/JobsMacEnvVarConfig.git"
 
 # =========================
+# Homebrew 第三方配置
+# 说明：这里是平时最常改的区域；下面安装流程只读取这里的定义。
+# =========================
+# 这里配置 Homebrew@formulae
+readonly -a BREW_FORMULAE=(
+    git-lfs
+    gh
+    nushell
+    rbenv
+    node
+    jenv
+    fvm
+    pnpm
+    ruby
+    python
+    python3
+    fastlane
+    mysql
+    hugo
+    openjdk
+    openjdk@17
+    yt-dlp
+    ffmpeg
+    go-task/tap/go-task
+    uv
+    fzf
+    lazygit
+)
+# 这里配置 Homebrew@cask
+readonly -a BREW_CASKS=(
+    hammerspoon
+    flutter
+    trex
+    vlc
+    onlyoffice
+)
+
+# =========================
 # 通用基础函数
 # =========================
 
@@ -409,33 +447,8 @@ stage_brew_packages() {
     fi
 
     info_echo "开始安装 brew formula..."
-    local formulae=(
-        git-lfs
-        gh
-        nushell
-        rbenv
-        node
-        jenv
-        fvm
-        pnpm
-        ruby
-        python
-        python3
-        fastlane
-        mysql
-        hugo
-        openjdk
-        openjdk@17
-        yt-dlp
-        ffmpeg
-        go-task/tap/go-task
-        uv
-        fzf
-        lazygit
-    )
-
     local pkg
-    for pkg in "${formulae[@]}"; do
+    for pkg in "${BREW_FORMULAE[@]}"; do
         brew_install_if_needed "${pkg}" || return 1
     done
 
@@ -463,14 +476,7 @@ stage_brew_packages() {
     fi
 
     info_echo "开始安装 brew cask..."
-    local casks=(
-        hammerspoon
-        flutter
-        trex
-        vlc
-    )
-
-    for pkg in "${casks[@]}"; do
+    for pkg in "${BREW_CASKS[@]}"; do
         brew_install_cask_if_needed "${pkg}" || return 1
     done
 
