@@ -78,6 +78,8 @@ readonly -a BREW_CASKS=(
     trex
     vlc
     onlyoffice
+    codex-app # 图形化界面
+    codex # 终端使用
 )
 
 # =========================
