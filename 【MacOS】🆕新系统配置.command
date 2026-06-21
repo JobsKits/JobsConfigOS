@@ -1,4 +1,9 @@
 #!/bin/zsh
+# 脚本自述：
+# - 脚本名称：【MacOS】🆕新系统配置.command
+# - 核心用途：执行“🆕新系统配置”对应的本机环境配置任务。
+# - 影响范围：可能安装、更新或修改当前用户的工具链与配置文件。
+# - 运行提示：运行后会先打印内置自述；终端模式按回车确认后继续，按 Ctrl+C 可取消。
 
 # ==============================================================================
 # macOS 新系统初始化脚本
@@ -9,27 +14,39 @@
 # 4. 最终从 main "$@" 统一收口
 # ==============================================================================
 
-set -u
 
 # =========================
 # 日志与彩色输出
 # =========================
 SCRIPT_BASENAME=$(basename "$0" | sed 's/\.[^.]*$//')   # 当前脚本名（去掉扩展名）
 LOG_FILE="/tmp/${SCRIPT_BASENAME}.log"                  # 设置对应的日志文件路径
-
+# 统一输出终端信息并同步记录日志。
 log()            { echo -e "$1" | tee -a "$LOG_FILE"; }
+# 输出 color echo 对应级别的日志信息。
 color_echo()     { log "\033[1;32m$1\033[0m"; }         # ✅ 正常绿色输出
+# 输出 info echo 对应级别的日志信息。
 info_echo()      { log "\033[1;34mℹ $1\033[0m"; }       # ℹ 信息
+# 输出 success echo 对应级别的日志信息。
 success_echo()   { log "\033[1;32m✔ $1\033[0m"; }       # ✔ 成功
+# 输出 warn echo 对应级别的日志信息。
 warn_echo()      { log "\033[1;33m⚠ $1\033[0m"; }       # ⚠ 警告
+# 输出 warm echo 对应级别的日志信息。
 warm_echo()      { log "\033[1;33m$1\033[0m"; }         # 🟡 温馨提示（无图标）
+# 输出 note echo 对应级别的日志信息。
 note_echo()      { log "\033[1;35m➤ $1\033[0m"; }       # ➤ 说明
+# 输出 error echo 对应级别的日志信息。
 error_echo()     { log "\033[1;31m✖ $1\033[0m"; }       # ✖ 错误
+# 输出 err echo 对应级别的日志信息。
 err_echo()       { log "\033[1;31m$1\033[0m"; }         # 🔴 错误纯文本
+# 输出 debug echo 对应级别的日志信息。
 debug_echo()     { log "\033[1;35m🐞 $1\033[0m"; }      # 🐞 调试
+# 输出 highlight echo 对应级别的日志信息。
 highlight_echo() { log "\033[1;36m🔹 $1\033[0m"; }      # 🔹 高亮
+# 输出 gray echo 对应级别的日志信息。
 gray_echo()      { log "\033[0;90m$1\033[0m"; }         # ⚫ 次要信息
+# 输出 bold echo 对应级别的日志信息。
 bold_echo()      { log "\033[1m$1\033[0m"; }            # 📝 加粗
+# 输出 underline echo 对应级别的日志信息。
 underline_echo() { log "\033[4m$1\033[0m"; }            # 🔗 下划线
 
 # =========================
@@ -82,23 +99,19 @@ readonly -a BREW_CASKS=(
     codex-app # 图形化界面
     codex # 终端使用
 )
-
 # =========================
 # 通用基础函数
 # =========================
-
 # 打印分隔线
 print_divider() {
     gray_echo "------------------------------------------------------------------------"
 }
-
 # 阻塞等待用户按回车
 pause_for_enter() {
     local prompt="${1:-👉 请按回车继续，或按 Ctrl+C 取消...}"
     echo ""
     read "?${prompt}"
 }
-
 # 输出阶段进度
 progress_step() {
     local step_name="$1"
@@ -107,7 +120,6 @@ progress_step() {
     highlight_echo "当前系统配置进度：${CURRENT_STAGE}/${TOTAL_STAGES} 👉 ${step_name}"
     print_divider
 }
-
 # 命令执行包装：统一打印、不中断整体流程
 run_cmd() {
     local desc="$1"
@@ -127,7 +139,6 @@ run_cmd() {
 
     return $exit_code
 }
-
 # 以 shell 字符串执行，适合复杂命令
 run_sh() {
     local desc="$1"
@@ -147,7 +158,6 @@ run_sh() {
 
     return $exit_code
 }
-
 # 检查命令是否存在
 require_command() {
     local cmd="$1"
@@ -156,12 +166,10 @@ require_command() {
     fi
     return 1
 }
-
 # 获取芯片架构
 get_cpu_arch() {
     [[ "$(uname -m)" == "arm64" ]] && echo "arm64" || echo "x86_64"
 }
-
 # 查找 Homebrew 可执行文件
 # 说明：双击 .command 时，PATH 经常拿不到 /opt/homebrew/bin 或 /usr/local/bin。
 find_brew_bin() {
@@ -180,19 +188,16 @@ find_brew_bin() {
 
     return 1
 }
-
 # 检测当前是否是双击启动
 is_double_click_launch() {
     [[ -z "${TERM_PROGRAM:-}" ]] && return 0
     return 1
 }
-
 # 检测网络
 check_url_access() {
     local url="$1"
     curl -I -L -s --connect-timeout 8 --max-time 15 "${url}" >/dev/null 2>&1
 }
-
 # 检查 GitHub 访问
 ensure_github_access_or_exit() {
     info_echo "开始检查 GitHub 网络连通性..."
@@ -207,7 +212,6 @@ ensure_github_access_or_exit() {
     pause_for_enter "👉 GitHub 不可访问。请按回车结束脚本..."
     exit 1
 }
-
 # 检查 Homebrew 相关访问
 ensure_brew_access_or_exit() {
     info_echo "开始检查 Homebrew 安装所需网络..."
@@ -221,7 +225,6 @@ ensure_brew_access_or_exit() {
     pause_for_enter "👉 网络未就绪。请按回车结束脚本..."
     exit 1
 }
-
 # 安装 Rosetta（仅 Apple Silicon，且未安装时）
 ensure_rosetta_if_needed() {
     if [[ $(uname -m) == 'arm64' ]]; then
@@ -232,12 +235,17 @@ ensure_rosetta_if_needed() {
         fi
     fi
 }
-
 # =========================
 # 自述文件 / 启动说明
 # =========================
 show_readme_and_block() {
     clear 2>/dev/null || true
+  print -r -- '============================== 脚本内置自述 =============================='
+  print -r -- '脚本名称：【MacOS】🆕新系统配置.command'
+  print -r -- '核心用途：执行“🆕新系统配置”对应的本机环境配置任务。'
+  print -r -- '影响范围：可能安装、更新或修改当前用户的工具链与配置文件。'
+  print -r -- '取消方式：确认前按 Ctrl+C 终止，不会继续执行后续业务。'
+  print -r -- '============================================================================'
 
     echo ""
     bold_echo "========================= macOS 新系统配置脚本说明 ========================="
@@ -272,7 +280,6 @@ show_readme_and_block() {
 
     pause_for_enter "👉 请确认没有误操作。按回车继续执行，或按 Ctrl+C 取消..."
 }
-
 # =========================
 # 阶段 1：Command Line Tools（CLT）
 # =========================
@@ -284,7 +291,6 @@ stage_clt() {
 
     run_cmd "接受 Xcode License" sudo xcodebuild -license accept
 }
-
 # =========================
 # 阶段 2：Xcode 模拟器配件
 # =========================
@@ -295,7 +301,6 @@ stage_xcode_simulator_assets() {
     run_sh "删除 CoreSimulator 缓存" 'rm -rf ~/Library/Developer/CoreSimulator/Caches'
     run_cmd "下载 iOS 模拟器平台" xcodebuild -downloadPlatform iOS -verbose
 }
-
 # =========================
 # 阶段 3：ohmyzsh
 # =========================
@@ -315,7 +320,6 @@ stage_oh_my_zsh() {
 
     warn_echo "oh-my-zsh 官方安装流程可能有交互输出，这是正常现象。"
 }
-
 # =========================
 # 阶段 4：Homebrew
 # 参考你给的双击安装升级思路，区分 Intel / Apple Silicon
@@ -345,7 +349,7 @@ setup_brew_shellenv() {
 
     eval "$(${brew_bin} shellenv)"
 }
-
+# 准备并配置 install or upgrade homebrew 对应的运行条件。
 install_or_upgrade_homebrew() {
     local arch
     local brew_bin
@@ -392,12 +396,11 @@ install_or_upgrade_homebrew() {
         return 1
     fi
 }
-
+# 封装 stage homebrew 对应的独立处理逻辑。
 stage_homebrew() {
     progress_step "Homebrew"
     install_or_upgrade_homebrew
 }
-
 # =========================
 # 阶段 5：brew 安装开发工具
 # =========================
@@ -410,12 +413,12 @@ brew_formula_installed() {
 
     return 1
 }
-
+# 封装 brew cask installed 对应的独立处理逻辑。
 brew_cask_installed() {
     local pkg="$1"
     brew list --cask --versions "${pkg}" >/dev/null 2>&1
 }
-
+# 封装 brew install if needed 对应的独立处理逻辑。
 brew_install_if_needed() {
     local pkg="$1"
 
@@ -428,7 +431,7 @@ brew_install_if_needed() {
         fi
     fi
 }
-
+# 封装 brew install cask if needed 对应的独立处理逻辑。
 brew_install_cask_if_needed() {
     local pkg="$1"
 
@@ -441,7 +444,7 @@ brew_install_cask_if_needed() {
         fi
     fi
 }
-
+# 封装 stage brew packages 对应的独立处理逻辑。
 stage_brew_packages() {
     progress_step "brew 安装开发工具"
 
@@ -486,7 +489,6 @@ stage_brew_packages() {
 
     run_cmd "brew cleanup（清理旧版本与缓存）" brew cleanup
 }
-
 # =========================
 # 阶段 6：npm
 # =========================
@@ -500,7 +502,6 @@ stage_npm() {
 
     run_cmd "全局安装 quicktype" sudo npm install -g quicktype
 }
-
 # =========================
 # 阶段 7：gem
 # =========================
@@ -514,7 +515,6 @@ stage_gem() {
 
     run_cmd "安装 cocoapods" sudo gem install cocoapods
 }
-
 # =========================
 # 阶段 8：Jobs
 # 下载仓库并执行 install.command
@@ -530,7 +530,7 @@ clone_or_pull_repo() {
         run_sh "克隆仓库到 ${target_dir}" "git clone '${repo_url}' '${target_dir}'"
     fi
 }
-
+# 封装 stage jobs 对应的独立处理逻辑。
 stage_jobs() {
     progress_step "Jobs"
 
@@ -553,7 +553,6 @@ stage_jobs() {
         error_echo "未找到 ${install_script}"
     fi
 }
-
 # =========================
 # 手动下载环节
 # =========================
@@ -568,7 +567,6 @@ open_manual_download_pages() {
     run_cmd "打开 Android Studio 下载页" open "https://developer.android.com/studio?hl=zh-cn"
     run_cmd "打开 Python 下载页" open "https://www.python.org/downloads/"
 }
-
 # =========================
 # 收尾
 # =========================
@@ -581,7 +579,6 @@ finish_summary() {
     warm_echo "尤其留意：CLT / Xcode / oh-my-zsh / Homebrew / GitHub 网络相关步骤。"
     print_divider
 }
-
 # =========================
 # 主函数
 # 说明：
@@ -589,24 +586,45 @@ finish_summary() {
 # 2. 便于后续继续加阶段、加参数、加开关
 # 3. 最终使用 main \"$@\" 一键唤起
 # =========================
+# 初始化本次运行的日志文件。
+initialize_execution_log() {
+  : > "${LOG_FILE}"
+}
+# 编排脚本的高层业务流程。
+# 初始化脚本运行环境，并集中承载原有的顶层执行逻辑。
+initialize_script_runtime() {
+  set -u
+}
+# 编排脚本的高层业务流程。
 main() {
-    : > "${LOG_FILE}"
-
-    show_readme_and_block              # 显示自述说明并阻塞，等待用户确认后继续
-
-    stage_clt                          # 阶段 1：安装 Command Line Tools 并接受 Xcode 协议
-    stage_xcode_simulator_assets       # 阶段 2：清理 Xcode/模拟器缓存并下载 iOS 平台组件
-    stage_oh_my_zsh                    # 阶段 3：安装 oh-my-zsh
-    stage_homebrew                     # 阶段 4：安装或升级 Homebrew，并完成基础环境配置
-    stage_brew_packages                # 阶段 5：通过 Homebrew 安装常用开发工具与图形应用
-    stage_npm                          # 阶段 6：通过 npm 安装全局工具 quicktype
-    stage_gem                          # 阶段 7：通过 gem 安装 cocoapods
-    stage_jobs                         # 阶段 8：下载 Jobs 相关仓库并执行环境配置脚本
-
-    open_manual_download_pages         # 打开需要用户手动下载安装的软件官网
-    finish_summary                     # 输出执行结果与日志路径摘要
-
-    pause_for_enter "👉 全部流程已执行完成。请按回车退出..."
+  # 显示内置自述并阻塞，等待用户确认后继续。
+  show_readme_and_block
+  # 初始化 Shell 选项、日志、依赖和入口运行状态。
+  initialize_script_runtime
+  # 清空旧日志，确保本次记录独立可查。
+  initialize_execution_log
+  # 安装 Command Line Tools 并接受 Xcode 协议。
+  stage_clt
+  # 清理 Xcode 与模拟器缓存并下载 iOS 平台组件。
+  stage_xcode_simulator_assets
+  # 安装 oh-my-zsh。
+  stage_oh_my_zsh
+  # 安装或升级 Homebrew，并完成基础环境配置。
+  stage_homebrew
+  # 通过 Homebrew 安装常用开发工具与图形应用。
+  stage_brew_packages
+  # 通过 npm 安装全局工具 quicktype。
+  stage_npm
+  # 通过 gem 安装 CocoaPods。
+  stage_gem
+  # 下载 Jobs 相关仓库并执行环境配置脚本。
+  stage_jobs
+  # 打开需要用户手动下载安装的软件官网。
+  open_manual_download_pages
+  # 输出执行结果与日志路径摘要。
+  finish_summary
+  # 等待用户确认全部流程完成后退出。
+  pause_for_enter "👉 全部流程已执行完成。请按回车退出..."
 }
 
 main "$@"
