@@ -81,10 +81,10 @@ ls -la
 
 ### 3.3、日志文件
 
-日志会写入 `/tmp`：
+日志会写入 `$TMPDIR`：
 
 ```shell
-/tmp/【MacOS】🆕新系统配置.log
+$TMPDIR/【MacOS】🆕新系统配置.log
 ```
 
 脚本真实日志文件名来自脚本文件名去掉扩展名后拼接 `.log`。
@@ -92,7 +92,7 @@ ls -la
 排查失败时先看终端最后一个 `✖`，再看日志：
 
 ```shell
-cat /tmp/【MacOS】🆕新系统配置.log
+cat $TMPDIR/【MacOS】🆕新系统配置.log
 ```
 
 ---
@@ -260,8 +260,8 @@ flowchart TD
     L --> M([Homebrew 升级完成])
     I -- 否 --> N[执行 Homebrew 官方安装脚本]
     N --> O{芯片架构}
-    O -- arm64 --> P[写入 /opt/homebrew/bin/brew shellenv 到 ~/.zprofile]
-    O -- x86_64 --> Q[写入 /usr/local/bin/brew shellenv 到 ~/.zprofile]
+    O -- arm64 --> P[写入 $(brew --prefix)/bin/brew shellenv 到 ~/.zprofile]
+    O -- x86_64 --> Q[写入 $(brew --prefix)/bin/brew shellenv 到 ~/.zprofile]
     P --> R[当前会话立即 eval shellenv]
     Q --> R
     R --> S{brew 是否可用?}
@@ -274,19 +274,19 @@ flowchart TD
 安装：
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+$SYSTEM_BIN_DIR/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Apple Silicon 环境变量：
 
 ```shell
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($(brew --prefix)/bin/brew shellenv)"
 ```
 
 Intel 环境变量：
 
 ```shell
-eval "$(/usr/local/bin/brew shellenv)"
+eval "$($(brew --prefix)/bin/brew shellenv)"
 ```
 
 升级维护：
@@ -309,8 +309,8 @@ brew doctor
 
 | Mac 架构 | Homebrew 默认路径 |
 |---|---|
-| Apple Silicon / `arm64` | `/opt/homebrew/bin/brew` |
-| Intel / `x86_64` | `/usr/local/bin/brew` |
+| Apple Silicon / `arm64` | `$(brew --prefix)/bin/brew` |
+| Intel / `x86_64` | `$(brew --prefix)/bin/brew` |
 
 #### 4.4.6、常见问题
 
@@ -741,7 +741,7 @@ git ls-remote https://github.com/JobsKits/JobsMacEnvVarConfig.git
 ```mermaid
 flowchart TD
     A([发现失败]) --> B[看终端最后一个红色错误]
-    B --> C[查看 /tmp 日志]
+    B --> C[查看 $TMPDIR 日志]
     C --> D{是否网络错误?}
     D -- 是 --> E[修复 GitHub / raw.githubusercontent.com 访问]
     D -- 否 --> F{是否命令不存在?}
@@ -756,7 +756,7 @@ flowchart TD
 ### 7.1、通用排查命令
 
 ```shell
-cat /tmp/【MacOS】🆕新系统配置.log
+cat $TMPDIR/【MacOS】🆕新系统配置.log
 
 which git
 git --version
