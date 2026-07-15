@@ -39,6 +39,7 @@ SUBMODULE_REPO_URLS=(
   "https://github.com/JobsKits/SourceTree.sh|🌲SourceTree.sh"
   "https://github.com/JobsKits/VScodeConfigs|⚙️VScodeConfigs"
   "https://github.com/JobsKits/JobsCodexConfigs|💻JobsCodexConfigs"
+  "https://github.com/JobsKits/CodexByObsidian|📒CodexByObsidian"
   # 以后新增仓库，只写浏览器页面地址即可。
   # "https://github.com/JobsKits/xxx"
 )
