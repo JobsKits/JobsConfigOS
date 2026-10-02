@@ -1,36 +1,36 @@
 [submodule "🍎JobsCodeSnippets"]
 	path = 🍎JobsCodeSnippets
-	url = git@github.com:JobsKits/JobsCodeSnippets.git
+	url = git@gitee.com:JobsGo/jobs-code-snippetsJobsCodeSnippets.git
 	branch = main
 [submodule "💻JobsCodexConfigs"]
 	path = 💻JobsCodexConfigs
-	url = git@github.com:JobsKits/JobsCodexConfigs.git
+	url = ../JobsCodexConfigs.git
 	branch = main
 [submodule "🔨JobsConfigHotKeyByHammerspoon"]
 	path = 🔨JobsConfigHotKeyByHammerspoon
-	url = git@github.com:JobsKits/JobsConfigHotKeyByHammerspoon.git
+	url = ../JobsConfigHotKeyByHammerspoon.git
 	branch = main
 [submodule "🦞JobsInstallOpenClaw"]
 	path = 🦞JobsInstallOpenClaw
-	url = git@github.com:JobsKits/JobsInstallOpenClaw.git
+	url = ../JobsInstallOpenClaw.git
 	branch = main
 [submodule "🌍JobsMacEnvVarConfigs"]
 	path = 🌍JobsMacEnvVarConfigs
-	url = git@github.com:JobsKits/JobsMacEnvVarConfigs.git
+	url = ../JobsMacEnvVarConfigs.git
 	branch = main
 [submodule "⏬JobsSoftware.MacOS"]
 	path = ⏬JobsSoftware.MacOS
-	url = git@github.com:JobsKits/JobsSoftware.MacOS.git
+	url = ../JobsSoftware.MacOS.git
 	branch = main
 [submodule "Obsidian"]
 	path = 📒CodexByObsidian
-	url = git@github.com:JobsKits/CodexByObsidian.git
+	url = ../CodexByObsidian.git
 	branch = main
 [submodule "🌲SourceTree.sh"]
 	path = 🌲SourceTree.sh
-	url = git@github.com:JobsKits/SourceTree.sh.git
+	url = ../SourceTree.sh.git
 	branch = main
 [submodule "⚙️VScodeConfigs"]
 	path = ⚙️VScodeConfigs
-	url = git@github.com:JobsKits/VScodeConfigs.git
+	url = ../VScodeConfigs.git
 	branch = main
