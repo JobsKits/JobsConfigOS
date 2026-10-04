@@ -1,4 +1,4 @@
-# `MacOS` 新系统配置
+# <span id="前言">`MacOS` 新系统配置</span>
 
 ![Jobs出品，必属精品](https://picsum.photos/1500/400)
 
@@ -6,7 +6,7 @@
 
 ---
 
-## 一、前言
+## <span id="前言">一、前言</span>
 
 这个仓库适合作为 **macOS 新系统初始化入口**。目标不是做到真正无人值守，而是把新系统配置流程标准化：先装基础工具链，再安装开发工具，最后同步 JobsKits 相关仓库和个人环境配置。
 
@@ -37,7 +37,7 @@
 
 ---
 
-## 二、总流程图
+## 二、总流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -59,9 +59,9 @@ flowchart TD
 
 ---
 
-## 三、运行方式
+## 三、运行方式 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### 3.1、授权并运行
+### 3.1、授权并运行 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 chmod +x '【MacOS】🆕新系统配置.command'
@@ -70,7 +70,7 @@ chmod +x '【MacOS】🆕新系统配置.command'
 
 也可以双击 `.command` 文件运行。
 
-### 3.2、运行前检查
+### 3.2、运行前检查 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 pwd
@@ -79,7 +79,7 @@ ls -la
 
 建议把脚本放在你自己的系统配置仓库根目录。这样 README、脚本、日志说明、后续仓库同步逻辑都更容易管理。
 
-### 3.3、日志文件
+### 3.3、日志文件 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 日志会写入 `$TMPDIR`：
 
@@ -97,15 +97,15 @@ cat $TMPDIR/【MacOS】🆕新系统配置.log
 
 ---
 
-## 四、系统配置阶段
+## 四、系统配置阶段 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### 4.1、阶段 1：Command Line Tools（CLT）
+### 4.1、阶段 1：Command Line Tools（CLT） <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.1.1、目的
+#### 4.1.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 新系统第一步先装 Apple 命令行工具，否则后续 `git`、`clang`、编译工具链、Homebrew、RubyGems、CocoaPods 都可能不完整。
 
-#### 4.1.2、流程图
+#### 4.1.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -123,14 +123,14 @@ flowchart TD
     H --> K
 ```
 
-#### 4.1.3、脚本执行命令
+#### 4.1.3、脚本执行命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 xcode-select --install
 sudo xcodebuild -license accept
 ```
 
-#### 4.1.4、检查命令
+#### 4.1.4、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 xcode-select -p
@@ -138,7 +138,7 @@ git --version
 clang --version
 ```
 
-#### 4.1.5、常见问题
+#### 4.1.5、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - `xcode-select --install` 提示已安装：正常，继续后续流程。
 - `sudo xcodebuild -license accept` 失败：通常是未安装完整 Xcode、权限不足，或系统弹窗没有处理完。
@@ -146,13 +146,13 @@ clang --version
 
 ---
 
-### 4.2、阶段 2：Xcode 模拟器配件
+### 4.2、阶段 2：Xcode 模拟器配件 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.2.1、目的
+#### 4.2.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 清理 Xcode / Simulator 缓存，并重新下载 iOS 平台支持包。适合新系统、新 Xcode、模拟器异常、平台组件缺失等场景。
 
-#### 4.2.2、流程图
+#### 4.2.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -167,7 +167,7 @@ flowchart TD
     I --> J[修复后重新执行该阶段]
 ```
 
-#### 4.2.3、脚本执行命令
+#### 4.2.3、脚本执行命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 rm -rf ~/Library/Caches/com.apple.dt.Xcode
@@ -175,26 +175,26 @@ rm -rf ~/Library/Developer/CoreSimulator/Caches
 xcodebuild -downloadPlatform iOS -verbose
 ```
 
-#### 4.2.4、适用场景
+#### 4.2.4、适用场景 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - 新系统首次安装 Xcode 后缺模拟器运行环境。
 - Xcode 升级后模拟器缓存异常。
 - `xcodebuild` 下载平台组件失败后需要重新拉取。
 
-#### 4.2.5、常见问题
+#### 4.2.5、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - 下载失败不一定是脚本问题，更多是 Xcode 未准备好、Apple 服务网络不稳定或磁盘空间不足。
 - 如果 Xcode 没打开过，建议先手动打开一次 Xcode，让系统完成首次初始化。
 
 ---
 
-### 4.3、阶段 3：oh-my-zsh
+### 4.3、阶段 3：oh-my-zsh <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.3.1、目的
+#### 4.3.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 安装 oh-my-zsh，作为 zsh 的常用增强配置。macOS 当前默认 Shell 通常是 `zsh`，所以这个阶段优先级比较高。
 
-#### 4.3.2、流程图
+#### 4.3.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -212,13 +212,13 @@ flowchart TD
     F --> I
 ```
 
-#### 4.3.3、脚本执行命令
+#### 4.3.3、脚本执行命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-#### 4.3.4、检查命令
+#### 4.3.4、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 ls -la ~/.oh-my-zsh
@@ -226,20 +226,20 @@ echo $SHELL
 zsh --version
 ```
 
-#### 4.3.5、常见问题
+#### 4.3.5、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - 官方安装脚本可能有交互行为，这是正常的。
 - 如果 `raw.githubusercontent.com` 不通，脚本会直接中断，不要把网络问题误判成脚本问题。
 
 ---
 
-### 4.4、阶段 4：Homebrew
+### 4.4、阶段 4：Homebrew <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.4.1、目的
+#### 4.4.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 安装或升级 Homebrew。Homebrew 是后续安装 Node、Ruby、Python、fastlane、openjdk、ffmpeg、Flutter 等工具的基础。
 
-#### 4.4.2、流程图
+#### 4.4.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -269,7 +269,7 @@ flowchart TD
     S -- 否 --> T[提示安装后仍未检测到 brew]
 ```
 
-#### 4.4.3、脚本执行命令
+#### 4.4.3、脚本执行命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 安装：
 
@@ -297,7 +297,7 @@ brew upgrade
 brew cleanup
 ```
 
-#### 4.4.4、检查命令
+#### 4.4.4、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 which brew
@@ -305,14 +305,14 @@ brew --version
 brew doctor
 ```
 
-#### 4.4.5、路径规则
+#### 4.4.5、路径规则 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 | Mac 架构 | Homebrew 默认路径 |
 |---|---|
 | Apple Silicon / `arm64` | `$(brew --prefix)/bin/brew` |
 | Intel / `x86_64` | `$(brew --prefix)/bin/brew` |
 
-#### 4.4.6、常见问题
+#### 4.4.6、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - 双击 `.command` 时 PATH 可能不完整，所以脚本需要写入 `~/.zprofile` 并在当前进程立即生效。
 - Apple Silicon 上部分 Intel 兼容工具依赖 Rosetta，脚本会自动检测并安装。
@@ -320,13 +320,13 @@ brew doctor
 
 ---
 
-### 4.5、阶段 5：brew 安装开发工具
+### 4.5、阶段 5：brew 安装开发工具 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.5.1、目的
+#### 4.5.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 通过 Homebrew 安装新系统常用开发工具、语言环境、CLI 工具和部分图形应用。
 
-#### 4.5.2、流程图
+#### 4.5.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -356,7 +356,7 @@ flowchart TD
     T --> U([brew 开发工具安装完成])
 ```
 
-#### 4.5.3、Formula 工具清单
+#### 4.5.3、Formula 工具清单 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 脚本意图安装的常用 formula：
 
@@ -384,7 +384,7 @@ brew install uv
 brew install fzf
 ```
 
-#### 4.5.4、Cask 工具清单
+#### 4.5.4、Cask 工具清单 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 脚本意图安装的图形应用：
 
@@ -395,7 +395,7 @@ brew install --cask trex
 brew install --cask vlc
 ```
 
-#### 4.5.5、Git LFS 初始化
+#### 4.5.5、Git LFS 初始化 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 git lfs install
@@ -403,7 +403,7 @@ git config --global core.compression 0
 git config --global http.postBuffer 524288000
 ```
 
-#### 4.5.6、检查命令
+#### 4.5.6、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 brew list --formula
@@ -418,7 +418,7 @@ java -version
 ffmpeg -version
 ```
 
-#### 4.5.7、脚本实现标准
+#### 4.5.7、脚本实现标准 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 新版脚本已经把 formula 和 cask 拆成两个数组：普通命令行工具只走 `brew install`，图形应用只走 `brew install --cask`。这样可以避免把 `--cask` 当成普通 formula 名称安装。
 
@@ -459,13 +459,13 @@ local casks=(
 
 ---
 
-### 4.6、阶段 6：npm
+### 4.6、阶段 6：npm <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.6.1、目的
+#### 4.6.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 通过 npm 安装 Node 生态的全局工具。目前脚本安装的是 `quicktype`。
 
-#### 4.6.2、流程图
+#### 4.6.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -484,13 +484,13 @@ flowchart TD
     K --> L
 ```
 
-#### 4.6.3、脚本执行命令
+#### 4.6.3、脚本执行命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 sudo npm install -g quicktype
 ```
 
-#### 4.6.4、检查命令
+#### 4.6.4、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 node -v
@@ -498,20 +498,20 @@ npm -v
 quicktype --version
 ```
 
-#### 4.6.5、常见问题
+#### 4.6.5、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - `npm` 不存在：优先检查 `node` 是否通过 Homebrew 安装成功。
 - `sudo npm install -g` 失败：常见原因是网络、权限、npm registry、全局目录权限。
 
 ---
 
-### 4.7、阶段 7：gem / CocoaPods
+### 4.7、阶段 7：gem / CocoaPods <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.7.1、目的
+#### 4.7.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 通过 RubyGems 安装 CocoaPods。CocoaPods 是 iOS / macOS Objective-C / Swift 项目常用依赖管理工具，后续本地 pod、私有 pod、组件化仓库都会用到它。
 
-#### 4.7.2、CocoaPods 安装流程图
+#### 4.7.2、CocoaPods 安装流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -530,13 +530,13 @@ flowchart TD
     K --> L
 ```
 
-#### 4.7.3、脚本执行命令
+#### 4.7.3、脚本执行命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 sudo gem install cocoapods
 ```
 
-#### 4.7.4、检查命令
+#### 4.7.4、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 ruby -v
@@ -545,7 +545,7 @@ pod --version
 which pod
 ```
 
-#### 4.7.5、本地 pod 编译检查建议
+#### 4.7.5、本地 pod 编译检查建议 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 如果你做的是本地管理的 pod，想确认 pod 内部是否能编译通过，建议按这个顺序查：
 
@@ -579,9 +579,9 @@ pod spec lint YourPod.podspec --allow-warnings --verbose
 
 ---
 
-### 4.8、阶段 8：JobsKits 仓库与环境配置
+### 4.8、阶段 8：JobsKits 仓库与环境配置 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-#### 4.8.1、目的
+#### 4.8.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 同步 JobsKits 相关仓库到本机，并执行环境变量配置脚本。
 
@@ -599,7 +599,7 @@ https://github.com/JobsKits/JobsMacEnvVarConfig.git
 ~/Desktop/JobsKits/JobsMacEnvVarConfig
 ```
 
-#### 4.8.2、流程图
+#### 4.8.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -623,7 +623,7 @@ flowchart TD
     L -- 否 --> P[提示未找到 install.command]
 ```
 
-#### 4.8.3、脚本执行逻辑
+#### 4.8.3、脚本执行逻辑 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 mkdir -p ~/Desktop/JobsKits
@@ -641,7 +641,7 @@ chmod +x '~/Desktop/JobsKits/JobsMacEnvVarConfig/install.command'
 git pull --ff-only
 ```
 
-#### 4.8.4、检查命令
+#### 4.8.4、检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 ls -la ~/Desktop/JobsKits
@@ -652,7 +652,7 @@ git -C ~/Desktop/JobsKits/JobsSoftware.MacOS status
 git -C ~/Desktop/JobsKits/JobsMacEnvVarConfig status
 ```
 
-#### 4.8.5、常见问题
+#### 4.8.5、常见问题 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - GitHub 不通时脚本会结束，不会静默失败。
 - `git pull --ff-only` 失败通常说明本地有分叉提交或未处理状态，先进入对应目录查 `git status`。
@@ -660,13 +660,13 @@ git -C ~/Desktop/JobsKits/JobsMacEnvVarConfig status
 
 ---
 
-## 五、手动下载环节
+## 五、手动下载环节 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### 5.1、目的
+### 5.1、目的 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 这些软件体积大、安装包变化快，或者图形安装更稳，因此脚本只负责打开官网，不强行自动化安装。
 
-### 5.2、流程图
+### 5.2、流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -681,7 +681,7 @@ flowchart TD
     H --> I
 ```
 
-### 5.3、脚本打开页面
+### 5.3、脚本打开页面 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```url
 https://code.visualstudio.com/
@@ -689,7 +689,7 @@ https://developer.android.com/studio?hl=zh-cn
 https://www.python.org/downloads/
 ```
 
-### 5.4、建议
+### 5.4、建议 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - VS Code 可以配合 `VScodeConfigs` 或个人配置仓恢复插件和设置。
 - Android Studio 体积大，且 SDK / 模拟器组件变化频繁，不建议硬塞进基础初始化脚本。
@@ -697,9 +697,9 @@ https://www.python.org/downloads/
 
 ---
 
-## 六、网络检查标准
+## 六、网络检查标准 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### 6.1、GitHub 检查流程图
+### 6.1、GitHub 检查流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -711,7 +711,7 @@ flowchart TD
     F --> G([结束脚本，避免误判为脚本错误])
 ```
 
-### 6.2、Homebrew / oh-my-zsh 检查流程图
+### 6.2、Homebrew / oh-my-zsh 检查流程图 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```mermaid
 flowchart TD
@@ -722,7 +722,7 @@ flowchart TD
     E --> F[修复网络后重新运行]
 ```
 
-### 6.3、手动检查命令
+### 6.3、手动检查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 curl -I -L https://github.com
@@ -734,7 +734,7 @@ git ls-remote https://github.com/JobsKits/JobsMacEnvVarConfig.git
 
 ---
 
-## 七、失败排查顺序
+## 七、失败排查顺序 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 不要一上来改脚本，先按顺序查：
 
@@ -753,7 +753,7 @@ flowchart TD
     J -- 否 --> L[保留日志，按失败命令单独复现]
 ```
 
-### 7.1、通用排查命令
+### 7.1、通用排查命令 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ```shell
 cat $TMPDIR/【MacOS】🆕新系统配置.log
@@ -779,7 +779,7 @@ pod --version
 
 ---
 
-## 八、配置项 Mermaid 编写标准
+## 八、配置项 Mermaid 编写标准 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 以后 README 里每一个子项都按这个格式写：
 
@@ -831,7 +831,7 @@ xxx --version
 
 ---
 
-## 九、当前脚本阶段和 README 对应关系
+## 九、当前脚本阶段和 README 对应关系 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 | 脚本函数 | README 章节 | Mermaid 是否已补齐 |
 |---|---|---|
@@ -849,7 +849,7 @@ xxx --version
 
 ---
 
-## 十、设计原则
+## 十、设计原则 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 - 新系统配置先保证基础工具链，再同步个人配置。
 - 网络不可达必须显式失败，不要假装成功。
@@ -864,29 +864,29 @@ xxx --version
 
 ---
 
-## 十一、FAQ
+## 十一、FAQ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### 11.1、为什么 README 里每个子项都要画流程图？
+### 11.1、为什么 README 里每个子项都要画流程图？ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 因为新系统配置不是单条命令合集。每个配置项都有前置条件、成功路径、失败路径和检查标准。流程图能把这些分支固定下来，后面维护脚本时不容易改乱。
 
-### 11.2、CocoaPods 的安装流程核心是什么？
+### 11.2、CocoaPods 的安装流程核心是什么？ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 核心是：先确认 `gem` 存在，再执行 `sudo gem install cocoapods`，最后用 `pod --version` 验证。不能只看 gem 安装结束就认为 CocoaPods 可用。
 
-### 11.3、Homebrew 已经安装了，为什么脚本还要 update / upgrade / cleanup？
+### 11.3、Homebrew 已经安装了，为什么脚本还要 update / upgrade / cleanup？ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 这是新系统配置和环境升级脚本，不是只安装缺失项。Homebrew 已存在时直接更新、升级、清理，符合这个脚本的目标。
 
-### 11.4、GitHub 不通时为什么直接结束？
+### 11.4、GitHub 不通时为什么直接结束？ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 因为 JobsKits、oh-my-zsh、Homebrew 安装源都依赖外网。网络不通时继续跑只会制造更多误导错误，不如直接失败并提示修复网络。
 
-### 11.5、为什么手动下载不全部自动化？
+### 11.5、为什么手动下载不全部自动化？ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 VS Code、Android Studio、Python 官网安装包变化快，Android Studio 还涉及 SDK、模拟器、授权协议。强行自动化不一定更稳，基础脚本只打开官网更可靠。
 
-### 11.6、本地 pod 要怎么确认真的能编译？
+### 11.6、本地 pod 要怎么确认真的能编译？ <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 优先执行：
 
@@ -898,7 +898,7 @@ pod lib lint YourPod.podspec --allow-warnings --verbose --no-clean
 
 ---
 
-## 十二、后续建议
+## 十二、后续建议 <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 当前 README 已经按“每个子项都有 Mermaid 流程图”的标准升级完成，并且脚本本体已经同步修复 Homebrew formula / cask 分类问题。后续继续按这个标准维护：
 
