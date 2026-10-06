@@ -18,6 +18,29 @@
 # =========================
 # 日志与彩色输出
 # =========================
+# 仅渲染自述：标题红色加粗，编号正文蓝色常规字重；非彩色终端输出纯文本。
+jobs_intro_style() {
+  local intro_color=0
+  if [ -t 1 ] && [ -n "${TERM:-}" ] && [ "${TERM:-}" != dumb ] &&
+     [ -z "${NO_COLOR+x}" ] && [ "${PLAIN_OUTPUT:-0}" != 1 ] &&
+     [ "${IS_SOURCETREE_RUNTIME:-0}" != 1 ]; then
+    intro_color=1
+  fi
+  /usr/bin/awk -v color="$intro_color" -v role="${1:-body}" '
+    BEGIN { esc = sprintf("%c", 27) }
+    {
+      gsub(esc "\\[[0-9;]*m", "")
+      gsub(/\\(033|e|x1[bB])\[[0-9;]*m/, "")
+      if (!color || $0 ~ /^[[:space:]]*$/) { print; next }
+      numbered = ($0 ~ /^[[:space:]➤ℹ🔹✔⚠]*([0-9]+[、.)）]|[0-9]+️⃣|[-•])/)
+      heading = ($0 ~ /^[[:space:]]*#{1,6}[[:space:]]/ || $0 ~ /[：:][[:space:]]*$/ || $0 ~ /^[[:space:]]*[=━─-]{3}/)
+      title = (!numbered && (role == "title" || heading))
+      if (role == "auto" && !seen && !numbered) title = 1
+      if ($0 !~ /^[[:space:]]*[=━─-]+[[:space:]]*$/) seen = 1
+      printf "%s%s%s\n", esc (title ? "[1;31m" : "[0;34m"), $0, esc "[0m"
+    }
+  '
+}
 SCRIPT_BASENAME=$(basename "$0" | sed 's/\.[^.]*$//')   # 当前脚本名（去掉扩展名）
 LOG_FILE="/tmp/${SCRIPT_BASENAME}.log"                  # 设置对应的日志文件路径
 # 统一输出终端信息并同步记录日志。
@@ -240,43 +263,43 @@ ensure_rosetta_if_needed() {
 # =========================
 show_readme_and_block() {
     clear 2>/dev/null || true
-  print -r -- '============================== 脚本内置自述 =============================='
-  print -r -- '脚本名称：【MacOS】🆕新系统配置.command'
-  print -r -- '核心用途：执行“🆕新系统配置”对应的本机环境配置任务。'
-  print -r -- '影响范围：可能安装、更新或修改当前用户的工具链与配置文件。'
-  print -r -- '取消方式：确认前按 Ctrl+C 终止，不会继续执行后续业务。'
-  print -r -- '============================================================================'
+  print -r -- '============================== 脚本内置自述 ==============================' | jobs_intro_style title
+  print -r -- '脚本名称：【MacOS】🆕新系统配置.command' | jobs_intro_style title
+  print -r -- '核心用途：执行“🆕新系统配置”对应的本机环境配置任务。' | jobs_intro_style body
+  print -r -- '影响范围：可能安装、更新或修改当前用户的工具链与配置文件。' | jobs_intro_style body
+  print -r -- '取消方式：确认前按 Ctrl+C 终止，不会继续执行后续业务。' | jobs_intro_style body
+  print -r -- '============================================================================' | jobs_intro_style title
 
-    echo ""
-    bold_echo "========================= macOS 新系统配置脚本说明 ========================="
-    echo ""
+    echo "" | jobs_intro_style body
+    bold_echo "========================= macOS 新系统配置脚本说明 =========================" | jobs_intro_style title
+    echo "" | jobs_intro_style body
 
-    info_echo "用途：自动执行一套新 Mac 常用开发环境初始化流程。"
-    info_echo "执行方式：支持双击 .command 运行，也支持终端手动执行。"
-    echo ""
+    info_echo "用途：自动执行一套新 Mac 常用开发环境初始化流程。" | jobs_intro_style body
+    info_echo "执行方式：支持双击 .command 运行，也支持终端手动执行。" | jobs_intro_style body
+    echo "" | jobs_intro_style body
 
-    highlight_echo "本脚本将尝试执行以下阶段："
-    gray_echo "1. 【Command Line Tools（CLT）】"
-    gray_echo "2. 【Xcode模拟器配件】"
-    gray_echo "3. 【ohmyzsh】"
-    gray_echo "4. 【Homebrew】"
-    gray_echo "5. 【brew 安装开发工具】"
-    gray_echo "6. 【npm】"
-    gray_echo "7. 【gem】"
-    gray_echo "8. 【Jobs】"
-    echo ""
+    highlight_echo "本脚本将尝试执行以下阶段：" | jobs_intro_style title
+    gray_echo "1. 【Command Line Tools（CLT）】" | jobs_intro_style body
+    gray_echo "2. 【Xcode模拟器配件】" | jobs_intro_style body
+    gray_echo "3. 【ohmyzsh】" | jobs_intro_style body
+    gray_echo "4. 【Homebrew】" | jobs_intro_style body
+    gray_echo "5. 【brew 安装开发工具】" | jobs_intro_style body
+    gray_echo "6. 【npm】" | jobs_intro_style body
+    gray_echo "7. 【gem】" | jobs_intro_style body
+    gray_echo "8. 【Jobs】" | jobs_intro_style body
+    echo "" | jobs_intro_style body
 
-    warn_echo "注意事项："
-    gray_echo "• 脚本中包含 sudo 命令，执行时可能要求输入系统密码"
-    gray_echo "• 部分步骤依赖 GitHub / raw.githubusercontent.com，网络不通会失败"
-    gray_echo "• xcode-select --install 可能弹出系统图形安装窗口"
-    gray_echo "• oh-my-zsh 官方脚本可能有交互行为，属于正常现象"
-    gray_echo "• 某些图形应用会使用 brew cask 安装，耗时取决于网络与机器性能"
-    gray_echo "• 手动软件下载链接会在最后自动打开浏览器"
-    echo ""
+    warn_echo "注意事项：" | jobs_intro_style title
+    gray_echo "• 脚本中包含 sudo 命令，执行时可能要求输入系统密码" | jobs_intro_style body
+    gray_echo "• 部分步骤依赖 GitHub / raw.githubusercontent.com，网络不通会失败" | jobs_intro_style body
+    gray_echo "• xcode-select --install 可能弹出系统图形安装窗口" | jobs_intro_style body
+    gray_echo "• oh-my-zsh 官方脚本可能有交互行为，属于正常现象" | jobs_intro_style body
+    gray_echo "• 某些图形应用会使用 brew cask 安装，耗时取决于网络与机器性能" | jobs_intro_style body
+    gray_echo "• 手动软件下载链接会在最后自动打开浏览器" | jobs_intro_style body
+    echo "" | jobs_intro_style body
 
-    warm_echo "日志文件：${LOG_FILE}"
-    echo ""
+    warm_echo "日志文件：${LOG_FILE}" | jobs_intro_style body
+    echo "" | jobs_intro_style body
 
     pause_for_enter "👉 请确认没有误操作。按回车继续执行，或按 Ctrl+C 取消..."
 }
