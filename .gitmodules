@@ -26,10 +26,6 @@
 	path = 📒CodexByObsidian
 	url = ../CodexByObsidian.git
 	branch = main
-[submodule "🌲SourceTree.sh"]
-	path = 🌲SourceTree.sh
-	url = ../SourceTree.sh.git
-	branch = main
 [submodule "⚙️VScodeConfigs"]
 	path = ⚙️VScodeConfigs
 	url = ../VScodeConfigs.git

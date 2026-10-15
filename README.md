@@ -10,6 +10,8 @@
 
 这个仓库适合作为 **macOS 新系统初始化入口**。目标不是做到真正无人值守，而是把新系统配置流程标准化：先装基础工具链，再安装开发工具，最后同步 JobsKits 相关仓库和个人环境配置。
 
+`【MacOS】⏬下载配置当前Git子模块.command` 维护本仓库的子模块。[**Sourcetree**](https://www.sourcetreeapp.com/) 脚本统一使用上一级的 [SourceTree.command](../SourceTree.command/README.md)，由总仓管理；本仓库不再重复克隆或登记该脚本库。
+
 当前脚本入口：
 
 ```shell
@@ -906,5 +908,7 @@ pod lib lint YourPod.podspec --allow-warnings --verbose --no-clean
 2. 对危险操作保留强确认，例如输入 `YES`。
 3. 保留 `brew cleanup` 作为普通清理项。
 4. 后续新增任何配置项时，先补 README 流程图，再写脚本函数。
+
+[**Homebrew**](https://brew.sh/) 安装路径由用户选择：已有可运行安装时复用；确实需要安装时先强提示，只有精确输入大写 `YES` 才选择系统标准目录，其它输入或直接回车选择当前用户的 `.local/homebrew`。`YES` 只表示选择路径，权限与密码由官方安装器实际处理；有管理员权限也可以选用户目录。选定路径失败立即停止，不自动切换；`Ctrl+C` / 输入结束取消整个任务。
 
 <a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>
