@@ -1,7 +1,7 @@
 # JobsCodeSnippets 两平台仓库名不同，保留已确认的 Gitee 地址；其它同名仓库跟随父仓远端。
 [submodule "🍎JobsCodeSnippets"]
 	path = 🍎JobsCodeSnippets
-	url = git@gitee.com:JobsGo/jobs-code-snippetsJobsCodeSnippets.git
+	url = https://gitee.com/JobsGo/jobs-code-snippetsJobsCodeSnippets.git
 	branch = main
 [submodule "💻JobsCodexConfigs"]
 	path = 💻JobsCodexConfigs
