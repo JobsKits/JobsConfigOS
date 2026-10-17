@@ -1,9 +1,10 @@
 #!/bin/zsh
 # 脚本自述：
 # - 脚本名称：【MacOS】🆕新系统配置.command
-# - 核心用途：执行“🆕新系统配置”对应的本机环境配置任务。
-# - 影响范围：可能安装、更新或修改当前用户的工具链与配置文件。
-# - 运行提示：运行后会先打印内置自述；终端模式按回车确认后继续，按 Ctrl+C 可取消。
+# - 核心用途：按需配置新 Mac 开发环境，并可安装 CodeGraph 代码地图工具。
+# - 影响范围：选中的阶段可能安装软件、修改用户环境、配置 Git 或下载 Xcode 平台。
+# - 运行提示：先阅读自述并按回车确认；每个阶段回车跳过、输入任意字符执行，缓存删除另需 YES。
+# shell: zsh
 
 # ==============================================================================
 # macOS 新系统初始化脚本
@@ -22,7 +23,11 @@
 # >>> Jobs Homebrew install choice >>>
 # 输出安装诊断，避免混入返回的命令路径。
 jobs_brew_note() {
-  print -u2 -r -- "ℹ $*"
+  if [[ -n "${LOG_FILE:-}" && -f "$LOG_FILE" ]]; then
+    print -r -- "ℹ $*" | tee -a "$LOG_FILE" >&2
+  else
+    print -u2 -r -- "ℹ $*"
+  fi
 }
 # 验证候选能够执行；共享安装只读不代表未安装。
 jobs_brew_candidate_ok() {
@@ -182,25 +187,26 @@ jobs_brew_activate() {
     jobs_brew_save_shellenv || return 1
   fi
 }
-# 在原版安装位置复用或安装 Homebrew，安装失败必须终止外层业务。
-jobs_brew_install_or_exit() {
+# 复用或安装 Homebrew；失败时返回阶段，停止下游依赖安装。
+jobs_brew_install_or_fail() {
   local installed=""
   if [[ "${DRY_RUN:-0}" == 1 ]]; then
     jobs_brew_note "演练：Homebrew 系统路径 $(jobs_brew_system_prefix)；用户路径 ${JOBS_HOMEBREW_INSTALL_PREFIX:-$HOME/.local/homebrew}；未询问或执行安装。"
-    return 0
+    return 1
   fi
   if ! JOBS_HOMEBREW_BIN="$(jobs_brew_find)"; then
-    jobs_brew_choose_installation || exit 1
+    jobs_brew_choose_installation || return 1
     case "$JOBS_HOMEBREW_INSTALL_MODE" in
-      system) jobs_brew_install_system || exit 1 ;;
-      user) jobs_brew_install_user || exit 1 ;;
-      *) jobs_brew_note "安装路径选择无效，停止。"; exit 1 ;;
+      system) jobs_brew_install_system || return 1 ;;
+      user) jobs_brew_install_user || return 1 ;;
+      *) jobs_brew_note "安装路径选择无效，停止。"; return 1 ;;
     esac
     installed=installed
   fi
-  jobs_brew_activate "$installed" || exit 1
+  jobs_brew_activate "$installed" || return 1
 }
 # <<< Jobs Homebrew install choice <<<
+# 渲染内置自述；非彩色终端使用纯文本。
 jobs_intro_style() {
   local intro_color=0
   if [ -t 1 ] && [ -n "${TERM:-}" ] && [ "${TERM:-}" != dumb ] &&
@@ -223,45 +229,58 @@ jobs_intro_style() {
     }
   '
 }
-SCRIPT_BASENAME=$(basename "$0" | sed 's/\.[^.]*$//')   # 当前脚本名（去掉扩展名）
-LOG_FILE="/tmp/${SCRIPT_BASENAME}.log"                  # 设置对应的日志文件路径
+SCRIPT_DIR=""
+SCRIPT_PATH=""
+SCRIPT_BASENAME=""
+LOG_FILE=""
+JOBS_CONFIG_ROOT=""
+CODEGRAPH_INSTALLER=""
+PLAIN_OUTPUT=0
 # 统一输出终端信息并同步记录日志。
-log()            { echo -e "$1" | tee -a "$LOG_FILE"; }
+log() {
+    if [[ "$PLAIN_OUTPUT" == 1 ]]; then
+        print -r -- "$1" | /usr/bin/sed $'s/\033\\[[0-9;]*m//g' | tee -a "$LOG_FILE"
+    else
+        print -r -- "$1" | tee -a "$LOG_FILE"
+    fi
+}
 # 输出 color echo 对应级别的日志信息。
-color_echo()     { log "\033[1;32m$1\033[0m"; }         # ✅ 正常绿色输出
+color_echo()     { log $'\033[1;32m'"$1"$'\033[0m'; }
 # 输出 info echo 对应级别的日志信息。
-info_echo()      { log "\033[1;34mℹ $1\033[0m"; }       # ℹ 信息
+info_echo()      { log $'\033[1;34mℹ '"$1"$'\033[0m'; }
 # 输出 success echo 对应级别的日志信息。
-success_echo()   { log "\033[1;32m✔ $1\033[0m"; }       # ✔ 成功
+success_echo()   { log $'\033[1;32m✔ '"$1"$'\033[0m'; }
 # 输出 warn echo 对应级别的日志信息。
-warn_echo()      { log "\033[1;33m⚠ $1\033[0m"; }       # ⚠ 警告
+warn_echo()      { log $'\033[1;33m⚠ '"$1"$'\033[0m'; }
 # 输出 warm echo 对应级别的日志信息。
-warm_echo()      { log "\033[1;33m$1\033[0m"; }         # 🟡 温馨提示（无图标）
+warm_echo()      { log $'\033[1;33m'"$1"$'\033[0m'; }
 # 输出 note echo 对应级别的日志信息。
-note_echo()      { log "\033[1;35m➤ $1\033[0m"; }       # ➤ 说明
+note_echo()      { log $'\033[1;35m➤ '"$1"$'\033[0m'; }
 # 输出 error echo 对应级别的日志信息。
-error_echo()     { log "\033[1;31m✖ $1\033[0m"; }       # ✖ 错误
+error_echo()     { log $'\033[1;31m✖ '"$1"$'\033[0m'; }
 # 输出 err echo 对应级别的日志信息。
-err_echo()       { log "\033[1;31m$1\033[0m"; }         # 🔴 错误纯文本
+err_echo()       { log $'\033[1;31m'"$1"$'\033[0m'; }
 # 输出 debug echo 对应级别的日志信息。
-debug_echo()     { log "\033[1;35m🐞 $1\033[0m"; }      # 🐞 调试
+debug_echo()     { log $'\033[1;35m🐞 '"$1"$'\033[0m'; }
 # 输出 highlight echo 对应级别的日志信息。
-highlight_echo() { log "\033[1;36m🔹 $1\033[0m"; }      # 🔹 高亮
+highlight_echo() { log $'\033[1;36m🔹 '"$1"$'\033[0m'; }
 # 输出 gray echo 对应级别的日志信息。
-gray_echo()      { log "\033[0;90m$1\033[0m"; }         # ⚫ 次要信息
+gray_echo()      { log $'\033[0;90m'"$1"$'\033[0m'; }
 # 输出 bold echo 对应级别的日志信息。
-bold_echo()      { log "\033[1m$1\033[0m"; }            # 📝 加粗
+bold_echo()      { log $'\033[1m'"$1"$'\033[0m'; }
 # 输出 underline echo 对应级别的日志信息。
-underline_echo() { log "\033[4m$1\033[0m"; }            # 🔗 下划线
+underline_echo() { log $'\033[4m'"$1"$'\033[0m'; }
 
 # =========================
 # 全局配置
 # =========================
-readonly TOTAL_STAGES=8
+readonly TOTAL_STAGES=9
 CURRENT_STAGE=0
+HOMEBREW_HEALTH_FAILED=0
+typeset -a FAILED_STAGES=()
+typeset -a SKIPPED_STAGES=()
 
 readonly JOBS_SOFTWARE_REPO="https://github.com/JobsKits/JobsSoftware.MacOS.git"
-readonly JOBS_ENV_REPO="https://github.com/JobsKits/JobsMacEnvVarConfig.git"
 
 # =========================
 # Homebrew 第三方配置
@@ -314,8 +333,26 @@ print_divider() {
 # 阻塞等待用户按回车
 pause_for_enter() {
     local prompt="${1:-👉 请按回车继续，或按 Ctrl+C 取消...}"
-    echo ""
-    read "?${prompt}"
+    local answer=""
+    print -r -- ""
+    if [[ ! -t 0 ]]; then
+        print -u2 -r -- "✖ 没有可交互输入，请在终端重新运行。"
+        return 1
+    fi
+    read -r "answer?${prompt}" || return 1
+}
+# 普通安装与更新阶段默认跳过，仅在用户主动输入后执行。
+ask_any_to_run() {
+    local answer=""
+    read -r "answer?$1（直接回车跳过；输入任意字符后回车执行）：" || return 1
+    [[ -n "$answer" ]]
+}
+# 缓存删除等破坏性动作必须精确输入 YES。
+confirm_yes() {
+    local answer=""
+    warn_echo "$1"
+    read -r 'answer?请输入 YES 后回车执行；其它输入取消：' || return 1
+    [[ "$answer" == YES ]]
 }
 # 输出阶段进度
 progress_step() {
@@ -333,8 +370,8 @@ run_cmd() {
     note_echo "${desc}"
     debug_echo "执行命令：$*"
 
-    "$@"
-    local exit_code=$?
+    "$@" 2>&1 | tee -a "$LOG_FILE"
+    local exit_code="${pipestatus[1]}"
 
     if [[ $exit_code -eq 0 ]]; then
         success_echo "${desc}：完成"
@@ -352,8 +389,8 @@ run_sh() {
     note_echo "${desc}"
     debug_echo "执行命令：${cmd}"
 
-    /bin/zsh -c "${cmd}"
-    local exit_code=$?
+    /bin/zsh -c "${cmd}" 2>&1 | tee -a "$LOG_FILE"
+    local exit_code="${pipestatus[1]}"
 
     if [[ $exit_code -eq 0 ]]; then
         success_echo "${desc}：完成"
@@ -362,6 +399,35 @@ run_sh() {
     fi
 
     return $exit_code
+}
+# 保留子安装器的真实终端交互；它们各自维护独立日志。
+run_interactive_script() {
+    local desc="$1" script_path="$2" exit_code=0
+    note_echo "$desc"
+    debug_echo "执行脚本：$script_path"
+    /bin/zsh "$script_path" || exit_code=$?
+    if (( exit_code == 0 )); then
+        success_echo "$desc：完成"
+    else
+        error_echo "$desc：失败（exit code: $exit_code）"
+    fi
+    return "$exit_code"
+}
+# 为每个阶段提供明确选择，并收集失败和跳过结果。
+run_optional_stage() {
+    local stage_function="$1" stage_name="$2" exit_code=0
+    progress_step "$stage_name"
+    if ! ask_any_to_run "执行 ${stage_name} 阶段"; then
+        SKIPPED_STAGES+=("$stage_name")
+        info_echo "已跳过：$stage_name"
+        return 0
+    fi
+    "$stage_function" || exit_code=$?
+    if (( exit_code != 0 )); then
+        FAILED_STAGES+=("$stage_name")
+        error_echo "阶段失败：$stage_name（退出码 $exit_code）；后续独立阶段仍可选择。"
+    fi
+    return 0
 }
 # 检查命令是否存在
 require_command() {
@@ -391,7 +457,7 @@ check_url_access() {
     curl -I -L -s --connect-timeout 8 --max-time 15 "${url}" >/dev/null 2>&1
 }
 # 检查 GitHub 访问
-ensure_github_access_or_exit() {
+ensure_github_access() {
     info_echo "开始检查 GitHub 网络连通性..."
     if check_url_access "https://github.com"; then
         success_echo "GitHub 网络访问正常"
@@ -401,11 +467,10 @@ ensure_github_access_or_exit() {
     error_echo "当前无法访问 GitHub。你现在的网络环境大概率无法直连 GitHub。"
     warm_echo "这一步在中国大陆网络环境下很常见，需要科学上网/VPN。"
     warm_echo "请先处理网络问题，再重新运行脚本。"
-    pause_for_enter "👉 GitHub 不可访问。请按回车结束脚本..."
-    exit 1
+    return 1
 }
 # 检查 Homebrew 相关访问
-ensure_brew_access_or_exit() {
+ensure_brew_access() {
     info_echo "开始检查 Homebrew 安装所需网络..."
     if check_url_access "https://raw.githubusercontent.com"; then
         success_echo "Homebrew 安装源访问正常"
@@ -414,8 +479,7 @@ ensure_brew_access_or_exit() {
 
     error_echo "当前无法访问 raw.githubusercontent.com，Homebrew / oh-my-zsh 安装会失败。"
     warm_echo "请先打开 VPN 或修复网络后再运行。"
-    pause_for_enter "👉 网络未就绪。请按回车结束脚本..."
-    exit 1
+    return 1
 }
 # 安装 Rosetta（仅 Apple Silicon，且未安装时）
 ensure_rosetta_if_needed() {
@@ -427,228 +491,189 @@ ensure_rosetta_if_needed() {
         fi
     fi
 }
-# =========================
-# 自述文件 / 启动说明
-# =========================
-show_readme_and_block() {
-    clear 2>/dev/null || true
-  print -r -- '============================== 脚本内置自述 ==============================' | jobs_intro_style title
-  print -r -- '脚本名称：【MacOS】🆕新系统配置.command' | jobs_intro_style title
-  print -r -- '核心用途：执行“🆕新系统配置”对应的本机环境配置任务。' | jobs_intro_style body
-  print -r -- '影响范围：可能安装、更新或修改当前用户的工具链与配置文件。' | jobs_intro_style body
-  print -r -- '取消方式：确认前按 Ctrl+C 终止，不会继续执行后续业务。' | jobs_intro_style body
-  print -r -- '============================================================================' | jobs_intro_style title
-
-    echo "" | jobs_intro_style body
-    bold_echo "========================= macOS 新系统配置脚本说明 =========================" | jobs_intro_style title
-    echo "" | jobs_intro_style body
-
-    info_echo "用途：自动执行一套新 Mac 常用开发环境初始化流程。" | jobs_intro_style body
-    info_echo "执行方式：支持双击 .command 运行，也支持终端手动执行。" | jobs_intro_style body
-    echo "" | jobs_intro_style body
-
-    highlight_echo "本脚本将尝试执行以下阶段：" | jobs_intro_style title
-    gray_echo "1. 【Command Line Tools（CLT）】" | jobs_intro_style body
-    gray_echo "2. 【Xcode模拟器配件】" | jobs_intro_style body
-    gray_echo "3. 【ohmyzsh】" | jobs_intro_style body
-    gray_echo "4. 【Homebrew】" | jobs_intro_style body
-    gray_echo "5. 【brew 安装开发工具】" | jobs_intro_style body
-    gray_echo "6. 【npm】" | jobs_intro_style body
-    gray_echo "7. 【gem】" | jobs_intro_style body
-    gray_echo "8. 【Jobs】" | jobs_intro_style body
-    echo "" | jobs_intro_style body
-
-    warn_echo "注意事项：" | jobs_intro_style title
-    gray_echo "• 脚本中包含 sudo 命令，执行时可能要求输入系统密码" | jobs_intro_style body
-    gray_echo "• 部分步骤依赖 GitHub / raw.githubusercontent.com，网络不通会失败" | jobs_intro_style body
-    gray_echo "• xcode-select --install 可能弹出系统图形安装窗口" | jobs_intro_style body
-    gray_echo "• oh-my-zsh 官方脚本可能有交互行为，属于正常现象" | jobs_intro_style body
-    gray_echo "• 某些图形应用会使用 brew cask 安装，耗时取决于网络与机器性能" | jobs_intro_style body
-    gray_echo "• 手动软件下载链接会在最后自动打开浏览器" | jobs_intro_style body
-    echo "" | jobs_intro_style body
-
-    warm_echo "日志文件：${LOG_FILE}" | jobs_intro_style body
-    echo "" | jobs_intro_style body
-
-    pause_for_enter "👉 请确认没有误操作。按回车继续执行，或按 Ctrl+C 取消..."
+# 准备只读展示路径；真实初始化放在自述确认之后。
+prepare_intro_context() {
+    local source_path="${BASH_SOURCE[0]:-${(%):-%x}}"
+    SCRIPT_DIR="$(cd "$(dirname "$source_path")" && pwd)"
+    SCRIPT_PATH="${SCRIPT_DIR}/${source_path:t}"
+    SCRIPT_BASENAME="${source_path:t:r}"
+    LOG_FILE="${TMPDIR:-/tmp}/${SCRIPT_BASENAME}.log"
+    JOBS_CONFIG_ROOT="${SCRIPT_DIR:h}"
+    CODEGRAPH_INSTALLER="${JOBS_CONFIG_ROOT:h}/JobsCommand@iOS/配置相关/【MacOS】⚙️安装代码地图CodeGraph.command/【MacOS】⚙️安装代码地图CodeGraph.command"
+    if [[ ! -t 1 || -z "${TERM:-}" || "${TERM:-}" == dumb || -n "${NO_COLOR+x}" ]]; then
+        PLAIN_OUTPUT=1
+    fi
+}
+# 显示固定内置说明；确认前不写日志或执行安装。
+show_script_intro_and_wait() {
+    prepare_intro_context
+    print -r -- '============================== 脚本内置自述 ==============================' | jobs_intro_style title
+    print -r -- '【MacOS】🆕新系统配置.command' | jobs_intro_style title
+    print -r -- '核心用途：按需准备新 Mac 开发环境，并可安装 CodeGraph 代码地图命令行工具。' | jobs_intro_style body
+    print -r -- '1、CLT；2、Xcode 模拟器；3、oh-my-zsh；4、Homebrew；5、开发工具。' | jobs_intro_style body
+    print -r -- '6、CodeGraph；7、npm / quicktype；8、gem / CocoaPods；9、Jobs 环境配置。' | jobs_intro_style body
+    print -r -- '运行策略：每个阶段直接回车跳过，输入任意字符后回车执行；缓存删除另需输入 YES。' | jobs_intro_style body
+    print -r -- '影响范围：选中的阶段会安装软件、修改用户配置、Git 全局设置或下载 Xcode 平台。' | jobs_intro_style body
+    print -r -- 'Homebrew 使用前执行体检，doctor 失败时阻止后续 Brew 安装；更新列表单独确认，不全量升级或清理。' | jobs_intro_style body
+    print -r -- 'CodeGraph 阶段只安装 CLI，不会自动给仓库建立 .codegraph 或修改 Codex 配置。' | jobs_intro_style body
+    print -r -- '部分阶段可能请求管理员密码、弹出系统安装窗口或访问 GitHub。按 Ctrl+C 可随时取消。' | jobs_intro_style body
+    print -r -- "日志文件：${LOG_FILE}" | jobs_intro_style body
+    print -r -- '============================================================================' | jobs_intro_style title
+    pause_for_enter '👉 已了解用途和影响，按回车进入阶段选择，或按 Ctrl+C 取消：' || exit 1
 }
 # =========================
 # 阶段 1：Command Line Tools（CLT）
 # =========================
+# 检查 CLT；缺失时打开安装窗口，完整 Xcode 可用时接受协议。
 stage_clt() {
-    progress_step "Command Line Tools（CLT）"
-
-    run_cmd "安装 Command Line Tools" xcode-select --install
-    warn_echo "如果系统提示“Command Line Tools 已安装”，这是正常情况。"
-
-    run_cmd "接受 Xcode License" sudo xcodebuild -license accept
+    if xcode-select -p >/dev/null 2>&1 && xcrun --find clang >/dev/null 2>&1; then
+        info_echo "Command Line Tools 已可用"
+    else
+        run_cmd "打开 Command Line Tools 安装窗口" xcode-select --install || return 1
+        warn_echo "请完成系统安装后重新运行需要 CLT 的阶段。"
+        return 1
+    fi
+    if xcodebuild -version >/dev/null 2>&1; then
+        run_cmd "接受 Xcode License" sudo xcodebuild -license accept
+    else
+        info_echo "尚未选定完整 Xcode，跳过 Xcode License；可在安装 Xcode 后重新运行此阶段。"
+    fi
 }
 # =========================
 # 阶段 2：Xcode 模拟器配件
 # =========================
+# 在 Xcode 可用时按需清理缓存并下载 iOS 平台。
 stage_xcode_simulator_assets() {
-    progress_step "Xcode模拟器配件"
-
-    run_sh "删除 Xcode 缓存" 'rm -rf ~/Library/Caches/com.apple.dt.Xcode'
-    run_sh "删除 CoreSimulator 缓存" 'rm -rf ~/Library/Developer/CoreSimulator/Caches'
+    if ! xcodebuild -version >/dev/null 2>&1; then
+        error_echo "Xcode 尚不可用，请安装并用 xcode-select 选定完整 Xcode。"
+        return 1
+    fi
+    if confirm_yes "是否删除 Xcode 与 CoreSimulator 缓存？缓存可重新生成，删除后首次启动可能变慢。"; then
+        run_cmd "删除 Xcode 缓存" /bin/rm -r -f -- "$HOME/Library/Caches/com.apple.dt.Xcode" || return 1
+        run_cmd "删除 CoreSimulator 缓存" /bin/rm -r -f -- "$HOME/Library/Developer/CoreSimulator/Caches" || return 1
+    else
+        info_echo "保留 Xcode 与 CoreSimulator 缓存"
+    fi
     run_cmd "下载 iOS 模拟器平台" xcodebuild -downloadPlatform iOS -verbose
 }
 # =========================
 # 阶段 3：ohmyzsh
 # =========================
+# 保留既有 oh-my-zsh；缺失时执行官方安装流程。
 stage_oh_my_zsh() {
-    progress_step "ohmyzsh"
-
-    ensure_brew_access_or_exit
-
     if [[ -d "${HOME}/.oh-my-zsh" ]]; then
         info_echo "检测到 ~/.oh-my-zsh 已存在，跳过安装"
         return 0
     fi
-
+    ensure_brew_access || return 1
     run_sh \
         "安装 oh-my-zsh" \
-        'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-
+        'RUNZSH=no CHSH=no sh -c "$(curl -fsSL --connect-timeout 10 --max-time 120 https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"' || return 1
     warn_echo "oh-my-zsh 官方安装流程可能有交互输出，这是正常现象。"
 }
 # =========================
 # 阶段 4：Homebrew
 # 参考你给的双击安装升级思路，区分 Intel / Apple Silicon
 # =========================
-setup_brew_shellenv() {
-  local jobs_existing_brew=""
-  if jobs_existing_brew="$(jobs_brew_find)"; then
-    JOBS_HOMEBREW_BIN="$jobs_existing_brew"
-    jobs_brew_activate || return 1
-  fi
-    local brew_bin="$1"
-    local target_file="${HOME}/.zprofile"
-    local shellenv_line="eval \"\$(${brew_bin} shellenv)\""
-
-    if [[ ! -x "${brew_bin}" ]]; then
-        error_echo "Homebrew 可执行文件不存在或不可执行：${brew_bin}"
+# 检查 Homebrew 命令层、前缀和诊断；任一失败时阻止 Brew 安装。
+check_homebrew_health() {
+    local prefix=""
+    HOMEBREW_HEALTH_FAILED=1
+    if ! run_cmd "Homebrew 版本体检" "$JOBS_HOMEBREW_BIN" --version; then
+        error_echo "Homebrew 版本检查失败：$JOBS_HOMEBREW_BIN"
         return 1
     fi
-
-    if [[ ! -f "${target_file}" ]]; then
-        touch "${target_file}"
-    fi
-
-    if grep -Fq "${shellenv_line}" "${target_file}"; then
-        info_echo "${target_file} 已存在 Homebrew shellenv 配置，跳过写入"
-    else
-        echo "" >> "${target_file}"
-        echo "# Homebrew shellenv" >> "${target_file}"
-        echo "${shellenv_line}" >> "${target_file}"
-        success_echo "已写入 Homebrew 环境变量到 ${target_file}"
-    fi
-
-    eval "$(${brew_bin} shellenv)"
-}
-# 准备并配置 install or upgrade homebrew 对应的运行条件。
-install_or_upgrade_homebrew() {
-  local jobs_existing_brew=""
-  if jobs_existing_brew="$(jobs_brew_find)"; then
-    JOBS_HOMEBREW_BIN="$jobs_existing_brew"
-    jobs_brew_activate || return 1
-  fi
-  if [[ "${DRY_RUN:-0}" == 1 ]]; then
-    jobs_brew_install_or_exit
-    return 0
-  fi
-    local arch
-    local brew_bin
-    arch="$(get_cpu_arch)"
-
-    ensure_brew_access_or_exit
-
-    # 先找现有 Homebrew。双击 .command 时 PATH 可能不完整，不能只靠 command -v brew。
-    if brew_bin="$(find_brew_bin)"; then
-        setup_brew_shellenv "${brew_bin}" || return 1
-        info_echo "已检测到 Homebrew：${brew_bin}，执行更新与升级流程"
-        run_cmd "brew update（更新软件列表）" brew update
-        run_cmd "brew upgrade（升级已安装软件）" brew upgrade
-        run_cmd "brew cleanup（清理旧版本缓存）" brew cleanup
-        run_cmd "brew doctor（检查 Homebrew 健康状态）" brew doctor
-        run_cmd "brew -v（输出 Homebrew 版本）" brew -v
-        return 0
-    fi
-
-    warn_echo "未检测到 Homebrew，开始安装（芯片架构：${arch}）"
-
-    jobs_brew_install_or_exit
-    brew_bin="$JOBS_HOMEBREW_BIN"
-    setup_brew_shellenv "${brew_bin}" || return 1
-
-    if require_command brew; then
-        success_echo "Homebrew 安装成功"
-        run_cmd "brew update（更新软件列表）" brew update
-        run_cmd "brew upgrade（升级已安装软件）" brew upgrade
-        run_cmd "brew cleanup（清理旧版本缓存）" brew cleanup
-        run_cmd "brew doctor（检查 Homebrew 健康状态）" brew doctor
-        run_cmd "brew -v（输出 Homebrew 版本）" brew -v
-    else
-        error_echo "Homebrew 安装后仍未检测到 brew 命令，后续流程将受到影响"
+    if ! prefix="$(HOMEBREW_NO_AUTO_UPDATE=1 "$JOBS_HOMEBREW_BIN" --prefix 2>>"$LOG_FILE")"; then
+        error_echo "Homebrew 前缀体检失败：$JOBS_HOMEBREW_BIN --prefix；详情见日志。"
         return 1
     fi
+    if [[ "$prefix" != /* || ! -d "$prefix" ]]; then
+        error_echo "Homebrew 前缀不可用：$prefix"
+        return 1
+    fi
+    info_echo "Homebrew 实际前缀：$prefix"
+    if ! run_cmd "Homebrew 配置体检" "$JOBS_HOMEBREW_BIN" config ||
+       ! run_cmd "Homebrew 健康诊断" "$JOBS_HOMEBREW_BIN" doctor; then
+        error_echo "Homebrew 体检未通过，停止下游 Brew / CodeGraph 安装；请按上方诊断修复后重试。"
+        return 1
+    fi
+    HOMEBREW_HEALTH_FAILED=0
+    success_echo "Homebrew 健康体检通过"
 }
-# 封装 stage homebrew 对应的独立处理逻辑。
+# 复用健康 Homebrew；没有安装时明确提示先执行 Homebrew 阶段。
+require_healthy_homebrew() {
+    if [[ "$HOMEBREW_HEALTH_FAILED" == 1 ]]; then
+        error_echo "本次 Homebrew 体检失败，已阻止后续依赖安装。"
+        return 1
+    fi
+    if ! JOBS_HOMEBREW_BIN="$(jobs_brew_find)"; then
+        error_echo "未发现可用 Homebrew，请先执行 Homebrew 阶段。"
+        return 1
+    fi
+    jobs_brew_activate || return 1
+    check_homebrew_health
+}
+# 需要时安装 Homebrew；已有安装只在主动确认后更新软件列表。
 stage_homebrew() {
-    progress_step "Homebrew"
-    install_or_upgrade_homebrew || exit 1
+    if ! jobs_brew_install_or_fail; then
+        HOMEBREW_HEALTH_FAILED=1
+        return 1
+    fi
+    check_homebrew_health || return 1
+    if ask_any_to_run "更新 Homebrew 软件列表（brew update）"; then
+        run_cmd "更新 Homebrew 软件列表" "$JOBS_HOMEBREW_BIN" update || return 1
+        check_homebrew_health || return 1
+    else
+        info_echo "保留当前 Homebrew 软件列表"
+    fi
 }
 # =========================
 # 阶段 5：brew 安装开发工具
 # =========================
+# 兼容带 tap 前缀的软件名，检查 formula 是否已安装。
 brew_formula_installed() {
     local pkg="$1"
     local short_name="${pkg:t}"
 
-    brew list --formula --versions "${pkg}" >/dev/null 2>&1 && return 0
-    brew list --formula --versions "${short_name}" >/dev/null 2>&1 && return 0
+    "$JOBS_HOMEBREW_BIN" list --formula --versions "${pkg}" >/dev/null 2>&1 && return 0
+    "$JOBS_HOMEBREW_BIN" list --formula --versions "${short_name}" >/dev/null 2>&1 && return 0
 
     return 1
 }
-# 封装 brew cask installed 对应的独立处理逻辑。
+# 检查图形应用是否已通过 Homebrew 安装。
 brew_cask_installed() {
     local pkg="$1"
-    brew list --cask --versions "${pkg}" >/dev/null 2>&1
+    "$JOBS_HOMEBREW_BIN" list --cask --versions "${pkg}" >/dev/null 2>&1
 }
-# 封装 brew install if needed 对应的独立处理逻辑。
+# 只补装缺失的 formula，失败时保留具体包名。
 brew_install_if_needed() {
     local pkg="$1"
 
     if brew_formula_installed "${pkg}"; then
         info_echo "brew formula 已安装：${pkg}"
     else
-        if ! run_cmd "安装 brew formula：${pkg}" brew install "${pkg}"; then
+        if ! run_cmd "安装 brew formula：${pkg}" "$JOBS_HOMEBREW_BIN" install "${pkg}"; then
             error_echo "brew formula 安装失败：${pkg}"
             return 1
         fi
     fi
 }
-# 封装 brew install cask if needed 对应的独立处理逻辑。
+# 只补装缺失的 cask，失败时保留具体应用名。
 brew_install_cask_if_needed() {
     local pkg="$1"
 
     if brew_cask_installed "${pkg}"; then
         info_echo "brew cask 已安装：${pkg}"
     else
-        if ! run_cmd "安装 brew cask：${pkg}" brew install --cask "${pkg}"; then
+        if ! run_cmd "安装 brew cask：${pkg}" "$JOBS_HOMEBREW_BIN" install --cask "${pkg}"; then
             error_echo "brew cask 安装失败：${pkg}"
             return 1
         fi
     fi
 }
-# 封装 stage brew packages 对应的独立处理逻辑。
+# 通过健康 Homebrew 补装工具，并配置原有 Git LFS 参数。
 stage_brew_packages() {
-    progress_step "brew 安装开发工具"
-
-    if ! require_command brew; then
-        error_echo "brew 不存在，无法继续安装开发工具"
-        return 1
-    fi
+    require_healthy_homebrew || return 1
 
     info_echo "开始安装 brew formula..."
     local pkg
@@ -659,18 +684,18 @@ stage_brew_packages() {
     # Git LFS 初始化
     if require_command git && git lfs version >/dev/null 2>&1; then
         info_echo "初始化 Git LFS..."
-        git lfs install || {
+        run_cmd "初始化 Git LFS" git lfs install || {
             error_echo "Git LFS 初始化失败"
             return 1
         }
 
         info_echo "配置 Git 大文件传输参数..."
-        git config --global core.compression 0 || {
+        run_cmd "配置 Git 压缩参数" git config --global core.compression 0 || {
             error_echo "git config core.compression 失败"
             return 1
         }
 
-        git config --global http.postBuffer 524288000 || {
+        run_cmd "配置 Git HTTP 传输缓冲" git config --global http.postBuffer 524288000 || {
             error_echo "git config http.postBuffer 失败"
             return 1
         }
@@ -684,28 +709,43 @@ stage_brew_packages() {
         brew_install_cask_if_needed "${pkg}" || return 1
     done
 
-    run_cmd "brew cleanup（清理旧版本与缓存）" brew cleanup
+    success_echo "开发工具安装阶段完成；未执行全量升级或缓存清理。"
 }
 # =========================
-# 阶段 6：npm
+# 阶段 6：CodeGraph
 # =========================
+# 调用相邻 JobsCommand 仓库中的独立安装器，不隐式创建仓库索引。
+stage_codegraph() {
+    if [[ "$HOMEBREW_HEALTH_FAILED" == 1 ]]; then
+        error_echo "本次 Homebrew 体检失败，已阻止 CodeGraph 安装。"
+        return 1
+    fi
+    if [[ ! -f "$CODEGRAPH_INSTALLER" ]]; then
+        error_echo "未找到 CodeGraph 安装器：$CODEGRAPH_INSTALLER"
+        warn_echo "请将 JobsCommand@iOS 与 JobsConfigOS 放在同一父目录，并保留安装器的完整目录结构。"
+        return 1
+    fi
+    info_echo "独立安装器将逐层体检 Homebrew、Node.js、npm 与 CodeGraph。"
+    run_interactive_script "安装 / 复检 CodeGraph CLI" "$CODEGRAPH_INSTALLER"
+}
+# 检查 Node 与 npm 可执行性后安装原有 quicktype 工具。
 stage_npm() {
-    progress_step "npm"
-
-    if ! require_command npm; then
-        error_echo "npm 不存在，跳过 quicktype 安装"
+    if ! require_command node || ! require_command npm ||
+       ! run_cmd "Node.js 版本体检" node --version ||
+       ! run_cmd "Node.js 运行体检" node -e 'process.exit(0)' ||
+       ! run_cmd "npm 版本体检" npm --version; then
+        error_echo "Node.js / npm 尚不可用，请先准备工具链；未执行 quicktype 安装。"
         return 1
     fi
 
     run_cmd "全局安装 quicktype" sudo npm install -g quicktype
 }
 # =========================
-# 阶段 7：gem
+# 阶段 8：gem
 # =========================
+# 验证 RubyGems 后安装 CocoaPods。
 stage_gem() {
-    progress_step "gem"
-
-    if ! require_command gem; then
+    if ! require_command gem || ! run_cmd "RubyGems 版本体检" gem --version; then
         error_echo "gem 不存在，跳过 cocoapods 安装"
         return 1
     fi
@@ -713,67 +753,83 @@ stage_gem() {
     run_cmd "安装 cocoapods" sudo gem install cocoapods
 }
 # =========================
-# 阶段 8：Jobs
+# 阶段 9：Jobs
 # 下载仓库并执行 install.command
 # =========================
+# 克隆缺失仓库；已有脏工作区保持原样，干净工作区只允许快进更新。
 clone_or_pull_repo() {
     local repo_url="$1"
     local target_dir="$2"
+    local repository_root="" target_root=""
 
-    if [[ -d "${target_dir}/.git" ]]; then
-        info_echo "仓库已存在，执行 git pull：${target_dir}"
-        run_sh "更新仓库 ${target_dir}" "cd '${target_dir}' && git pull --ff-only"
+    if git -C "$target_dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        repository_root="$(git -C "$target_dir" rev-parse --show-toplevel)" || return 1
+        target_root="$(cd "$target_dir" && pwd -P)" || return 1
+        if [[ "$repository_root" != "$target_root" ]]; then
+            error_echo "目标只是其它 Git 仓库内的目录，不作为独立仓库更新：$target_dir"
+            return 1
+        fi
+        if [[ -n "$(git -C "$target_dir" status --porcelain)" ]]; then
+            warn_echo "仓库存在未提交改动，保留工作区并跳过更新：$target_dir"
+            return 0
+        fi
+        run_cmd "更新仓库 ${target_dir}" git -C "$target_dir" pull --ff-only
+    elif [[ -e "$target_dir" ]]; then
+        error_echo "目标已存在但不是可用 Git 仓库，不覆盖：$target_dir"
+        return 1
     else
-        run_sh "克隆仓库到 ${target_dir}" "git clone '${repo_url}' '${target_dir}'"
+        run_cmd "克隆仓库到 ${target_dir}" git clone -- "$repo_url" "$target_dir"
     fi
 }
-# 封装 stage jobs 对应的独立处理逻辑。
+# 准备 Jobs 软件仓，并执行当前 JobsConfigOS 中的环境配置入口。
 stage_jobs() {
-    progress_step "Jobs"
-
-    ensure_github_access_or_exit
-
     local base_dir="${HOME}/Desktop/JobsKits"
     local software_dir="${base_dir}/JobsSoftware.MacOS"
-    local env_dir="${base_dir}/JobsMacEnvVarConfig"
-
-    run_sh "创建 JobsKits 工作目录" "mkdir -p '${base_dir}'"
-
-    clone_or_pull_repo "${JOBS_SOFTWARE_REPO}" "${software_dir}"
-    clone_or_pull_repo "${JOBS_ENV_REPO}" "${env_dir}"
-
-    local install_script="${env_dir}/install.command"
-    if [[ -f "${install_script}" ]]; then
-        run_cmd "为 install.command 添加可执行权限" chmod +x "${install_script}"
-        run_cmd "执行 JobsMacEnvVarConfig/install.command" "${install_script}"
-    else
-        error_echo "未找到 ${install_script}"
+    local install_script="${JOBS_CONFIG_ROOT}/🌍JobsMacEnvVarConfigs/install.command/install.command"
+    if [[ ! -f "$install_script" ]]; then
+        error_echo "未找到本仓环境配置入口：$install_script"
+        warn_echo "请先准备 🌍JobsMacEnvVarConfigs 子模块，再运行 Jobs 阶段。"
+        return 1
     fi
+    ensure_github_access || return 1
+    run_cmd "创建 JobsKits 工作目录" mkdir -p "$base_dir" || return 1
+    clone_or_pull_repo "$JOBS_SOFTWARE_REPO" "$software_dir" || return 1
+    run_interactive_script "同步本仓 JobsMacEnvVarConfigs 到当前用户环境" "$install_script"
 }
 # =========================
 # 手动下载环节
 # =========================
+# 用户主动选择后才打开软件官网下载页。
 open_manual_download_pages() {
+    if ! ask_any_to_run "打开需要手动下载的软件官网"; then
+        info_echo "已跳过手动下载页面"
+        return 0
+    fi
     echo ""
     highlight_echo "接下来会为你打开需要手动下载安装的页面："
     gray_echo "• Visual Studio Code"
     gray_echo "• Android Studio"
     gray_echo "• Python Downloads"
 
-    run_cmd "打开 VS Code 下载页" open "https://code.visualstudio.com/"
-    run_cmd "打开 Android Studio 下载页" open "https://developer.android.com/studio?hl=zh-cn"
-    run_cmd "打开 Python 下载页" open "https://www.python.org/downloads/"
+    run_cmd "打开 VS Code 下载页" open "https://code.visualstudio.com/" || FAILED_STAGES+=("VS Code 下载页")
+    run_cmd "打开 Android Studio 下载页" open "https://developer.android.com/studio?hl=zh-cn" || FAILED_STAGES+=("Android Studio 下载页")
+    run_cmd "打开 Python 下载页" open "https://www.python.org/downloads/" || FAILED_STAGES+=("Python 下载页")
 }
 # =========================
 # 收尾
 # =========================
+# 汇总已选阶段的真实结果以及日志位置。
 finish_summary() {
     echo ""
     print_divider
-    success_echo "macOS 新系统配置流程执行结束"
+    if (( ${#FAILED_STAGES} == 0 )); then
+        success_echo "macOS 新系统配置流程结束，选中的阶段均已完成。"
+    else
+        error_echo "macOS 新系统配置流程结束，失败 ${#FAILED_STAGES} 项：${(j:、:)FAILED_STAGES}"
+    fi
     info_echo "日志文件位置：${LOG_FILE}"
-    warm_echo "请你手动检查终端日志，确认失败项并按需补装。"
-    warm_echo "尤其留意：CLT / Xcode / oh-my-zsh / Homebrew / GitHub 网络相关步骤。"
+    info_echo "跳过 ${#SKIPPED_STAGES} 个阶段：${(j:、:)SKIPPED_STAGES}"
+    warm_echo "CodeGraph 只有安装 CLI；需要建图时在目标目录运行 codemap，或运行 codemap 后追加目标目录。"
     print_divider
 }
 # =========================
@@ -785,43 +841,42 @@ finish_summary() {
 # =========================
 # 初始化本次运行的日志文件。
 initialize_execution_log() {
-  : > "${LOG_FILE}"
+    : > "$LOG_FILE" || exit 1
+    info_echo "开始新系统配置；架构：$(get_cpu_arch)"
 }
 # 编排脚本的高层业务流程。
 # 初始化脚本运行环境，并集中承载原有的顶层执行逻辑。
 initialize_script_runtime() {
-  set -u
+    set -u
+    setopt NO_NOMATCH
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    if [[ "$(uname -s)" != Darwin ]]; then
+        print -u2 -r -- '✖ 此入口仅支持 macOS，请在 Mac 终端中运行。'
+        exit 1
+    fi
+}
+# 等待查看结果，并用退出码反映是否存在失败阶段。
+finish_and_wait() {
+    pause_for_enter '👉 阶段选择与执行已结束，按回车退出：' || exit 1
+    (( ${#FAILED_STAGES} == 0 )) || exit 1
 }
 # 编排脚本的高层业务流程。
 main() {
-  # 显示内置自述并阻塞，等待用户确认后继续。
-  show_readme_and_block
-  # 初始化 Shell 选项、日志、依赖和入口运行状态。
-  initialize_script_runtime
-  # 清空旧日志，确保本次记录独立可查。
-  initialize_execution_log
-  # 安装 Command Line Tools 并接受 Xcode 协议。
-  stage_clt
-  # 清理 Xcode 与模拟器缓存并下载 iOS 平台组件。
-  stage_xcode_simulator_assets
-  # 安装 oh-my-zsh。
-  stage_oh_my_zsh
-  # 安装或升级 Homebrew，并完成基础环境配置。
-  stage_homebrew
-  # 通过 Homebrew 安装常用开发工具与图形应用。
-  stage_brew_packages
-  # 通过 npm 安装全局工具 quicktype。
-  stage_npm
-  # 通过 gem 安装 CocoaPods。
-  stage_gem
-  # 下载 Jobs 相关仓库并执行环境配置脚本。
-  stage_jobs
-  # 打开需要用户手动下载安装的软件官网。
-  open_manual_download_pages
-  # 输出执行结果与日志路径摘要。
-  finish_summary
-  # 等待用户确认全部流程完成后退出。
-  pause_for_enter "👉 全部流程已执行完成。请按回车退出..."
+    show_script_intro_and_wait # 展示内置自述，回车确认后进入阶段选择。
+    initialize_script_runtime # 确认 macOS 并集中初始化 Shell 运行选项。
+    initialize_execution_log # 确认后才初始化本次执行日志。
+    run_optional_stage stage_clt 'Command Line Tools（CLT）' # 按需安装 CLT 并处理 Xcode 协议。
+    run_optional_stage stage_xcode_simulator_assets 'Xcode 模拟器配件' # 按需清理缓存并下载 iOS 平台。
+    run_optional_stage stage_oh_my_zsh 'oh-my-zsh' # 按需安装终端配置框架。
+    run_optional_stage stage_homebrew 'Homebrew' # 安装或复用 Homebrew，并在使用前体检。
+    run_optional_stage stage_brew_packages 'Homebrew 开发工具' # 体检通过后按需补装开发工具。
+    run_optional_stage stage_codegraph 'CodeGraph 代码地图 CLI' # 调用相邻仓库中的独立安装器。
+    run_optional_stage stage_npm 'npm / quicktype' # 按需安装原有 npm 工具。
+    run_optional_stage stage_gem 'gem / CocoaPods' # 按需安装原有 Ruby 工具。
+    run_optional_stage stage_jobs 'Jobs 环境配置' # 准备软件仓并同步当前仓库的终端配置。
+    open_manual_download_pages # 按需打开手动下载的软件官网。
+    finish_summary # 汇总完成、跳过与失败结果。
+    finish_and_wait # 等待查看摘要，并传播真实失败状态。
 }
 
 main "$@"
