@@ -16,7 +16,7 @@
 | 2、Xcode 模拟器配件 | 下载 iOS 平台；可选删除 Xcode 与 CoreSimulator 缓存 | 缓存删除必须额外输入 `YES` |
 | 3、oh-my-zsh | 缺失时执行官方安装器 | 已有目录保持原样，不启动新 Shell 或自动切换默认 Shell |
 | 4、Homebrew | 安装或复用，执行健康体检，可选更新软件列表 | `doctor` 失败会阻止后续 Brew / CodeGraph 安装；不执行全量升级或清理 |
-| 5、Homebrew 开发工具 | 补装脚本配置中的 formula / cask，配置 Git LFS | 使用前再次体检；会写入原有 Git 全局传输配置 |
+| 5、Homebrew 开发工具 | 补装 formula / cask，含 `python@3.13`，配置 Git LFS | 使用前再次体检；Python 3.13 不可用时只重装一次并复检；会写入原有 Git 全局传输配置 |
 | 6、CodeGraph 代码地图 CLI | 调用相邻仓库中的独立安装器 | 安装 CLI 与建立代码地图分开，不会隐式创建 `.codegraph/` 或修改 Codex 配置 |
 | 7、npm / quicktype | 体检 Node.js / npm 后安装 quicktype | 沿用管理员授权的全局 npm 安装方式 |
 | 8、gem / CocoaPods | 体检 RubyGems 后安装 CocoaPods | 沿用管理员授权的 gem 安装方式 |
@@ -49,6 +49,15 @@ zsh './【MacOS】🆕新系统配置.command'
 在执行后续 Brew 安装前，会检查 `brew --version`、真实 `brew --prefix`、`brew config` 和 `brew doctor`。诊断失败时停止该依赖链，并输出排查信息。已有安装只在主动确认后执行 `brew update`，不执行全量 `brew upgrade` 或 `brew cleanup`。
 
 缺少可用 Homebrew 时，会单独询问安装路径：精确输入 `YES` 选择系统标准目录，其它输入或直接回车选择用户目录。系统安装器可能请求管理员密码；用户目录安装不使用 `sudo`。选定路径失败后停止，不自动换到另一路径。只有新安装才写入带边界标记、可重复运行的 shellenv 配置块，并立即激活当前进程。
+
+开发工具清单保留原有 `python` / `python3`，同时安装固定 3.13 系列的 [`python@3.13`](https://formulae.brew.sh/formula/python@3.13)。脚本通过 `brew --prefix python@3.13` 定位 `bin/python3.13`，检查命令可执行且实际版本为 3.13；已有健康安装直接复用，缺失时安装，已有安装损坏时只重装一次，复检失败就停止该阶段。不会将 3.13 强制设为默认 `python` / `python3`。
+
+需要指定版本时使用：
+
+```shell
+python3.13 --version
+python3.13 -m venv .venv
+```
 
 ## 三、<span id="codegraph">CodeGraph 安装与建图</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
@@ -103,6 +112,6 @@ CodeGraph 和 Jobs 环境配置安装器直接使用当前终端，保留它们�
 
 该入口会根据阶段选择安装软件、下载平台组件、修改用户终端配置和 Git 全局参数。删除缓存另需 `YES`；未选中的阶段不会执行。脚本不创建提交或推送。
 
-脚本经过 `zsh -n` 静态检查，并以隔离假命令检查 Homebrew 健康与失败门禁、CodeGraph 子安装器调用和失败传播。未通过验证流程真实安装软件、接受系统协议、删除缓存或修改用户工具链。
+脚本经过 `zsh -n` 静态检查，并以隔离假命令检查 Homebrew 健康与失败门禁、Python 3.13 复用 / 安装 / 修复及失败停止、CodeGraph 子安装器调用和失败传播。未通过验证流程真实安装软件、接受系统协议、删除缓存或修改用户工具链。
 
 <a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>

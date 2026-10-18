@@ -299,6 +299,7 @@ readonly -a BREW_FORMULAE=(
     ruby
     python
     python3
+    python@3.13
     fastlane
     mysql
     hugo
@@ -645,10 +646,50 @@ brew_cask_installed() {
     local pkg="$1"
     "$JOBS_HOMEBREW_BIN" list --cask --versions "${pkg}" >/dev/null 2>&1
 }
+# 按 formula 的真实前缀检查 3.13，避免误用 PATH 中的其它 Python。
+check_python313_health() {
+    local python_prefix="" python_bin="" python_version=""
+    if ! python_prefix="$("$JOBS_HOMEBREW_BIN" --prefix python@3.13 2>>"$LOG_FILE")"; then
+        error_echo "无法解析 python@3.13 安装前缀；详情见日志。"
+        return 1
+    fi
+    python_bin="${python_prefix}/bin/python3.13"
+    if [[ "$python_prefix" != /* || ! -x "$python_bin" ]]; then
+        error_echo "python@3.13 解释器不可用：$python_bin"
+        return 1
+    fi
+    if ! python_version="$("$python_bin" --version 2>>"$LOG_FILE")" ||
+       [[ "$python_version" != "Python 3.13."* ]]; then
+        error_echo "python@3.13 版本体检失败：$python_bin（${python_version:-无版本输出}）；请查看日志。"
+        return 1
+    fi
+    success_echo "${python_version} 体检通过：$python_bin"
+}
+# 补装缺失的 3.13，已有安装损坏时只重装一次并复检。
+ensure_python313() {
+    local install_action=install
+    if brew_formula_installed python@3.13; then
+        if check_python313_health; then
+            return 0
+        fi
+        warn_echo "已有 python@3.13 未通过体检，将尝试重装一次。"
+        install_action=reinstall
+    fi
+    run_cmd "${install_action} python@3.13" "$JOBS_HOMEBREW_BIN" "$install_action" python@3.13 || return 1
+    rehash
+    if ! check_python313_health; then
+        error_echo "python@3.13 安装或修复后仍不可用，停止开发工具阶段；请检查 Brew 日志后重试。"
+        return 1
+    fi
+}
 # 只补装缺失的 formula，失败时保留具体包名。
 brew_install_if_needed() {
     local pkg="$1"
 
+    if [[ "$pkg" == python@3.13 ]]; then
+        ensure_python313
+        return $?
+    fi
     if brew_formula_installed "${pkg}"; then
         info_echo "brew formula 已安装：${pkg}"
     else
@@ -671,7 +712,7 @@ brew_install_cask_if_needed() {
         fi
     fi
 }
-# 通过健康 Homebrew 补装工具，并配置原有 Git LFS 参数。
+# 通过健康 Homebrew 补装工具、体检 Python 3.13，并配置原有 Git LFS 参数。
 stage_brew_packages() {
     require_healthy_homebrew || return 1
 
