@@ -2,13 +2,34 @@
 
 ![Jobs出品，必属精品](https://picsum.photos/1500/400)
 
-[toc]
+<!-- jobs-toc:start -->
+<!-- jobs-toc:source {"v":2,"token":"[toc]"} -->
+<details>
+<summary>📚 目录（点击展开 / 收起）</summary>
+
+- [🔥 前言](#jobs-toc-heading-1)
+- [一、九个可选阶段](#stages)
+- [二、执行流程](#flow)
+- [三、Homebrew 健康门禁](#homebrew)
+- [四、CodeGraph 与 codemap](#codegraph)
+- [五、Jobs 工作区与配置同步](#jobs-config)
+- [六、日志、排查与验证](#troubleshooting)
+- [七、Git 子模块脚本](#git-submodule-scripts)
+  - [【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command](#jobs-toc-heading-9)
+  - [【MacOS】🧭更新引用Git父仓=\>子仓.command](#jobs-toc-heading-10)
+  - [【MacOS】🧾更新gitmodules.command](#jobs-toc-heading-11)
+- [八、实际目录结构](#repository-layout)
+- [九、新系统配置脚本](#repository-script-flows)
+  - [【MacOS】🆕新系统配置.command](#jobs-toc-heading-14)
+
+</details>
+<!-- jobs-toc:end -->
 
 [实际目录结构](#repository-layout) · [Git 子模块脚本](#git-submodule-scripts) · [新系统配置流程](#repository-script-flows)
 
 ---
 
-## 🔥 <font id=前言>前言</font>
+## <span id="jobs-toc-heading-1" data-jobs-toc="v2">🔥 <font id=前言>前言</font></span><!-- jobs-toc:heading-end -->
 
 [**Git**](https://git-scm.com/) 子模块脚本的用途与执行顺序见[专章说明](#git-submodule-scripts)。
 
@@ -44,7 +65,7 @@
 
 这个仓库提供可选择阶段的 macOS 新系统初始化入口。先展示脚本内置自述并等待回车，随后每个阶段都采用“直接回车跳过，输入任意字符后回车执行”。缓存删除另需精确输入 `YES`。
 
-`【MacOS】⏬下载配置当前Git子模块.command` 维护本仓库的子模块。[**Sourcetree**](https://www.sourcetreeapp.com/) 脚本统一使用上一级的 [SourceTree.command](../SourceTree.command/README.md)，由总仓管理；本仓库不再重复克隆或登记该脚本库。
+`【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command` 维护本仓库的子模块。[**Sourcetree**](https://www.sourcetreeapp.com/) 脚本统一使用上一级的 [SourceTree.command](../SourceTree.command/README.md)，由总仓管理；本仓库不再重复克隆或登记该脚本库。
 
 当前入口采用同名完整目录：
 
@@ -62,7 +83,7 @@ zsh './【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.com
 
 完整交互、依赖、风险、日志和故障说明见[新系统配置 README](./【MacOS】🆕新系统配置.command/README.md)。安装 CodeGraph CLI 与建立仓库代码地图分别执行，安装阶段不会隐式创建 `.codegraph/` 或修改 Codex 配置。
 
-**下载脚本的 Gitee 传输规则：** `【MacOS】⏬下载配置当前Git子模块.command` 在本次运行中，将 `git@gitee.com:`、`ssh://git@gitee.com/`、`ssh://git@gitee.com:22/` 开头的标准地址统一通过 `https://gitee.com/` 访问，保留账号、真实仓名和分支；即使设置 `GIT_URL_STYLE=ssh`，这类 Gitee 地址仍使用 HTTPS。首次 `clone --recurse-submodules` 和后续递归同步都继承该规则，历史子模块中的 SSH 地址无需新电脑先配置 SSH 密钥。
+**下载脚本的 Gitee 传输规则：** `【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command` 在本次运行中，将 `git@gitee.com:`、`ssh://git@gitee.com/`、`ssh://git@gitee.com:22/` 开头的标准地址统一通过 `https://gitee.com/` 访问，保留账号、真实仓名和分支；即使设置 `GIT_URL_STYLE=ssh`，这类 Gitee 地址仍使用 HTTPS。各层首次克隆和后续拉取都继承该规则，历史子模块中的 SSH 地址无需新电脑先配置 SSH 密钥。
 
 规则通过追加进程级 `GIT_CONFIG_COUNT` / `url.https://gitee.com/.insteadOf` 配置传给子进程，不写入全局 Git 配置，也不依赖其它工程路径。GitHub、其它主机及非 `22` 的自定义 SSH 端口保持原规则。克隆或递归更新失败会返回非零状态，停止本轮同步并保留错误；不会再输出该项同步成功。各仓清单与浅克隆参数保留；全量删除重建须输入 `YES` 确认，范围限定为清单目标及对应旧仓名目录。
 
@@ -209,13 +230,13 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
 
 ## 七、<span id="git-submodule-scripts">Git 子模块脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### [【MacOS】⏬下载配置当前Git子模块.command](./【MacOS】⏬下载配置当前Git子模块.command)
+### <span id="jobs-toc-heading-9" data-jobs-toc="v2">[【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command](./【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command)</span><!-- jobs-toc:heading-end -->
 
-> **目的：** 将选中的直属子仓更新到远端目标分支最新版本，并维护父仓关联。
+> **目的：** 将选中的子仓及可选的后代子模块更新到各自远端目标分支最新版本，并维护入口父仓关联。
 
 * 确认自述后读取脚本清单、检查远端，尝试拉取父仓。
   * 父仓有未提交改动：跳过父仓拉取，继续处理子仓。
-* 在菜单中选择同步范围。
+* 在主菜单选择同步范围；“切换同步深度”可在默认“向下递归”和“仅直属子模块”之间切换，当前深度适用于各同步动作。
   * 全量同步：选择清单内全部目标重建，须输入 `YES` 执行，其它输入取消。
   * 只更新已有：更新清单内已存在的子仓；一个都没有时转全量同步。
   * 指定子模块：回车勾选或取消，空格确认开始。
@@ -224,13 +245,16 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
   * 全量模式：清洁检查通过后删除目标目录、对应仓名的旧目录及缓存，再重新克隆。
   * 其它模式：缺失的目标目录首次克隆，已有子仓继续更新。
   * 子仓有未提交改动：停止该项更新。
-* 拉取并强制对齐远端目标分支最新提交，默认优先 `main`，不存在时使用远端默认分支。
+* 拉取并强制对齐远端目标分支最新提交：优先使用该层 `.gitmodules` 显式 `branch`，`.` 继承直接父仓分支；未设置时优先 `main`，不存在则使用远端默认分支。
   * 使用 `checkout -B` 和 `reset --hard`：目标本地分支未推送的独有提交可能被覆盖。
-* 按子仓记录的提交同步更深层子模块，整理 Git 元数据与来源日志。
-* 默认自动提交父仓的关联变化，不自动推送。
+* 按当前深度同步：默认逐层读取所选子仓下的 `.gitmodules`，将已登记后代同步到各自远端目标分支最新提交；仅直属模式不下载或更新下层代码。
+  * 只处理本层所选子树，不向上扫描，也不接管未登记的嵌套仓库。
+  * 深层只下载更新，不自动暂存或提交其父仓的 gitlink；递归后这些父仓可能显示子模块指针改动，保留待审阅。
+* 整理入口父仓 Git 元数据与来源日志。
+* 默认自动提交入口父仓的关联变化，不自动推送。
   * 设置 `AUTO_PARENT_COMMIT=0`：跳过提交；`AUTO_PARENT_PUSH=1`：启用父仓推送。
 
-### [【MacOS】🧭更新引用Git父仓=>子仓.command](./【MacOS】🧭更新引用Git父仓=%3E子仓.command)
+### <span id="jobs-toc-heading-10" data-jobs-toc="v2">[【MacOS】🧭更新引用Git父仓=>子仓.command](./【MacOS】🧭更新引用Git父仓=%3E子仓.command)</span><!-- jobs-toc:heading-end -->
 
 > **目的：** 修复目录改名、旧路径残留或元数据指向错误，让父仓关联符合当前磁盘布局。
 
@@ -243,7 +267,7 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
 * 修复可证明失效的工作树指向，暂存各子仓当前提交号，用官方命令归集元数据并补齐父仓本地登记。
 * 核对磁盘目录、清单和父仓子模块指针是否一致，输出状态；不拉取代码、不提交、不推送。
 
-### [【MacOS】🧾更新gitmodules.command](./【MacOS】🧾更新gitmodules.command)
+### <span id="jobs-toc-heading-11" data-jobs-toc="v2">[【MacOS】🧾更新gitmodules.command](./【MacOS】🧾更新gitmodules.command)</span><!-- jobs-toc:heading-end -->
 
 > **目的：** 将新放入的直属子仓完整纳入父仓子模块管理，保留已有登记与指针。
 
@@ -270,7 +294,7 @@ JobsConfigOS/
 ├── 📒CodexByObsidian/                       # 独立 Git 仓：记忆 Vault 与同步入口
 ├── 🔨JobsConfigHotKeyByHammerspoon/         # 独立 Git 仓：桌面热键
 ├── 🦞JobsInstallOpenClaw/                    # 独立 Git 仓：OpenClaw 安装入口
-├── 【MacOS】⏬下载配置当前Git子模块.command
+├── 【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command
 ├── 【MacOS】🧭更新引用Git父仓=>子仓.command
 ├── 【MacOS】🧾更新gitmodules.command
 └── 【MacOS】🆕新系统配置.command/
@@ -293,7 +317,7 @@ JobsConfigOS/
 
 ## 九、<span id="repository-script-flows">新系统配置脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### [【MacOS】🆕新系统配置.command](./【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command)
+### <span id="jobs-toc-heading-14" data-jobs-toc="v2">[【MacOS】🆕新系统配置.command](./【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command)</span><!-- jobs-toc:heading-end -->
 
 > **目的：** 按需准备新 Mac 的开发工具链，并安装 Jobs 终端环境。
 

@@ -2,11 +2,25 @@
 
 ![Jobs出品，必属精品](https://picsum.photos/1500/400)
 
-[toc]
+<!-- jobs-toc:start -->
+<!-- jobs-toc:source {"v":2,"token":"[toc]"} -->
+<details>
+<summary>📚 目录（点击展开 / 收起）</summary>
+
+- [🔥 前言](#jobs-toc-heading-1)
+- [一、运行方式](#run)
+- [二、Homebrew 健康体检与安装](#brew)
+- [三、CodeGraph 安装与建图](#codegraph)
+- [四、Jobs 配置与已有工作区](#jobs)
+- [五、日志与排查](#logs)
+- [六、验证与影响范围](#validation)
+
+</details>
+<!-- jobs-toc:end -->
 
 ---
 
-## 🔥 <font id=前言>前言</font>
+## <span id="jobs-toc-heading-1" data-jobs-toc="v2">🔥 <font id=前言>前言</font></span><!-- jobs-toc:heading-end -->
 
 这个入口用于按需准备新 Mac 的开发环境。脚本先展示内置自述并等待回车，再逐个询问九个阶段：直接回车跳过，输入任意字符后回车执行。只选择自己需要的阶段即可。
 
