@@ -4,9 +4,13 @@
 
 [toc]
 
+[实际目录结构](#repository-layout) · [Git 子模块脚本](#git-submodule-scripts) · [新系统配置流程](#repository-script-flows)
+
 ---
 
 ## 🔥 <font id=前言>前言</font>
+
+[**Git**](https://git-scm.com/) 子模块脚本的用途与执行顺序见[专章说明](#git-submodule-scripts)。
 
 <strong id="submodule-quick-look">父子仓多平台地址速览</strong>
 
@@ -60,7 +64,7 @@ zsh './【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.com
 
 **下载脚本的 Gitee 传输规则：** `【MacOS】⏬下载配置当前Git子模块.command` 在本次运行中，将 `git@gitee.com:`、`ssh://git@gitee.com/`、`ssh://git@gitee.com:22/` 开头的标准地址统一通过 `https://gitee.com/` 访问，保留账号、真实仓名和分支；即使设置 `GIT_URL_STYLE=ssh`，这类 Gitee 地址仍使用 HTTPS。首次 `clone --recurse-submodules` 和后续递归同步都继承该规则，历史子模块中的 SSH 地址无需新电脑先配置 SSH 密钥。
 
-规则通过追加进程级 `GIT_CONFIG_COUNT` / `url.https://gitee.com/.insteadOf` 配置传给子进程，不写入全局 Git 配置，也不依赖其它工程路径。GitHub、其它主机及非 `22` 的自定义 SSH 端口保持原规则。克隆或递归更新失败会返回非零状态，停止本轮同步并保留错误；不会再输出该项同步成功。原有清单、浅克隆参数和全量模式的删除重建策略保留。
+规则通过追加进程级 `GIT_CONFIG_COUNT` / `url.https://gitee.com/.insteadOf` 配置传给子进程，不写入全局 Git 配置，也不依赖其它工程路径。GitHub、其它主机及非 `22` 的自定义 SSH 端口保持原规则。克隆或递归更新失败会返回非零状态，停止本轮同步并保留错误；不会再输出该项同步成功。各仓清单与浅克隆参数保留；全量删除重建须输入 `YES` 确认，范围限定为清单目标及对应旧仓名目录。
 
 ## 一、<span id="stages">九个可选阶段</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
@@ -202,5 +206,104 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
 选择部分阶段可能请求管理员密码、弹出系统窗口、下载平台或修改用户配置。Xcode 缓存删除另外要求 `YES`。CocoaPods CLI 安装成功与具体本地 Pod 编译成功属于不同验证范围；本入口不会运行 Pod 构建或 `pod lib lint`。
 
 验证包含 `zsh -n`、入口结构检查和隔离假命令测试，覆盖 Homebrew 健康顺序、doctor 失败门禁、安装器缺失、子安装器调用及退出状态传播。没有通过验证流程真实安装软件、接受系统协议、删除缓存或改变用户工具链。
+
+## 七、<span id="git-submodule-scripts">Git 子模块脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+### [【MacOS】⏬下载配置当前Git子模块.command](./【MacOS】⏬下载配置当前Git子模块.command)
+
+> **目的：** 将选中的直属子仓更新到远端目标分支最新版本，并维护父仓关联。
+
+* 确认自述后读取脚本清单、检查远端，尝试拉取父仓。
+  * 父仓有未提交改动：跳过父仓拉取，继续处理子仓。
+* 在菜单中选择同步范围。
+  * 全量同步：选择清单内全部目标重建，须输入 `YES` 执行，其它输入取消。
+  * 只更新已有：更新清单内已存在的子仓；一个都没有时转全量同步。
+  * 指定子模块：回车勾选或取消，空格确认开始。
+  * 添加地址：输入新仓地址，自动用仓名作为目录，本轮登记并同步。
+* 补齐关联配置，检查并处理目标子仓目录。
+  * 全量模式：清洁检查通过后删除目标目录、对应仓名的旧目录及缓存，再重新克隆。
+  * 其它模式：缺失的目标目录首次克隆，已有子仓继续更新。
+  * 子仓有未提交改动：停止该项更新。
+* 拉取并强制对齐远端目标分支最新提交，默认优先 `main`，不存在时使用远端默认分支。
+  * 使用 `checkout -B` 和 `reset --hard`：目标本地分支未推送的独有提交可能被覆盖。
+* 按子仓记录的提交同步更深层子模块，整理 Git 元数据与来源日志。
+* 默认自动提交父仓的关联变化，不自动推送。
+  * 设置 `AUTO_PARENT_COMMIT=0`：跳过提交；`AUTO_PARENT_PUSH=1`：启用父仓推送。
+
+### [【MacOS】🧭更新引用Git父仓=>子仓.command](./【MacOS】🧭更新引用Git父仓=%3E子仓.command)
+
+> **目的：** 修复目录改名、旧路径残留或元数据指向错误，让父仓关联符合当前磁盘布局。
+
+* 扫描父仓第一层实际带 `.git` 的子目录，读取远端和已有登记。
+  * 远端缺失、元数据归属不明或属于链接工作树：停止修复。
+* 展示磁盘目录、父仓状态与清理计划，确认后备份关联状态。
+  * 直接回车：跳过；输入任意字符后回车：执行；`--dry-run`：只预览。
+* 按现存目录对齐 `.gitmodules`，保留仍存在条目的 URL、分支及扩展字段。
+  * 目录缺失，包括尚未下载：移除旧登记和旧子模块指针，磁盘文件保留。
+* 修复可证明失效的工作树指向，暂存各子仓当前提交号，用官方命令归集元数据并补齐父仓本地登记。
+* 核对磁盘目录、清单和父仓子模块指针是否一致，输出状态；不拉取代码、不提交、不推送。
+
+### [【MacOS】🧾更新gitmodules.command](./【MacOS】🧾更新gitmodules.command)
+
+> **目的：** 将新放入的直属子仓完整纳入父仓子模块管理，保留已有登记与指针。
+
+* 读取已有登记，扫描直属子仓，预检远端、提交、索引和元数据冲突。
+  * 有冲突或缺少必要信息：停止，展示问题。
+* 生成增量计划，保留已有 URL、分支、扩展字段、子模块指针和暂缺目录登记。
+  * `--dry-run` 或 `DRY_RUN=1`：只预览，不执行关联写入。
+* 确认计划后备份关联配置和父仓索引。
+  * 直接回车：跳过；输入任意字符后回车：执行。
+* 补齐 `.gitmodules` 和缺失的子模块指针，初始化本地登记，将元数据归集到父仓。
+* 核验父子关系和子仓提交号；仅暂存必要关联，不联网拉取、不提交、不推送。
+
+## 八、<span id="repository-layout">实际目录结构</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+```text
+JobsConfigOS/
+├── README.md / .gitmodules                 # 父仓说明与子模块登记
+├── assets/ / icon.png / LICENSE
+├── ⏬JobsSoftware.MacOS/                    # 独立 Git 仓：软件包与下载辅助
+├── ⚙️VScodeConfigs/                         # 独立 Git 仓：编辑器配置父仓
+├── 🌍JobsMacEnvVarConfigs/                  # 独立 Git 仓：终端环境与命令
+├── 🍎JobsCodeSnippets/                      # 独立 Git 仓：Xcode 代码片段
+├── 💻JobsCodexConfigs/                      # 独立 Git 仓：Codex 配置标准源
+├── 📒CodexByObsidian/                       # 独立 Git 仓：记忆 Vault 与同步入口
+├── 🔨JobsConfigHotKeyByHammerspoon/         # 独立 Git 仓：桌面热键
+├── 🦞JobsInstallOpenClaw/                    # 独立 Git 仓：OpenClaw 安装入口
+├── 【MacOS】⏬下载配置当前Git子模块.command
+├── 【MacOS】🧭更新引用Git父仓=>子仓.command
+├── 【MacOS】🧾更新gitmodules.command
+└── 【MacOS】🆕新系统配置.command/
+    ├── 【MacOS】🆕新系统配置.command
+    └── README.md
+```
+
+子仓内部的脚本由各自根 `README.md` 说明；本仓直接维护的三个 Git 脚本见[第七章](#git-submodule-scripts)。
+
+| 独立子仓 | 根说明 |
+| --- | --- |
+| 软件包与下载辅助 | [⏬JobsSoftware.MacOS](./⏬JobsSoftware.MacOS/README.md) |
+| 编辑器配置父仓 | [⚙️VScodeConfigs](./⚙️VScodeConfigs/README.md) |
+| 终端环境与命令 | [🌍JobsMacEnvVarConfigs](./🌍JobsMacEnvVarConfigs/README.md) |
+| Xcode 代码片段 | [🍎JobsCodeSnippets](./🍎JobsCodeSnippets/README.md) |
+| Codex 配置标准源 | [💻JobsCodexConfigs](./💻JobsCodexConfigs/README.md) |
+| 永久记忆与同步 | [📒CodexByObsidian](./📒CodexByObsidian/README.md) |
+| 桌面热键 | [🔨JobsConfigHotKeyByHammerspoon](./🔨JobsConfigHotKeyByHammerspoon/README.md) |
+| OpenClaw 安装入口 | [🦞JobsInstallOpenClaw](./🦞JobsInstallOpenClaw/README.md) |
+
+## 九、<span id="repository-script-flows">新系统配置脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+### [【MacOS】🆕新系统配置.command](./【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command)
+
+> **目的：** 按需准备新 Mac 的开发工具链，并安装 Jobs 终端环境。
+
+* 阅读自述，确认后建立本次日志与阶段状态。
+* 依次询问 Command Line Tools、Xcode 模拟器、Oh My Zsh 和 Homebrew 的准备项目。
+  * 每阶段直接回车跳过，输入非空内容执行；模拟器缓存清理另需输入 `YES`。
+* 继续按阶段选择开发软件、CodeGraph、quicktype 和 CocoaPods。
+  * 依赖缺失时先处理前置条件；需要外部安装脚本或本地包时检查对应路径。
+* 在 Jobs 配置阶段调用本地环境安装入口，并按提示准备软件目录和下载页面。
+* 汇总各阶段结果及日志位置。
+  * 单阶段失败会记录并继续后续独立阶段；有失败时最终返回失败状态。
 
 <a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>
