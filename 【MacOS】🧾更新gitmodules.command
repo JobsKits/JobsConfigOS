@@ -127,7 +127,9 @@ initialize_runtime() {
   CHILDREN=(); WORK_ITEMS=(); ISSUES=()
   SECTION_NAMES=(); SECTION_PATHS=(); CHILD_HEADS=(); CHILD_URLS=(); CHILD_BRANCHES=()
   CHILD_GIT_DIRS=(); CHILD_MODES=(); NEED_GITLINK=(); NEED_ABSORB=()
-  : > "$LOG_FILE"
+  umask 077
+  LOG_FILE="$(mktemp "${LOG_FILE}.XXXXXXXX")" || return 1
+  print -r -- "本次日志：$LOG_FILE"
 }
 # 为后续并发变更检测记录文件内容，不存在的文件使用独立标识。
 file_checksum() {

@@ -561,15 +561,25 @@ stage_xcode_simulator_assets() {
 # 阶段 3：ohmyzsh
 # =========================
 # 保留既有 oh-my-zsh；缺失时执行官方安装流程。
+# 下载成功且语法有效才执行；保留现有 .zshrc，不改变登录 Shell。
+jobs_install_ohmyzsh() (
+  local installer=""
+  installer="$(mktemp "${TMPDIR:-/tmp}/jobs-ohmyzsh-install.XXXXXXXX")" || return 1
+  trap 'rm -f -- "$installer"' EXIT
+  curl --fail --show-error --silent --location --proto '=https' --proto-redir '=https' \
+    --connect-timeout 10 --max-time 120 --output "$installer" \
+    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh || return 1
+  [[ -s "$installer" ]] || return 1
+  /bin/sh -n "$installer" || return 1
+  RUNZSH=no CHSH=no KEEP_ZSHRC=yes /bin/sh "$installer"
+)
 stage_oh_my_zsh() {
     if [[ -d "${HOME}/.oh-my-zsh" ]]; then
         info_echo "检测到 ~/.oh-my-zsh 已存在，跳过安装"
         return 0
     fi
     ensure_brew_access || return 1
-    run_sh \
-        "安装 oh-my-zsh" \
-        'RUNZSH=no CHSH=no sh -c "$(curl -fsSL --connect-timeout 10 --max-time 120 https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"' || return 1
+    run_cmd "安装 oh-my-zsh" jobs_install_ohmyzsh || return 1
     warn_echo "oh-my-zsh 官方安装流程可能有交互输出，这是正常现象。"
 }
 # =========================

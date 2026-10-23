@@ -124,7 +124,9 @@ initialize_script_runtime() {
   SUBMODULE_URLS=(); REGISTRATION_URLS=(); EXISTING_SECTION_NAMES=(); EXISTING_SECTION_PATHS=()
   CHILD_GIT_DIRS=(); CHILD_HEADS=(); CHILD_BRANCHES=(); CHILD_REFS=(); CHILD_INDEXES=()
   CHILD_STATES=(); CHILD_REMOTES=(); CHILD_CONFIGS=(); NEED_ABSORB=(); NEED_WORKTREE=(); RENAMED_FROM=()
-  : > "$LOG_FILE"
+  umask 077
+  LOG_FILE="$(mktemp "${LOG_FILE}.XXXXXXXX")" || return 1
+  print -r -- "本次日志：$LOG_FILE"
 }
 # 根目录入口优先处理自身；包目录入口只向上一层定位。
 resolve_parent_repo_dir() {

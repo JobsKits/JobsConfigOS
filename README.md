@@ -31,6 +31,21 @@
 
 ## <span id="jobs-toc-heading-1" data-jobs-toc="v2">🔥 <font id=前言>前言</font></span><!-- jobs-toc:heading-end -->
 
+本仓集中管理 macOS 新系统初始化与 Jobs 开发配置。既可以按阶段初始化整机，也可以单独使用下列配置仓，不必先运行全部安装流程。
+
+| 功能入口 | 功能覆盖 | 使用结果 |
+| --- | --- | --- |
+| [新系统配置](./【MacOS】🆕新系统配置.command/README.md) | CLT、Xcode 模拟器资源、Oh My Zsh、Homebrew、开发工具、CodeGraph、quicktype、CocoaPods 与 Jobs 环境九个可选阶段 | 只执行确认的阶段，输出各阶段完成 / 跳过 / 失败摘要 |
+| [终端环境与命令](./🌍JobsMacEnvVarConfigs/README.md) | Shell 环境声明、短命令注册、Flutter / iOS 辅助、文件与媒体工具、开发工具维护 | 部署用户环境并注册命令；[命令目录](./🌍JobsMacEnvVarConfigs/scripts/README.md)逐项说明用途 |
+| [编辑器配置](./⚙️VScodeConfigs/README.md) | VS Code 配置及按项目类型组织的开发设置 | 按对应子目录选择配置和部署入口 |
+| [代码片段](./🍎JobsCodeSnippets/README.md) | Xcode 自定义代码片段的保存与安装 | 将片段部署到当前用户的 Xcode 代码片段目录 |
+| [快捷键](./🔨JobsConfigHotKeyByHammerspoon/README.md) | Hammerspoon 热键、应用与隐私相关快捷操作 | 安装配置、授权后按快捷键触发对应动作 |
+| [Codex 配置](./💻JobsCodexConfigs/README.md) | 全局指导部署、用户级 Skills 识别与配置管理入口 | 按独立说明管理标准源和运行配置 |
+| [永久记忆](./📒CodexByObsidian/README.md) | Obsidian Vault、长期偏好、工作流与项目笔记 | 按记忆入口检索与维护跨项目上下文 |
+| [软件与压缩分卷](./⏬JobsSoftware.MacOS/README.md) | 官网下载导航、文件压缩拆分及分卷合并 | 打开所选官网，或在选择的目标位置生成分卷 / 合并文件 |
+| [OpenClaw 安装](./🦞JobsInstallOpenClaw/README.md) | OpenClaw 安装与环境准备入口 | 按独立说明检查依赖并安装目标程序 |
+| [子模块管理](#git-submodule-scripts) | 下载同步、按磁盘对齐引用、增量登记子仓 | 预览或应用父子仓关联，具体提交条件见对应入口 |
+
 [**Git**](https://git-scm.com/) 子模块脚本的用途与执行顺序见[专章说明](#git-submodule-scripts)。
 
 <strong id="markdown-toc-sync">同步后文档目录：本地 `[toc]`，提交后发布折叠目录</strong>
@@ -264,7 +279,6 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
 ## 七、<span id="git-submodule-scripts">Git 子模块脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 ### <span id="jobs-toc-heading-9" data-jobs-toc="v2">[【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command](./【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command)</span><!-- jobs-toc:heading-end -->
-
 
 > **目的：** 默认递归拉取已登记子模块目标分支的最新提交，保持本地跟踪分支；显式维护模式保留清单与登记能力。
 
