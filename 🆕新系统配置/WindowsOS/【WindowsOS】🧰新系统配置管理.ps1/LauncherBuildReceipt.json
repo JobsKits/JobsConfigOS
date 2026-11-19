@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "product": "JobsSystemSetupManager",
+  "artifactKind": "Windows GUI PE / .NET Framework managed launcher",
+  "targetFramework": "net472",
+  "targetFrameworkMoniker": ".NETFramework,Version=v4.7.2",
+  "architecture": "AnyCPU",
+  "clrFlags": {
+    "ILOnly": true,
+    "Requires32Bit": false,
+    "Prefers32Bit": false
+  },
+  "nativeAot": false,
+  "selfContained": false,
+  "authenticodeSigned": false,
+  "actualBuildUtc": "2026-11-17T03:36:29Z",
+  "toolchain": {
+    "hostOS": "macOS",
+    "dotnetSdk": "11.0.100",
+    "configuration": "Release",
+    "warnings": 0,
+    "errors": 0,
+    "referencePackage": {
+      "id": "Microsoft.NETFramework.ReferenceAssemblies.net472",
+      "version": "1.0.3",
+      "source": "https://api.nuget.org/v3/index.json",
+      "contentHash": "0E7evZXHXaDYYiLRfpyXvCh+yzM2rNTyuZDI+ZO7UUqSc6GfjePiXTdqJGtgIKUwdI81tzQKmaWprnUiPj9hAw=="
+    }
+  },
+  "sourceFiles": [
+    {
+      "path": "Launcher/JobsSystemSetupManager.csproj",
+      "sha256": "d37ef860cd06bd69fb001aa7ef0a42f7040aad44cd35b6302d3c4e5b69c4f034"
+    },
+    {
+      "path": "Launcher/Program.cs",
+      "sha256": "e110393a516052613728150cd61a054a3c00d02929eeec50506d2fd76fbf5c0b"
+    },
+    {
+      "path": "Launcher/app.manifest",
+      "sha256": "24c977b920af0f07c2470d37db5679e870a9ed69e8e567aa30c12b7da299fe1d"
+    },
+    {
+      "path": "Launcher/NuGet.Config",
+      "sha256": "9d361c9b2ddfc06d1110b04bd36b47d476d92481521f660e609e112356a39db2"
+    },
+    {
+      "path": "Launcher/packages.lock.json",
+      "sha256": "6aa1d0a592cddcc1239dcecbeac05d608245ccd5ad91f6cacf3d5b99fff81a40"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "JobsSystemSetupManager.exe",
+      "sha256": "92340f6402f1ba46fffba68f3bfb05e39be795ea932346d5f99a7070856dbc3b",
+      "sizeBytes": 11776
+    },
+    {
+      "path": "JobsSystemSetupManager.exe.config",
+      "sha256": "435ea23443d8dd98eeb707aad9d3a5c1fe6046f8d76647a44d495d94ea4597ef",
+      "sizeBytes": 171
+    }
+  ],
+  "requiredRuntime": {
+    "operatingSystem": "Windows 10 1809 64-bit or later; target-machine acceptance pending",
+    "framework": ".NET Framework 4.7.2 or compatible later 4.x",
+    "host": "System Windows PowerShell 5.1 and WinForms",
+    "payloadRelativeToExecutable": [
+      "JobsSystemSetupManager.exe.config",
+      "【WindowsOS】🧰新系统配置管理.ps1",
+      "Resources/PanelTranslations.json",
+      "Resources/PanelWorker.cs",
+      "../【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.ps1"
+    ]
+  },
+  "nativeWindowsRun": false,
+  "verification": {
+    "isolatedAssertions": 18,
+    "windowsProcessesStarted": false,
+    "guiInteraction": "not tested",
+    "realInstallationOrUninstallation": "not performed"
+  }
+}

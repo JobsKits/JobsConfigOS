@@ -1,0 +1,41 @@
+{
+  "repository": "JobsConfigOS",
+  "captured": "2026-11-18",
+  "files": [
+    {
+      "path": "【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command/README.md",
+      "sha256": "36ed0daf8edfc29191236cd912b1764d4fa097a45029f2cdd2d088609358e2fa",
+      "bytes": 1634
+    },
+    {
+      "path": "【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command/【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command",
+      "sha256": "c140aa9f363572c657cda193edca0a3ad899870ce037af5576c0f1ea3fb58617",
+      "bytes": 278016
+    },
+    {
+      "path": "【MacOS】🧭更新引用Git父仓=＞子仓.command/README.md",
+      "sha256": "031a44853c61a220836df85fa8aa6f8c529404151bbdb3705981d2233f881823",
+      "bytes": 1462
+    },
+    {
+      "path": "【MacOS】🧭更新引用Git父仓=＞子仓.command/【MacOS】🧭更新引用Git父仓=＞子仓.command",
+      "sha256": "7b2e4f8de6f059b1765165392b871b09a169e8604fe5440e03e9da92886fd37f",
+      "bytes": 86138
+    },
+    {
+      "path": "【MacOS】🧾更新gitmodules.command/README.md",
+      "sha256": "74cd153b6954eb2663528171a24d16e58c7dc63d2bcdb17286284c07d2828d25",
+      "bytes": 1452
+    },
+    {
+      "path": "【MacOS】🧾更新gitmodules.command/【MacOS】🧾更新gitmodules.command",
+      "sha256": "bb3733757e4d9a6036e19210060b03a3eb1293d61c2a46a2aaed19eed5df4c18",
+      "bytes": 73949
+    },
+    {
+      "path": "README.md",
+      "sha256": "22becdf796cc33935b2a94214b095af5e3a2d037d2a46d14210162ca45a4073e",
+      "bytes": 56140
+    }
+  ]
+}

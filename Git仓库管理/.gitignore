@@ -1,0 +1,6 @@
+JobsGitManager/.build-venv/
+**/__pycache__/
+**/*.egg-info/
+dist/
+latest-macos.json
+latest-windows.json

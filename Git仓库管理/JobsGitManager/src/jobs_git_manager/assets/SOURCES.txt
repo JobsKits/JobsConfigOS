@@ -1,0 +1,10 @@
+Git logo / Git Icon, by Jason Long.
+Source: https://git-scm.com/community/logos
+Original SVG: https://git-scm.com/images/logos/downloads/Git-Icon-1788C.svg
+License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/
+Downloaded 2026-11-18. Original SVG preserved; shown at a smaller size.
+
+Source selection: iconfont.cn was searched first; its public endpoint returned
+an HTML page without a verifiable Git asset. The official Git source was used.
+The globe and moon beside the settings labels are system Unicode glyphs.

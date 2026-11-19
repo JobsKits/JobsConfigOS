@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "id": "Alpine",
+  "title": "Alpine 新系统配置管理",
+  "platform": "Alpine",
+  "kind": "interpreted-tcl-tk-gui-runtime",
+  "packagedAtShanghai": "2026-11-17T11:49:53.597733+08:00",
+  "sourceEntry": "GuiRuntime/安装面板/UnixManager.tcl/UnixManager.tcl",
+  "buildEntries": [],
+  "launchEntry": "GuiRuntime/Alpine/【Alpine】🧰新系统配置管理.sh/【Alpine】🧰新系统配置管理.sh",
+  "dependencies": [
+    "匹配的Alpine x64/ARM64桌面；具体最低OS版本尚未实机锁定",
+    "Tcl/Tk 8.6+、DISPLAY；Wayland需XWayland；写任务需root或可用PolicyKit图形授权",
+    "这是解释型GUI成品运行包，保留完整同平台CLI/共享资源；不是ELF、AppImage或内嵌Tk的独立二进制"
+  ],
+  "verified": [
+    "打包器复核归档逐文件SHA-256与ZIP完整性；此项不是目标系统GUI运行结论",
+    "共享模型与本机Tk隔离验证的历史记录见随包说明；不外推目标发行版已运行"
+  ],
+  "pending": [
+    "Alpine原生桌面、字体/辅助技术、PolicyKit和真实系统包事务未验",
+    "运行依赖Tcl/Tk和图形桌面，不自动安装GUI运行时"
+  ],
+  "artifactValidation": {
+    "kind": "interpreted-tcl-tk-gui-runtime",
+    "requiresTclTk": true,
+    "standaloneElf": false
+  },
+  "archivePolicy": {
+    "fixedZipTimestamp": "1980-01-01T00:00:00",
+    "sourceContentUnchanged": true,
+    "preserveRelativeLayout": true,
+    "secretsAndCachesExcluded": true
+  },
+  "archives": {
+    "source": {
+      "file": "source.zip",
+      "sha256": "014edfc513dba8efbe215129a7363a1c15dfa548e1e0116072dc9a70b3ade91b",
+      "bytes": 67299,
+      "entries": [
+        {
+          "path": "GuiRuntime/Alpine/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6022,
+          "sha256": "0dbe3f3dba6bf927f524d10de6f7a67ad9bdb3dfc88066fe32fd99cb6f9ac484"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🆕新系统配置.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1908,
+          "sha256": "f50d7b34188e458baad50b74097423c079ad35484dc1347dae9aaef490bc4837"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🆕新系统配置.sh/【Alpine】🆕新系统配置.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 51019,
+          "sha256": "12598912d583c5c9be8468907941d917db956c17788f10ef4d710a95261fa337"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🧰新系统配置管理.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5292,
+          "sha256": "099bc681af346e70ed07186be32b25ecba40f03c7c78f88e544183593a1387ba"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🧰新系统配置管理.sh/【Alpine】🧰新系统配置管理.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 5040,
+          "sha256": "5cd227fcb56d1b1ff8a53990ce0832f1c69697fc43e22421c2e9f29c8e23c1b1"
+        },
+        {
+          "path": "GuiRuntime/安装面板/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4313,
+          "sha256": "f4fe0929780c476a97a6db420760487e795d13f41db65c5348533dfba9fd7b1c"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Resources/UnixTranslations.dict",
+          "type": "file",
+          "mode": "0o644",
+          "size": 79990,
+          "sha256": "aaf5ac0ffc203770e1269b4cdfde86fdb5168411cb246291c5e3ba5eff6d91fb"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1078,
+          "sha256": "ddb67730480d4cd717224c3671abc48eaab5a4e431abe665b76bf87c16dccf8c"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixManagerTests.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 931,
+          "sha256": "bd8d45f8f28e9aaa7881ed77120a61e96868523878e26be3f6b4764a9157c172"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixManagerTests.tcl/UnixManagerTests.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5251,
+          "sha256": "fc3a93171464d3be0b92a152cc8d6314de528deaac7536dda67cc52700a6340f"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixNativeUiTests.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1722,
+          "sha256": "3fe4d206a3575735134fde39e9656d410b4b18f5041e4e663ad907f4ab21dfaf"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixNativeUiTests.tcl/UnixNativeUiTests.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6968,
+          "sha256": "be40e506c39f564f39e05d0e3fb1705880c0d96f73ae5f06a158fa8016a81275"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/ManagerCore.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 9984,
+          "sha256": "472e802ac41050e9b216b4df528258ba446992ac40e840d745e4ec41ce4004e0"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 753,
+          "sha256": "286ae793c792af6300a005611441076946d136d0382a1aef6c56126f2e158eff"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 815,
+          "sha256": "76d4ced65bf6d5ef64f58bcd77db9a456beb01902995142ef64d1384a65fc160"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/RunBackend.sh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 546,
+          "sha256": "5775c16672715386bfdb7b73fe9f0d245b778fbbc47d89c61d99b6093d57d028"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/UnixManager.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 26128,
+          "sha256": "bf3f01bb259bf0c1e3b55665beb0d835e8d33eddcd25e56f861358f6ac6c1eb6"
+        }
+      ]
+    },
+    "product": {
+      "file": "product.zip",
+      "sha256": "283ffae210767de2eb1c009659b15fbb42bedc8793e851ed05105fe88d37a0ad",
+      "bytes": 58890,
+      "entries": [
+        {
+          "path": "GuiRuntime/Alpine/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6022,
+          "sha256": "0dbe3f3dba6bf927f524d10de6f7a67ad9bdb3dfc88066fe32fd99cb6f9ac484"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🆕新系统配置.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1908,
+          "sha256": "f50d7b34188e458baad50b74097423c079ad35484dc1347dae9aaef490bc4837"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🆕新系统配置.sh/【Alpine】🆕新系统配置.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 51019,
+          "sha256": "12598912d583c5c9be8468907941d917db956c17788f10ef4d710a95261fa337"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🧰新系统配置管理.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5292,
+          "sha256": "099bc681af346e70ed07186be32b25ecba40f03c7c78f88e544183593a1387ba"
+        },
+        {
+          "path": "GuiRuntime/Alpine/【Alpine】🧰新系统配置管理.sh/【Alpine】🧰新系统配置管理.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 5040,
+          "sha256": "5cd227fcb56d1b1ff8a53990ce0832f1c69697fc43e22421c2e9f29c8e23c1b1"
+        },
+        {
+          "path": "GuiRuntime/安装面板/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4313,
+          "sha256": "f4fe0929780c476a97a6db420760487e795d13f41db65c5348533dfba9fd7b1c"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Resources/UnixTranslations.dict",
+          "type": "file",
+          "mode": "0o644",
+          "size": 79990,
+          "sha256": "aaf5ac0ffc203770e1269b4cdfde86fdb5168411cb246291c5e3ba5eff6d91fb"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/ManagerCore.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 9984,
+          "sha256": "472e802ac41050e9b216b4df528258ba446992ac40e840d745e4ec41ce4004e0"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 753,
+          "sha256": "286ae793c792af6300a005611441076946d136d0382a1aef6c56126f2e158eff"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 815,
+          "sha256": "76d4ced65bf6d5ef64f58bcd77db9a456beb01902995142ef64d1384a65fc160"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/RunBackend.sh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 546,
+          "sha256": "5775c16672715386bfdb7b73fe9f0d245b778fbbc47d89c61d99b6093d57d028"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/UnixManager.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 26128,
+          "sha256": "bf3f01bb259bf0c1e3b55665beb0d835e8d33eddcd25e56f861358f6ac6c1eb6"
+        }
+      ]
+    }
+  }
+}

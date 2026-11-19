@@ -1,4 +1,4 @@
-# `macOS` 新系统配置
+# Jobs 多平台新系统配置
 
 ![Jobs出品，必属精品](https://picsum.photos/1500/400)
 
@@ -8,35 +8,56 @@
 <summary>📚 目录（点击展开 / 收起）</summary>
 
 - [🔥 前言](#jobs-toc-heading-1)
-- [一、九个可选阶段](#stages)
+- [一、MacOS 十个可选阶段](#stages)
 - [二、执行流程](#flow)
 - [三、Homebrew 健康门禁](#homebrew)
 - [四、CodeGraph 与 codemap](#codegraph)
 - [五、Jobs 工作区与配置同步](#jobs-config)
 - [六、日志、排查与验证](#troubleshooting)
-- [七、Git 子模块脚本](#git-submodule-scripts)
-  - [【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command](#jobs-toc-heading-9)
-  - [【MacOS】🧭更新引用Git父仓=\>子仓.command](#jobs-toc-heading-10)
-  - [【MacOS】🧾更新gitmodules.command](#jobs-toc-heading-11)
+- [七、Git 父／子仓管理](#git-submodule-scripts)
+  - [【MacOS】🧩Git仓库管理.command](#jobs-toc-heading-9)
+  - [【Windows】🧩Git仓库管理.cmd](#jobs-toc-heading-10)
 - [八、实际目录结构](#repository-layout)
 - [九、新系统配置脚本](#repository-script-flows)
-  - [【MacOS】🆕新系统配置.command](#jobs-toc-heading-14)
+  - [【MacOS】🆕新系统配置.command](#jobs-toc-heading-13)
+  - [【WindowsOS】🆕新系统配置.ps1](#jobs-toc-heading-14)
+  - [【WindowsOS】↩️卸载新系统配置.ps1](#jobs-toc-heading-15)
+  - [【Ubuntu】🆕新系统配置.sh](#jobs-toc-heading-16)
+  - [【Debian】🆕新系统配置.sh](#jobs-toc-heading-17)
+  - [【RockyLinux】🆕新系统配置.sh](#jobs-toc-heading-18)
+  - [【Alpine】🆕新系统配置.sh](#jobs-toc-heading-19)
+  - [【AlibabaCloudLinux】🆕新系统配置.sh](#jobs-toc-heading-20)
+  - [【FreeBSD】🆕新系统配置.sh](#jobs-toc-heading-21)
+- [十、安装与反安装面板](#management-panels)
+  - [【WindowsOS】🧰新系统配置管理.ps1](#jobs-toc-heading-23)
+  - [【Ubuntu】🧰新系统配置管理.sh](#jobs-toc-heading-24)
+  - [【Debian】🧰新系统配置管理.sh](#jobs-toc-heading-25)
+  - [【RockyLinux】🧰新系统配置管理.sh](#jobs-toc-heading-26)
+  - [【Alpine】🧰新系统配置管理.sh](#jobs-toc-heading-27)
+  - [【AlibabaCloudLinux】🧰新系统配置管理.sh](#jobs-toc-heading-28)
+  - [【FreeBSD】🧰新系统配置管理.sh](#jobs-toc-heading-29)
+  - [【MacOS】↩️卸载新系统配置.command](#jobs-toc-heading-30)
 
 </details>
 <!-- jobs-toc:end -->
 
-[实际目录结构](#repository-layout) · [Git 子模块脚本](#git-submodule-scripts) · [新系统配置流程](#repository-script-flows)
+[八平台 GUI 启动文件](./🆕新系统配置/README.md#gui-entrypoints) · [八平台卸载入口](./🆕新系统配置/README.md#uninstall-entrypoints) · [实际目录结构](#repository-layout) · [Git 父／子仓管理](#git-submodule-scripts) · [新系统配置流程](#repository-script-flows)
 
 ---
 
 ## <span id="jobs-toc-heading-1" data-jobs-toc="v2">🔥 <font id=前言>前言</font></span><!-- jobs-toc:heading-end -->
 
-本仓集中管理 macOS 新系统初始化与 Jobs 开发配置。既可以按阶段初始化整机，也可以单独使用下列配置仓，不必先运行全部安装流程。
+本仓按操作系统管理新系统开发环境初始化，并保留 Jobs 的 MacOS 专属配置仓。多平台入口集中在 [新系统配置目录](./🆕新系统配置/README.md)；可单独使用各平台脚本或下列配置仓。
 
 | 功能入口 | 功能覆盖 | 使用结果 |
 | --- | --- | --- |
-| [新系统配置](./【MacOS】🆕新系统配置.command/README.md) | CLT、Xcode 模拟器资源、Oh My Zsh、Homebrew、开发工具、CodeGraph、quicktype、CocoaPods 与 Jobs 环境九个可选阶段 | 只执行确认的阶段，输出各阶段完成 / 跳过 / 失败摘要 |
-| [终端环境与命令](./🌍JobsMacEnvVarConfigs/README.md) | Shell 环境声明、短命令注册、Flutter / iOS 辅助、文件与媒体工具、开发工具维护 | 部署用户环境并注册命令；[命令目录](./🌍JobsMacEnvVarConfigs/scripts/README.md)逐项说明用途 |
+| [多平台新系统配置](./🆕新系统配置/README.md) | MacOS、WindowsOS、Ubuntu、Debian、RockyLinux、Alpine、AlibabaCloudLinux、FreeBSD 分目录 | 原生脚本、按组件配置与反安装；目标系统实机验收见平台说明 |
+| [MacOS 新系统配置](./🆕新系统配置/MacOS/【MacOS】🆕新系统配置.command/README.md) | CLT、Xcode 模拟器资源、Oh My Zsh、Homebrew、开发工具、CodeGraph、quicktype、CocoaPods、REA 与 Jobs 环境十个可选阶段 | 保留终端逐阶段确认，输出完成 / 跳过 / 失败摘要 |
+| [GUI源码与成品双交付](./项目相关报告/GUI源码与成品交付审计.md) | 2026-11-16两套Mac面板及11-17七平台扩展的源码、工程／构建入口与成品包逐项对应 | [交付目录](./🆕新系统配置/交付产物/GUI源码与成品/README.md)；附版本、SHA256与运行依赖 |
+| [MacOS面板源码与Xcode工程](./🆕新系统配置/MacOS/安装面板/README.md) | 可读Swift源码、原生App target、共享Scheme与资源构建阶段 | 打开工程直接Build／Run；保留独立命令行构建器 |
+| [新系统配置管理面板](./🆕新系统配置/README.md#gui-entrypoints) | 八平台分别提供 GUI 入口，按本平台组件预览／安装／卸载，十语与三主题 | MacOS 双击 `🆕新系统配置/MacOS/【MacOS】🧰新系统配置管理.app`；其它平台见入口表；默认空选，明确确认后执行 |
+| [终端环境管理面板](./🌍JobsMacEnvVarConfigs/安装面板/README.md) | 环境模块与短命令自定义安装／卸载、覆盖前备份与受管恢复 | 双击子仓 `【MacOS】🌍环境配置管理.app`；原终端安装入口继续保留 |
+| [终端环境与命令](./🌍JobsMacEnvVarConfigs/README.md) | Shell 环境声明、短命令注册、Flutter / iOS 辅助、文件与媒体工具、开发工具维护 | 部署用户环境并注册命令；[命令目录](./🌍JobsMacEnvVarConfigs/scripts/README.md)逐项说明用途；`update` 的[桌面右键入口](../OS@Extension/MacOS@Extension/JobsEnvironmentUpdater/README.md)通过 Finder 面板独立安装 |
 | [编辑器配置](./⚙️VScodeConfigs/README.md) | VS Code 配置及按项目类型组织的开发设置 | 按对应子目录选择配置和部署入口 |
 | [代码片段](./🍎JobsCodeSnippets/README.md) | Xcode 自定义代码片段的保存与安装 | 将片段部署到当前用户的 Xcode 代码片段目录 |
 | [快捷键](./🔨JobsConfigHotKeyByHammerspoon/README.md) | Hammerspoon 热键、应用与隐私相关快捷操作 | 安装配置、授权后按快捷键触发对应动作 |
@@ -44,96 +65,21 @@
 | [永久记忆](./📒CodexByObsidian/README.md) | Obsidian Vault、长期偏好、工作流与项目笔记 | 按记忆入口检索与维护跨项目上下文 |
 | [软件与压缩分卷](./⏬JobsSoftware.MacOS/README.md) | 官网下载导航、文件压缩拆分及分卷合并 | 打开所选官网，或在选择的目标位置生成分卷 / 合并文件 |
 | [OpenClaw 安装](./🦞JobsInstallOpenClaw/README.md) | OpenClaw 安装与环境准备入口 | 按独立说明检查依赖并安装目标程序 |
-| [子模块管理](#git-submodule-scripts) | 下载同步、按磁盘对齐引用、增量登记子仓 | 预览或应用父子仓关联，具体提交条件见对应入口 |
+| [Git 父／子仓管理](./Git仓库管理/README.md) | 双端 Python GUI：下载同步、精确对齐引用、增量登记子仓 | 根普通启动器按相对路径定位成品；写前计划与确认，不自动提交／推送 |
 
-[**Git**](https://git-scm.com/) 子模块脚本的用途与执行顺序见[专章说明](#git-submodule-scripts)。
+[**Git**](https://git-scm.com/) 父／子仓面板的入口与操作见[专章说明](#git-submodule-scripts)。
 
-<strong id="markdown-toc-sync">同步后文档目录：本地 `[toc]`，提交后发布折叠目录</strong>
+<strong id="markdown-toc-sync">Git 父／子仓统一管理</strong>
 
-本地编辑保留独占行 `[toc]`；整文件暂存时由 [**Git**](https://git-scm.com/) 过滤器生成按标题层级缩进、默认收起的可折叠目录，正常提交推送后供远端展示。下载入口逐仓检查已生效的 `filter.jobs-markdown-toc` 配置，再决定是否恢复当前工作区；父仓配置不能代替子仓配置。
+仓根旧三份 Git 终端入口已集中到 [Python GUI](./Git仓库管理/README.md)：本仓有 8 个登记子仓，打开只扫描，选择目标后预览计划并明确确认才执行。主标题体现父／子仓并带 Git 图标，语言与主题同排，选择按钮不带省略号；不再显示常驻扫描提示。
 
-| 本仓配置与工具 | 同步入口处理 | 结果与依赖 |
+| 功能 | 当前行为 | 写入边界 |
 | --- | --- | --- |
-| 已有有效目录过滤器 | 执行本仓 `.jobs-markdown-toc/MarkdownToc.mjs restore`，再执行 `verify`；已有工作树即使没有新提交，也显式恢复当前正文 | 需要可用的 [**Node.js**](https://nodejs.org) 和完整目录工具；保留正文及原暂存语义 |
-| 未配置有效目录过滤器 | 明确跳过目录恢复，不自动安装、注册或改写 Git 配置 | 不额外依赖 Node.js；跳过不代表已有生成目录已恢复为 `[toc]` |
-| 已有有效过滤器，但缺少 Node.js / 工具，或还原、验证失败 | 报出具体仓库并停止本轮同步 | 处理该仓配置或工具后重试，不能将本轮视为全部成功 |
+| 下载子模块 | 默认递归并跟随远端分支最新；也可依据父仓固定提交 | 保护本地改动与独有提交，仅安全快进，不自动更新入口父仓 |
+| 对齐父子仓引用 | 预览所选子仓当前提交与父仓 gitlink 的关系 | 确认后仅精确更新所选 gitlink 索引，不暂存其它文件 |
+| 补齐 .gitmodules | 发现独立子仓并增量登记；保留已有字段 | 配置留工作区审阅；必要 gitlink、本地登记及元数据归集明确列入计划 |
 
-默认只拉取的首次克隆先以 `--no-checkout` 复制已预检对象，记录真实远端地址后才首次安全检出，让按真实 URL 匹配的机器过滤器有机会生效；不会为此再次联网获取未经预检的提交。已有生成目录的恢复以当前磁盘正文为来源，不从旧 `HEAD` 或暂存区覆盖正文，也不自动暂存、提交或推送。当前机器尚未注册或换机后没有有效配置时，仍按表中“跳过”处理，不能承诺首次落盘已经是 `[toc]`。
-
-<strong id="readonly-submodule-mode">先选用途：只拉取电脑默认跟随分支最新，子仓保持本地分支</strong>
-
-用途、维护菜单、子仓多选和同步深度统一使用 [**fzf**](https://formulae.brew.sh/formula/fzf)。两种模式启动前都需已有可用 fzf，缺失或损坏时安全停止并提示修复，不自动退回数字菜单。维护菜单按 `←` 返回用途页，子仓与深度页按 `←` 返回维护菜单；返回后保留当前深度并恢复菜单位置。子仓多选用回车勾选 / 取消、空格确认、`Ctrl+A` 全选、`Ctrl+D` 清空；空选不启动同步，`Esc` / `Ctrl+C` 取消本轮。返回只改变后续选择，已经完成的父仓更新不会撤销。
-
-| 启动选择 | 版本依据 | 是否写入父仓提交 |
-| --- | --- | --- |
-| 只拉取，默认 | 更新当前父仓明确的远程上游，再逐层跟随子仓目标分支最新提交，保持本地跟踪分支 | 不暂存、不提交、不推送 |
-| 维护子模块，显式选择 | 按本仓清单及原有菜单，把所选子树更新到各自远端目标分支最新 | 沿用 `AUTO_PARENT_COMMIT` / `AUTO_PARENT_PUSH` 原有开关 |
-
-启动第一屏显示同步策略版本 `2026.10.27-audited`。新电脑须先取得并运行带此版本号的入口；另一台电脑上的本地修改不会自动更新到新电脑。任一仓库拉取、分支切换或递归校验失败时，本轮不能视为全部完成；处理日志中的具体路径后重新运行。
-
-只拉取模式从脚本所在仓库向下递归处理全部已登记子模块；不向上处理，不使用清单新增关联，也不把子仓最新提交自动提交回父仓。各层优先使用直接父仓 `.gitmodules` 的显式 `branch`，`.` 继承该层计划更新后的直接父仓分支；未配置时读取该子仓远端默认分支。首次下载和已有游离 HEAD 都会恢复或创建对应本地跟踪分支，获取最新提交并快进；成功结束时子仓显示实际分支名。每层相对 URL 随当前父仓的下载线路解析。只拉取模式使用系统 Git、zsh、Perl 等现有工具；仅命中有效目录过滤器时另需 Node.js 和该仓完整目录工具，外层用途选择仍需 fzf；只拉取不需要 Homebrew。
-
-子仓源码、未跟踪内容、已暂存 gitlink、未完成操作或本地独有提交会报出具体路径并停止；不会强制覆盖或丢弃独有的游离提交，父仓 `YES` 不扩散到子仓。当前父仓自己的源码改动或本地独有提交，仍须红字列明并精确输入 `YES` 才舍弃。目标分支不存在、远端默认分支无法确定或最新提交获取失败时，停止并报告对应仓库与来源；不会把旧 gitlink SHA 当作最新分支结果。
-
-只拉取模式在入口仓已有本地分支时仍要求明确上游。入口仓自身处于游离 HEAD 时，先使用直接父仓 `.gitmodules` 的显式 `branch`，`.` 继承直接父仓当前分支；无配置时读取 `origin` 或唯一远端的默认分支。已有目标本地分支须明确跟踪所选远端的同名分支；先获取最新提交，预检整棵子树与提交历史，并复查确认期间的状态，再恢复或创建本地跟踪分支。入口源码未提交、需继承分支时直接父仓同样游离、目标不明、目标分支无法快进或存在未受引用保护的独有游离提交时停止；普通父仓的 `YES` 不授权舍弃这些提交。
-
-`REMOTE_NAME` 等原有清单参数只用于维护模式。设置 `DRY_RUN=1` 时，默认只拉取会停止并提示选择维护演练，不能忽略演练标志后执行真实更新。未初始化但存在旧 Git 缓存的空工作树须先恢复，脚本不会覆盖缓存内索引或独有提交。
-
-下文关于清单新增、多选、可切换同步深度、目录清理及自动提交的既有流程，均指显式选择的**维护模式**。只拉取模式默认向下递归到分支最新，不使用这些写入父仓的开关；子仓最新提交与父仓 gitlink 可能不同，父仓会显示待审阅的子模块指针改动。两种模式都保留各仓独立清单和来源显示；两种模式均使用本次私有随机日志，终端会输出实际路径。
-
-<strong id="download-resume-cache">网络不稳定时：保留下载缓存，安全发布工作树</strong>
-
-只拉取与维护模式都会复用已有工作树。首次下载先把目标分支获取到持久裸对象库，再在实际 Git 元数据目录内的本次临时目录以 `--no-checkout` 复制对象、设置真实远端、检出并核验固定提交；全部成功后才移入经过复检的空目标目录。获取或检出失败时只清理本次临时目录，保留持久缓存供重跑使用，不把半成品工作树留在目标位置，不覆盖已有非空目录。已有条件过滤器仍在真实远端配置完成后的首次检出参与转换，不额外联网获取未经预检的提交。
-
-缓存位于实际 Git 目录内的 `jobs-download-cache/v1/<路径与来源哈希>.git`：只拉取统一使用入口仓的 Git 目录，维护模式逐层使用当前父仓的 Git 目录。路径、配置来源与实际展开来源共同区分缓存；成功、失败和正常中断后均保留，不自动清空，所占磁盘空间会持续保留。中断只留下本工具的空缓存目录时可以重新初始化；不明或非空冲突目录保留并停止，不借恢复删除用户内容。
-
-需要同步时正常获取最新分支，已完整下载的对象参与增量协商；后续某仓失败不会清除前面已下载成功的准备对象。**这不是半截 pack 按字节续传**：当前尚未完整接收的 pack 仍可能重新传输。只拉取的首次下载使用 `--depth=1`；维护模式沿用 `SUBMODULE_SHALLOW_CLONE`、`SUBMODULE_DEPTH` 和 `SUBMODULE_FETCH_TAGS`。已有完整仓不改成浅仓，已有工作树更新不重新设置浅克隆深度；浅克隆主要减少历史，当前工作文件中的大包仍须下载。
-
-<strong id="download-complete-marker">每仓完成标记：先查询远端，版本匹配才跳过</strong>
-
-每次运行先用 `ls-remote` 查询目标分支的远端最新提交，再核对该仓实际 Git 目录中的 `jobs-download-complete`。标记记录来源签名（包含配置来源与实际展开 URL 的哈希）、目标分支和已完成提交；本地 `HEAD`、当前分支、远端提交和标记全部匹配，并通过源码风险检查，默认才跳过**当前仓库**的下载与检出。来源哈希避免把带凭据的原始地址写进完成标记。
-
-| 检查结果 | 当前仓库的处理 |
-| --- | --- |
-| 标记匹配远端最新提交，本地分支 / `HEAD` 和源码状态也符合，且使用默认不取 tags 策略 | 跳过当前仓下载与检出，仍核对或补齐子模块登记、`active` 和 `absorbgitdirs` 元数据归集，再独立检查所选范围内的后代。 |
-| 标记不存在、来源 / 分支 / 提交改变，或本地状态与标记不一致 | 进入正常同步及既有风险检查，成功核验后才写入或更新标记。 |
-| 已经是最新代码，但此前没有完成标记 | 正常同步一次，核验成功后建立标记，后续运行才可按标记跳过。 |
-| 查询远端、下载、检出或核验失败 | 不写本轮成功标记；保留失败状态和下载缓存，处理具体原因后重跑。 |
-
-父仓标记只表示该仓完成，**不表示整棵子树完成**；每个后代仍独立查询与核对。标记不会放宽源码、暂存内容、分叉或独有提交的保护，也不会跳过必要的本地登记修复；发现风险仍按原有门禁停止或确认。维护模式中 `SUBMODULE_FETCH_TAGS=0` 为默认省流量策略；显式设为 `1` 时，每次仍同步 tags，目标分支 `HEAD` 没变也不能被完成标记跳过。完成标记和下载缓存都在 Git 元数据目录内，不生成源码文件或自动提交。
-
-需要强制重新同步某个仓库时，先停止该下载任务，在该仓执行下面的只读命令定位标记，然后只移除这个 `jobs-download-complete` 文件；保留 `modules/`、索引、对象缓存和其它 Git 元数据。移除某个仓的标记只影响该仓，后代仍按各自标记检查：
-
-```shell
-git rev-parse --git-path jobs-download-complete
-```
-
-| 环境变量 | 默认值 | 允许范围 | 作用 |
-| --- | --- | --- | --- |
-| `JOBS_DOWNLOAD_TIMEOUT` | `900` | `1–86400` | 单次 Git 网络命令总时限，单位秒；超时终止该命令及其子进程。 |
-| `JOBS_DOWNLOAD_ATTEMPTS` | `3` | `1–10` | `clone` / `fetch` / 远端查询遇网络错误时的最多尝试次数，包含首次。 |
-| `JOBS_DOWNLOAD_RETRY_DELAY` | `2` | `0–60` | 重试等待基数，默认两次分别等待 2、4 秒；`0` 表示不等待。 |
-| `JOBS_DOWNLOAD_LOW_SPEED_LIMIT` | `1024` | `1–1000000000` | HTTP / HTTPS 低速阈值，单位字节 / 秒。 |
-| `JOBS_DOWNLOAD_LOW_SPEED_TIME` | `60` | `1–3600` | 持续低于阈值达到此秒数后终止该次传输。 |
-
-参数须为对应范围内的十进制整数，空值、表达式和越界值会停止执行。认证、权限、分支不存在和本地仓库错误保留失败状态，按日志处理后重跑；`pull` 不自动重复合并 / rebase，`push` 不使用下载重试包装。参数只影响本次脚本及其 Git 子进程，不修改全局 HTTP 或代理配置。同一入口通过共用锁阻止并行运行；异常强制结束留下锁时，须先确认旧进程已经退出再处理日志指明的锁目录。
-
-维护模式在父仓工作区可拉取时，只精确 `fetch` 当前目标分支一次，固定本次远端跟踪目标，再在本地 `rebase` 到该目标；不会为了同一次父仓更新再发起 `pull` 的第二次网络获取。远端获取失败或 rebase 冲突会停止本轮，不继续处理子仓。父仓存在未提交内容时继续按原有策略跳过父仓拉取，具体风险与后续所选子仓分别检查。
-
-脚本是可单独复制的完整入口：共享函数在本文件内只维护一份，只拉取流程按明确白名单导出所需函数到独立 zsh 子进程，不依赖外置支持库。两种模式的外层用途选择均要求已有健康的 fzf；只拉取不需要 Homebrew，维护模式仅在 fzf 修复确需且确认后使用 Homebrew，不为拉代码批量升级全部已安装软件。
-
-两种模式的日志都在系统临时目录中使用本次唯一的随机文件名，权限为 `600`；以终端打印的“本次日志”或“日志”完整路径为准，不根据固定名称猜测。来源和诊断按既有规则脱敏。缓存、临时检出目录与完成标记放在 Git 元数据目录内，不进入源码或提交。
-
-在本 README 所在目录运行，下面把单次时限放宽到 30 分钟，其余参数使用默认值；普通使用仍可直接双击脚本。网络慢但持续有数据时可适当提高总时限，避免完整大包尚未传完就达到时限：
-
-```shell
-JOBS_DOWNLOAD_TIMEOUT=1800 \
-  /bin/zsh './【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command'
-```
-
-终端来源块后会显示 `下载缓存（重跑复用已完成对象）` 及其实际路径。这里的下载对象缓存与 `modules/` 中已有子模块的索引、配置和历史不同；后者仍按原有归属及索引保护规则处理，不能为重试删除它们。
-
-维护模式补齐或新增登记时，不自动写入 `branch = main`；已有 `branch` 与缺省状态均保留。显式 `branch` 严格指定目标分支，`.` 继承直接父仓分支；未配置时跟随子仓远端默认分支。目标不存在、直接父仓分支无法确定或远端默认分支无法确定时停止。
+已配置文档目录过滤器时，更新前后使用该仓工具恢复并验证，未配置则跳过，不自动安装。新 GUI 不继承旧终端的自动提交／推送、危险舍弃、私有下载完成标记与缓存协议；既有 Git 缓存和配置保留。完整旧源码及原 README 已归档至 [legacy](./Git仓库管理/legacy/README.md)，实际平台验证见 [本仓资产盘点](./项目相关报告/Git父子仓管理资产盘点.md)。
 
 <strong id="submodule-quick-look">父子仓多平台地址速览</strong>
 
@@ -167,29 +113,42 @@ JOBS_DOWNLOAD_TIMEOUT=1800 \
 
 这个仓库提供可选择阶段的 macOS 新系统初始化入口。先展示脚本内置自述并等待回车，随后每个阶段都采用“直接回车跳过，输入任意字符后回车执行”。缓存删除另需精确输入 `YES`。
 
-`【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command` 维护本仓库的子模块。[**Sourcetree**](https://www.sourcetreeapp.com/) 脚本统一使用上一级的 [SourceTree.command](../SourceTree.command/README.md)，由总仓管理；本仓库不再重复克隆或登记该脚本库。
+[Git 父／子仓面板](./Git仓库管理/README.md)维护本仓库的子模块。[**Sourcetree**](https://www.sourcetreeapp.com/) 脚本统一使用上一级的 [SourceTree.command](../SourceTree.command/README.md)，由总仓管理；本仓库不再重复克隆或登记该脚本库。
 
-当前入口采用同名完整目录：
+MacOS 入口保留同名完整脚本包；外层按平台组织：
 
 ```text
-./【MacOS】🆕新系统配置.command/
-├── 【MacOS】🆕新系统配置.command
-└── README.md
+./🆕新系统配置/
+├── README.md
+├── MacOS/【MacOS】🆕新系统配置.command/
+│   ├── 【MacOS】🆕新系统配置.command
+│   ├── 【MacOS】环境管理后端.command/
+│   └── README.md
+├── WindowsOS/
+├── Ubuntu/
+├── Debian/
+├── RockyLinux/
+├── Alpine/
+├── AlibabaCloudLinux/
+└── FreeBSD/
 ```
 
 从当前仓库目录运行：
 
 ```shell
-zsh './【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command'
+zsh './🆕新系统配置/MacOS/【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command'
 ```
 
-完整交互、依赖、风险、日志和故障说明见[新系统配置 README](./【MacOS】🆕新系统配置.command/README.md)。安装 CodeGraph CLI 与建立仓库代码地图分别执行，安装阶段不会隐式创建 `.codegraph/` 或修改 Codex 配置。
+完整交互、依赖、风险、日志和故障说明见[新系统配置 README](./🆕新系统配置/MacOS/【MacOS】🆕新系统配置.command/README.md)。安装 CodeGraph CLI 与建立仓库代码地图分别执行，安装阶段不会隐式创建 `.codegraph/` 或修改 Codex 配置。
 
-**下载脚本的 Gitee 传输规则：** `【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command` 在本次运行中，将 `git@gitee.com:`、`ssh://git@gitee.com/`、`ssh://git@gitee.com:22/` 开头的标准地址统一通过 `https://gitee.com/` 访问，保留账号、真实仓名和分支；即使设置 `GIT_URL_STYLE=ssh`，这类 Gitee 地址仍使用 HTTPS。各层首次克隆和后续拉取都继承该规则，历史子模块中的 SSH 地址无需新电脑先配置 SSH 密钥。
+**GUI 的传输来源：** 沿用当前 `.gitmodules`、所选实际远端、分支及已有 Git URL 重写配置，不额外强制更换 Gitee／GitHub 协议，不改全局 Git 或代理。操作计划与执行日志显示实际线路；跨平台异名例外仍以本仓已有配置为准。
 
-规则通过追加进程级 `GIT_CONFIG_COUNT` / `url.https://gitee.com/.insteadOf` 配置传给子进程，不写入全局 Git 配置，也不依赖其它工程路径。GitHub、其它主机及非 `22` 的自定义 SSH 端口保持原规则。克隆或递归更新失败会返回非零状态，停止本轮同步并保留错误；不会再输出该项同步成功。各仓清单与浅克隆参数保留；全量同步默认逐仓复用已有工作区，空或缺失目录才首次克隆，不批量删除旧仓名目录、多层子树或缓存。未提交内容须逐仓处理，精确 `YES` 仅放弃当前仓自己的内容。
+脚本规范覆盖、验证与待处理项见[脚本统一审查](./项目相关报告/脚本统一审查.md)。
 
-## 一、<span id="stages">九个可选阶段</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+其它平台的默认行为是只读计划；安装和反安装使用显式组件与确认参数。WindowsOS 使用原生 PowerShell / WinGet，Linux 和 FreeBSD 使用系统 Shell 与原生包管理器。各平台入口、组件清单、权限、日志与收据位置见[多平台总览](./🆕新系统配置/README.md)；MacOS 的十阶段不代表其它系统也有 Apple 工具或 Jobs 配置能力。
+
+## 一、<span id="stages">MacOS 十个可选阶段</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
 | 阶段 | 配置项 | 当前行为 |
 | --- | --- | --- |
@@ -202,6 +161,7 @@ zsh './【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.com
 | 7 | npm / quicktype | 先验证 Node.js 版本与实际执行、npm 版本，再按原有 `sudo npm install -g quicktype` 方式安装 |
 | 8 | gem / CocoaPods | 验证 RubyGems 后，按原有 `sudo gem install cocoapods` 方式安装 |
 | 9 | Jobs 环境配置 | 准备 Jobs 软件仓，运行本仓 `🌍JobsMacEnvVarConfigs` 的安装入口 |
+| 10 | REA 逆向工具 | 安装官方 `rea-agents` 包，严格核对 Node.js/npm；MCP、Skill 注册和分析引擎按需另外配置 |
 
 手动下载页面另行询问；确认后才打开 [**Visual Studio Code**](https://code.visualstudio.com)、[**Android Studio**](https://developer.android.com/studio?hl=zh-c) 与 [**Python**](https://www.python.org) 官网。阶段失败会记入摘要，后续独立阶段仍可以选择；最后返回非零退出码，不把失败标记成完成。
 
@@ -212,7 +172,7 @@ flowchart TD
     A["显示固定内置自述"] --> B{"回车确认进入选择"}
     B -->|"Ctrl+C 或无交互输入"| Z["退出"]
     B -->|"确认"| C["初始化日志和 macOS 运行环境"]
-    C --> D["按顺序询问九个阶段"]
+    C --> D["按顺序询问十个阶段"]
     D --> E{"本阶段是否输入任意字符"}
     E -->|"直接回车"| F["记录跳过"]
     E -->|"执行"| G["检查本阶段依赖"]
@@ -308,7 +268,7 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
 
 [**JobsSoftware.MacOS**](https://github.com/JobsKits/JobsSoftware.MacOS) 仍准备在当前用户桌面的 `JobsKits` 工作目录中。缺失时克隆；已有干净工作区只做快进更新；存在未提交改动时保留并跳过 pull；目标存在但不是有效仓库时失败，不覆盖。
 
-仓库子模块下载、父子仓关联维护仍由各自的根目录脚本负责。新系统入口不创建提交或推送，不改写子模块远端。
+仓库子模块下载、父子仓关联维护由根 Git 父／子仓 GUI 入口负责。新系统入口不创建提交或推送，不改写子模块远端。
 
 ## 六、<span id="troubleshooting">日志、排查与验证</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
@@ -330,63 +290,24 @@ Jobs 阶段使用本仓 `./🌍JobsMacEnvVarConfigs/install.command/install.comm
 
 验证包含 `zsh -n`、入口结构检查和隔离假命令测试，覆盖 Homebrew 健康顺序、doctor 失败门禁、安装器缺失、子安装器调用及退出状态传播。没有通过验证流程真实安装软件、接受系统协议、删除缓存或改变用户工具链。
 
-## 七、<span id="git-submodule-scripts">Git 子模块脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+## 七、<span id="git-submodule-scripts">Git 父／子仓管理</span> <a href="#前言">🔼</a> <a href="#🔚">🔽</a>
 
-### <span id="jobs-toc-heading-9" data-jobs-toc="v2">[【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command](./【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command)</span><!-- jobs-toc:heading-end -->
+### <span id="jobs-toc-heading-9" data-jobs-toc="v2">[【MacOS】🧩Git仓库管理.command](./【MacOS】🧩Git仓库管理.command)</span><!-- jobs-toc:heading-end -->
 
-> **目的：** 默认递归拉取已登记子模块目标分支的最新提交，保持本地跟踪分支；显式维护模式保留清单与登记能力。
+> **目的：** 打开本仓统一面板，查看 8 个登记子仓并按计划维护父子关系。
 
-- 启动时回车默认进入[只拉取模式](#readonly-submodule-mode)，先预检本地状态，再查询当前父仓及子仓目标分支最新提交，按完成标记判断跳过或同步；恢复已有游离 HEAD，不提交、不推送。
-- 显式选择维护模式后，按以下原有清单和菜单流程处理。
+- 普通文本入口从自身位置解析本仓，读取功能目录内的成功构建清单并启动 MacOS 成品；不是 Finder 替身，不依赖启动目录。
+- 勾选子仓，选择下载、对齐引用或补齐登记，先预览、再确认；正在执行时可请求取消，完成步骤不会自动回滚。
+- 语言与主题即时切换并持久保存。源码、构建与备份／日志说明见 [完整 README](./Git仓库管理/README.md)。
 
-* 确认自述后读取脚本清单、检查远端，尝试拉取父仓。
-  * 父仓有未提交改动：跳过父仓拉取，再检查所选子仓；远端获取失败或 rebase 冲突则停止本轮。
-* 在主菜单选择同步范围；“切换同步深度”可在默认“向下递归”和“仅直属子模块”之间切换，当前深度适用于各同步动作。
-  * 全量同步：逐项同步清单内全部目标，按目录状态复用或首次克隆。
-  * 只更新已有：更新清单内已存在的子仓；一个都没有时转全量同步。
-  * 指定子模块：回车勾选或取消，空格确认开始。
-  * 添加地址：输入新仓地址，自动用仓名作为目录，本轮登记并同步。
-* 补齐关联配置，检查并处理目标子仓目录。
-  * 目录为空或缺失：首次克隆；已有有效 Git 工作区：保留目录、缓存及后代；默认不取 tags 时，远端最新提交、完成标记与本地状态匹配可跳过当前仓，否则获取并快进更新。
-  * 已有 `modules/` 缓存时先核验并恢复空工作区；非 Git 非空目录保护并停止。
-  * 子仓有未提交、已暂存或未跟踪内容：红字加粗显示该仓绝对路径并循环等待；精确输入 `YES` 只放弃当前仓自己的未提交内容，或在外部处理后回车复检。其它输入继续复检；无交互或输入结束则停止。
-* 拉取并快进到远端目标分支最新提交：优先使用该层 `.gitmodules` 显式 `branch`，`.` 继承直接父仓分支；未设置时读取该子仓远端默认分支；显式目标分支不存在时立即停止，不回退其它分支。
-  * 已有目标本地分支只允许快进，领先远端或发生分叉时停止并保留本地提交；缺少目标分支时创建本地跟踪分支。
-* 按当前深度同步：默认逐层读取所选子仓下的 `.gitmodules`，将已登记后代同步到各自远端目标分支最新提交；仅直属模式不下载或更新下层代码。
-  * 只处理本层所选子树，不向上扫描，也不接管未登记的嵌套仓库。
-  * 递归更新本层前先检查当前已有后代；各仓单独确认，子模块 HEAD 与父仓 gitlink 的普通差异不作为源码未提交反复提示。
-  * `YES` 清理仅作用于当前仓：`reset --hard HEAD` 与 `clean -fd`；保留忽略文件和独立嵌套 Git 仓，残留冲突须外部处理后复检。
-  * `PRUNE_STALE_GITMODULES` 默认 `0`，保留清单外旧登记；主动设为 `1` 时，每个旧登记另用红字加粗列明目录和后代删除范围，逐项精确输入 `YES` 才删除，其它输入、输入结束或非交互则停止；演练只展示，删除前仍逐仓检查已有后代。
-  * 深层只下载更新，不自动暂存或提交其父仓的 gitlink；递归后这些父仓可能显示子模块指针改动，保留待审阅。
-* 整理入口父仓 Git 元数据与来源日志。
-* 默认自动提交入口父仓的关联变化，不自动推送。
-  * 设置 `AUTO_PARENT_COMMIT=0`：跳过提交；`AUTO_PARENT_PUSH=1`：启用父仓推送。
+### <span id="jobs-toc-heading-10" data-jobs-toc="v2">[【Windows】🧩Git仓库管理.cmd](./【Windows】🧩Git仓库管理.cmd)</span><!-- jobs-toc:heading-end -->
 
-### <span id="jobs-toc-heading-10" data-jobs-toc="v2">[【MacOS】🧭更新引用Git父仓=>子仓.command](./【MacOS】🧭更新引用Git父仓=%3E子仓.command)</span><!-- jobs-toc:heading-end -->
+> **目的：** 用相同 GUI 源码在 Windows 本机管理此仓。
 
-> **目的：** 修复目录改名、旧路径残留或元数据指向错误，让父仓关联符合当前磁盘布局。
+- 普通相对路径入口调用本端辅助程序；首次在 Windows 使用前先运行功能目录内的 [生成 EXE 入口](./Git仓库管理/【Windows】📦生成exe.bat/【Windows】📦生成exe.bat)。
+- Windows 成品和实机验收尚未执行，不将 MacOS 包冒充 Windows EXE。
 
-* 扫描父仓第一层实际带 `.git` 的子目录，读取远端和已有登记。
-  * 远端缺失、元数据归属不明或属于链接工作树：停止修复。
-* 展示磁盘目录、父仓状态与清理计划，确认后备份关联状态。
-  * 直接回车：跳过；输入任意字符后回车：执行；`--dry-run`：只预览。
-* 按现存目录对齐 `.gitmodules`，保留仍存在条目的 URL、分支及扩展字段。
-  * 目录缺失，包括尚未下载：移除旧登记和旧子模块指针，磁盘文件保留。
-* 修复可证明失效的工作树指向，暂存各子仓当前提交号，用官方命令归集元数据并补齐父仓本地登记。
-* 核对磁盘目录、清单和父仓子模块指针是否一致，输出状态；不拉取代码、不提交、不推送。
-
-### <span id="jobs-toc-heading-11" data-jobs-toc="v2">[【MacOS】🧾更新gitmodules.command](./【MacOS】🧾更新gitmodules.command)</span><!-- jobs-toc:heading-end -->
-
-> **目的：** 将新放入的直属子仓完整纳入父仓子模块管理，保留已有登记与指针。
-
-* 读取已有登记，扫描直属子仓，预检远端、提交、索引和元数据冲突。
-  * 有冲突或缺少必要信息：停止，展示问题。
-* 生成增量计划，保留已有 URL、分支、扩展字段、子模块指针和暂缺目录登记。
-  * `--dry-run` 或 `DRY_RUN=1`：只预览，不执行关联写入。
-* 确认计划后备份关联配置和父仓索引。
-  * 直接回车：跳过；输入任意字符后回车：执行。
-* 补齐 `.gitmodules` 和缺失的子模块指针，初始化本地登记，将元数据归集到父仓。
-* 核验父子关系和子仓提交号；仅暂存必要关联，不联网拉取、不提交、不推送。
+旧三份脚本已完整归档至 [legacy](./Git仓库管理/legacy/README.md)，不再保留根可运行旧入口。本面板不含缓存清理能力；已有安装／反安装面板与系统配置入口继续独立维护。
 
 ## 八、<span id="repository-layout">实际目录结构</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
@@ -402,15 +323,23 @@ JobsConfigOS/
 ├── 📒CodexByObsidian/                       # 独立 Git 仓：记忆 Vault 与同步入口
 ├── 🔨JobsConfigHotKeyByHammerspoon/         # 独立 Git 仓：桌面热键
 ├── 🦞JobsInstallOpenClaw/                    # 独立 Git 仓：OpenClaw 安装入口
-├── 【MacOS】⏬下载配置当前Git子模块（可向下同步递归）.command
-├── 【MacOS】🧭更新引用Git父仓=>子仓.command
-├── 【MacOS】🧾更新gitmodules.command
-└── 【MacOS】🆕新系统配置.command/
-    ├── 【MacOS】🆕新系统配置.command
-    └── README.md
+├── Git仓库管理/                           # Python源码、双端构建、当前成品与归档
+├── 【MacOS】🧩Git仓库管理.command           # 本仓MacOS相对路径入口
+├── 【Windows】🧩Git仓库管理.cmd            # 本仓Windows相对路径入口
+├── 项目相关报告/                           # 资产盘点与验证边界
+└── 🆕新系统配置/                    # 按平台配置开发环境
+    ├── README.md
+    ├── MacOS/                             # 安装／卸载入口、后端与独立管理 App
+    │   └── 安装面板/                       # Swift源码、翻译、Xcode资源阶段与构建/交付工具
+    ├── 交付产物/                           # 版本化多平台源码包、成品包与摘要
+    ├── WindowsOS/                         # PowerShell、CMD 与 WinForms 面板
+    ├── Ubuntu/ / Debian/
+    ├── RockyLinux/ / AlibabaCloudLinux/
+    ├── Alpine/ / FreeBSD/                  # 六个 Unix 平台均有安装／卸载与 GUI 入口
+    └── 安装面板/                           # 六平台共用 Tcl/Tk 管理器与翻译
 ```
 
-子仓内部的脚本由各自根 `README.md` 说明；本仓直接维护的三个 Git 脚本见[第七章](#git-submodule-scripts)。
+子仓内部的脚本由各自根 `README.md` 说明；本仓 Git 父／子仓管理面板见[第七章](#git-submodule-scripts)。
 
 | 独立子仓 | 根说明 |
 | --- | --- |
@@ -425,17 +354,154 @@ JobsConfigOS/
 
 ## 九、<span id="repository-script-flows">新系统配置脚本</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
 
-### <span id="jobs-toc-heading-14" data-jobs-toc="v2">[【MacOS】🆕新系统配置.command](./【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command)</span><!-- jobs-toc:heading-end -->
+八个平台的安装、卸载和图形管理统一放在 [🆕新系统配置](./🆕新系统配置/README.md) 内；[独立卸载入口表](./🆕新系统配置/README.md#uninstall-entrypoints)列出全部实际脚本。MacOS 使用终端多选，WindowsOS 与六个 Unix 平台显式指定组件，各自保留现有收据保护。当前布局与验证范围见[卸载入口资产盘点](./项目相关报告/新系统配置卸载入口资产盘点.md)。
+
+### <span id="jobs-toc-heading-13" data-jobs-toc="v2">[【MacOS】🆕新系统配置.command](./🆕新系统配置/MacOS/【MacOS】🆕新系统配置.command/【MacOS】🆕新系统配置.command)</span><!-- jobs-toc:heading-end -->
 
 > **目的：** 按需准备新 Mac 的开发工具链，并安装 Jobs 终端环境。
 
 * 阅读自述，确认后建立本次日志与阶段状态。
 * 依次询问 Command Line Tools、Xcode 模拟器、Oh My Zsh 和 Homebrew 的准备项目。
   * 每阶段直接回车跳过，输入非空内容执行；模拟器缓存清理另需输入 `YES`。
-* 继续按阶段选择开发软件、CodeGraph、quicktype 和 CocoaPods。
+* 继续按阶段选择开发软件、CodeGraph、quicktype、CocoaPods 和 REA。
   * 依赖缺失时先处理前置条件；需要外部安装脚本或本地包时检查对应路径。
 * 在 Jobs 配置阶段调用本地环境安装入口，并按提示准备软件目录和下载页面。
 * 汇总各阶段结果及日志位置。
   * 单阶段失败会记录并继续后续独立阶段；有失败时最终返回失败状态。
+
+### <span id="jobs-toc-heading-14" data-jobs-toc="v2">[【WindowsOS】🆕新系统配置.ps1](./🆕新系统配置/WindowsOS/【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.ps1)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 使用 Windows 原生 WinGet 准备所选开发工具，按收据核验反安装。
+
+- 由 PowerShell 或[同目录 CMD 入口](./🆕新系统配置/WindowsOS/【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.cmd)启动；默认显示静态计划，不调用包管理器。
+- 查看清单并显式选择组件，确认安装或卸载后检查系统与既有 WinGet。
+- 逐项复用健康工具、补缺或定向修复，写入日志和归属收据；卸载核对版本、完整目录和注册信息，不确定项保留并报告。
+
+### <span id="jobs-toc-heading-15" data-jobs-toc="v2">[【WindowsOS】↩️卸载新系统配置.ps1](./🆕新系统配置/WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/【WindowsOS】↩️卸载新系统配置.ps1)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 从 WindowsOS 独立快捷入口转交受管反安装。
+
+- 通过 PowerShell 或同包 CMD 启动，显式指定组件，保留主脚本的自述与默认取消。
+- 按当前收据、版本和完整目录指纹核对归属；结果与退出码来自同平台唯一实施脚本。
+
+### <span id="jobs-toc-heading-16" data-jobs-toc="v2">[【Ubuntu】🆕新系统配置.sh](./🆕新系统配置/Ubuntu/【Ubuntu】🆕新系统配置.sh/【Ubuntu】🆕新系统配置.sh)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 为 Ubuntu 配置基础开发工具并撤回可核对的直接包。
+
+- 默认只读计划；显式选择组件后检查系统类型与原生包管理器。
+- 确认后按当前软件源补缺、修复和复检；记录系统级收据、日志与互斥状态。
+- 反安装核对归属和当前版本，包管理器阻止共享依赖删除；未完成项返回失败并保留现场。详细参数见[平台说明](./🆕新系统配置/Ubuntu/README.md)。
+
+### <span id="jobs-toc-heading-17" data-jobs-toc="v2">[【Debian】🆕新系统配置.sh](./🆕新系统配置/Debian/【Debian】🆕新系统配置.sh/【Debian】🆕新系统配置.sh)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 为 Debian 配置基础开发工具并撤回可核对的直接包。
+
+- 默认只读计划；显式选择组件后检查系统类型与原生包管理器。
+- 确认后按当前软件源补缺、修复和复检；记录系统级收据、日志与互斥状态。
+- 反安装核对归属和当前版本，包管理器阻止共享依赖删除；未完成项返回失败并保留现场。详细参数见[平台说明](./🆕新系统配置/Debian/README.md)。
+
+### <span id="jobs-toc-heading-18" data-jobs-toc="v2">[【RockyLinux】🆕新系统配置.sh](./🆕新系统配置/RockyLinux/【RockyLinux】🆕新系统配置.sh/【RockyLinux】🆕新系统配置.sh)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 为 RockyLinux 配置基础开发工具并撤回可核对的直接包。
+
+- 默认只读计划；显式选择组件后检查系统类型与原生包管理器。
+- 确认后按当前软件源补缺、修复和复检；记录系统级收据、日志与互斥状态。
+- 反安装核对归属和当前版本，包管理器阻止共享依赖删除；未完成项返回失败并保留现场。详细参数见[平台说明](./🆕新系统配置/RockyLinux/README.md)。
+
+### <span id="jobs-toc-heading-19" data-jobs-toc="v2">[【Alpine】🆕新系统配置.sh](./🆕新系统配置/Alpine/【Alpine】🆕新系统配置.sh/【Alpine】🆕新系统配置.sh)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 为 Alpine 配置基础开发工具并撤回可核对的直接包。
+
+- 默认只读计划；显式选择组件后检查系统类型与原生包管理器。
+- 确认后按当前软件源补缺、修复和复检；记录系统级收据、日志与互斥状态。
+- 反安装核对归属和当前版本，包管理器阻止共享依赖删除；未完成项返回失败并保留现场。详细参数见[平台说明](./🆕新系统配置/Alpine/README.md)。
+
+### <span id="jobs-toc-heading-20" data-jobs-toc="v2">[【AlibabaCloudLinux】🆕新系统配置.sh](./🆕新系统配置/AlibabaCloudLinux/【AlibabaCloudLinux】🆕新系统配置.sh/【AlibabaCloudLinux】🆕新系统配置.sh)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 为 AlibabaCloudLinux 配置基础开发工具并撤回可核对的直接包。
+
+- 默认只读计划；显式选择组件后检查系统类型与原生包管理器。
+- 确认后按当前软件源补缺、修复和复检；记录系统级收据、日志与互斥状态。
+- 反安装核对归属和当前版本，包管理器阻止共享依赖删除；未完成项返回失败并保留现场。详细参数见[平台说明](./🆕新系统配置/AlibabaCloudLinux/README.md)。
+
+### <span id="jobs-toc-heading-21" data-jobs-toc="v2">[【FreeBSD】🆕新系统配置.sh](./🆕新系统配置/FreeBSD/【FreeBSD】🆕新系统配置.sh/【FreeBSD】🆕新系统配置.sh)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 为 FreeBSD 配置基础开发工具并撤回可核对的直接包。
+
+- 默认只读计划；显式选择组件后检查系统类型与原生包管理器。
+- 确认后按当前软件源补缺、修复和复检；记录系统级收据、日志与互斥状态。
+- 反安装核对归属和当前版本，包管理器阻止共享依赖删除；未完成项返回失败并保留现场。详细参数见[平台说明](./🆕新系统配置/FreeBSD/README.md)。
+
+## 十、<span id="management-panels">安装与反安装面板</span> <a href="#前言" style="font-size:17px; color:green;"><b>🔼</b></a> <a href="#🔚" style="font-size:17px; color:green;"><b>🔽</b></a>
+
+本仓的 `🆕新系统配置/MacOS/【MacOS】🧰新系统配置管理.app` 管理 MacOS 开发环境组件，子仓的 `【MacOS】🌍环境配置管理.app` 管理终端配置与短命令。两者均保留原有终端安装入口，各自携带运行必需的二进制、后端和配置，不依赖构建电脑的目录。WindowsOS 另有 WinForms 面板，六个 Linux／FreeBSD 平台各有 GUI 启动入口，见[八平台入口表](./🆕新系统配置/README.md)；下列 Homebrew、系统状态栏与自动修复细节限定 MacOS 面板，其它平台能力按就近说明验收。
+
+- 面板默认不选择组件；可搜索、全选、清空或多选。安装和卸载先显示选择范围，取消与空选不会执行。启动及刷新读取真实后端状态，不以演示数据触发安装。
+- 新装 Homebrew 时明确选择位置；当前用户目录可在面板确认执行，系统标准目录由原终端安装器处理授权，不在后台等待密码，也不会在一路失败后暗中改走另一路。
+- 安装确认覆盖本次所选任务必需依赖的定向补齐／修复：发现、健康检查、修复、刷新、复检后自动续行。缺少 Node/npm、共享库 ABI 不匹配或运行时版本不满足包要求时处理实际失效层；已有健康依赖复用。网络获取失败持续可取消重试，确定的本地阻断如实报告；目录查询、预览和卸载不借机修改工具链。环境配置面板只部署配置与脚本支持，不因勾选命令立即执行业务或安装业务 SDK。
+- 写操作记录归属与必要备份。反安装只撤回本工具创建或覆盖且复检匹配的内容；原有、共享、后续修改或缺少恢复依据的对象保留并报告未完成。没有旧收据时不能承诺重建原私人配置。
+- 十种语言及跟随系统语言、白天／黑夜／跟随系统主题仅修改本面板偏好。日志可复制、可关闭追尾；手动浏览后可重新开启自动滚动。
+- 管理任务进行中关闭窗口会隐藏到状态栏并继续，点击状态栏恢复原窗口；忙碌期间保护完全退出，完成后仍可查看结果。没有自启动服务。
+- REA 安装项使用[官方 npm 包](https://www.npmjs.com/package/rea-agents)，按发布包 `engines` 核对 Node.js。客户端注册通过 `rea setup` 另行配置；原生反编译引擎按目标另装，详见 [REA 官方说明](https://github.com/morluto/rea)。
+
+### <span id="jobs-toc-heading-23" data-jobs-toc="v2">[【WindowsOS】🧰新系统配置管理.ps1](./🆕新系统配置/WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 用 Windows 原生桌面管理本平台20项开发组件。
+
+- 双击同包CMD进入WinForms面板，启动只读取静态清单，默认空选。
+- 多选后预览或明确点击安装／卸载，后台调用现有PowerShell后端，按结构化事件显示结果；忙时关闭转托盘，完整日志保留。
+
+### <span id="jobs-toc-heading-24" data-jobs-toc="v2">[【Ubuntu】🧰新系统配置管理.sh](./🆕新系统配置/Ubuntu/【Ubuntu】🧰新系统配置管理.sh/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 在Ubuntu桌面用共享Tk界面管理本平台9项开发组件。
+
+- 检查本平台、共享资源与图形环境，打开默认空选的组件列表；缺Tk时给出原生软件源准备命令，入口不自动安装依赖。
+- 成功预览当前计划后启用主操作，写操作请求可用的图形管理员授权并转交本平台CLI；真实批结果和逐项原始日志保留，忙时关闭最小化保全任务。
+
+### <span id="jobs-toc-heading-25" data-jobs-toc="v2">[【Debian】🧰新系统配置管理.sh](./🆕新系统配置/Debian/【Debian】🧰新系统配置管理.sh/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 在Debian桌面用共享Tk界面管理本平台9项开发组件。
+
+- 检查本平台、共享资源与图形环境，打开默认空选的组件列表；缺Tk时给出原生软件源准备命令，入口不自动安装依赖。
+- 成功预览当前计划后启用主操作，写操作请求可用的图形管理员授权并转交本平台CLI；真实批结果和逐项原始日志保留，忙时关闭最小化保全任务。
+
+### <span id="jobs-toc-heading-26" data-jobs-toc="v2">[【RockyLinux】🧰新系统配置管理.sh](./🆕新系统配置/RockyLinux/【RockyLinux】🧰新系统配置管理.sh/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 在RockyLinux桌面用共享Tk界面管理本平台9项开发组件。
+
+- 检查本平台、共享资源与图形环境，打开默认空选的组件列表；缺Tk时给出原生软件源准备命令，入口不自动安装依赖。
+- 成功预览当前计划后启用主操作，写操作请求可用的图形管理员授权并转交本平台CLI；真实批结果和逐项原始日志保留，忙时关闭最小化保全任务。
+
+### <span id="jobs-toc-heading-27" data-jobs-toc="v2">[【Alpine】🧰新系统配置管理.sh](./🆕新系统配置/Alpine/【Alpine】🧰新系统配置管理.sh/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 在Alpine桌面用共享Tk界面管理本平台9项开发组件。
+
+- 检查本平台、共享资源与图形环境，打开默认空选的组件列表；缺Tk时给出原生软件源准备命令，入口不自动安装依赖。
+- 成功预览当前计划后启用主操作，写操作请求可用的图形管理员授权并转交本平台CLI；真实批结果和逐项原始日志保留，忙时关闭最小化保全任务。
+
+### <span id="jobs-toc-heading-28" data-jobs-toc="v2">[【AlibabaCloudLinux】🧰新系统配置管理.sh](./🆕新系统配置/AlibabaCloudLinux/【AlibabaCloudLinux】🧰新系统配置管理.sh/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 在AlibabaCloudLinux桌面用共享Tk界面管理本平台9项开发组件。
+
+- 检查本平台、共享资源与图形环境，打开默认空选的组件列表；缺Tk时给出原生软件源准备命令，入口不自动安装依赖。
+- 成功预览当前计划后启用主操作，写操作请求可用的图形管理员授权并转交本平台CLI；真实批结果和逐项原始日志保留，忙时关闭最小化保全任务。
+
+### <span id="jobs-toc-heading-29" data-jobs-toc="v2">[【FreeBSD】🧰新系统配置管理.sh](./🆕新系统配置/FreeBSD/【FreeBSD】🧰新系统配置管理.sh/README.md)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 在FreeBSD桌面用共享Tk界面管理本平台9项开发组件。
+
+- 检查本平台、共享资源与图形环境，打开默认空选的组件列表；缺Tk时给出原生软件源准备命令，入口不自动安装依赖。
+- 成功预览当前计划后启用主操作，写操作请求可用的图形管理员授权并转交本平台CLI；真实批结果和逐项原始日志保留，忙时关闭最小化保全任务。
+
+### <span id="jobs-toc-heading-30" data-jobs-toc="v2">[【MacOS】↩️卸载新系统配置.command](./🆕新系统配置/MacOS/【MacOS】↩️卸载新系统配置.command/【MacOS】↩️卸载新系统配置.command)</span><!-- jobs-toc:heading-end -->
+
+> **目的：** 从终端多选撤回受管的新系统组件。
+
+- 阅读内置自述后，查看真实组件状态并选择卸载范围。
+- 确认准确范围，再转交与面板相同的安全后端。
+  - 缺少安装凭据、共享依赖仍在使用或安装后被修改时保留并显示原因。
+- 汇总退出结果与日志；取消、空选或输入结束不扩大为全部卸载。
+
+构建及面板用法见[面板说明](./🆕新系统配置/MacOS/安装面板/README.md)，终端逐阶段安装用法见[原安装器说明](./🆕新系统配置/MacOS/【MacOS】🆕新系统配置.command/README.md)。实现与验收边界集中在[新系统配置卸载入口资产盘点](./项目相关报告/新系统配置卸载入口资产盘点.md)及[环境配置资产盘点](./🌍JobsMacEnvVarConfigs/项目相关报告/环境安装管理资产盘点.md)。构建、隔离测试和真实软件安装／卸载分别记录，不以构建成功代替整机初始化验收。
 
 <a id="🔚" href="#前言" style="font-size:17px; color:green; font-weight:bold;">我是有底线的➤点我回到首页</a>

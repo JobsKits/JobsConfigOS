@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "packagedAtShanghai": "2026-11-17T14:07:30.929809+08:00",
+  "packages": [
+    {
+      "id": "MacOS-System",
+      "manifestSHA256": "054385926f80505d3c4ba7d789854cea49b518cb15d2356f0cbb8efa3fc7981d",
+      "sourceSHA256": "f999530896919a304980da06f816475fc29f86c126533531fce8576c791594ce",
+      "productSHA256": "9534a2c9e25b79a15d74ea774e411ae16772f515dd949d128db793dac58ca362"
+    },
+    {
+      "id": "MacOS-Environment",
+      "manifestSHA256": "cae6c705f6801f422241e9f61b43ac18ce836ce73a1b870ef05d7b0904f6745f",
+      "sourceSHA256": "eac86d7f0dd7d21689ed4f1518067a3a83ea0513f78cb961076b7881c585dd20",
+      "productSHA256": "2230caca022f5f3d0f912277723fa442ffcec051392d96ef7ab52faa175f5e1f"
+    },
+    {
+      "id": "WindowsOS",
+      "manifestSHA256": "4c8e1d87a4d2695112260eb4994293017ef89186a0e661d8ecff3d3b8f89f5c5",
+      "sourceSHA256": "93a91aab69b84af7ef0ae2aa6a65606be8359b8a02a7652186d1b458cf6eca51",
+      "productSHA256": "9eec83d3b4774c9097d46a5e5657e037a61b83ed70338da73660bde1987f7a3f"
+    },
+    {
+      "id": "Ubuntu",
+      "manifestSHA256": "eba2212ea8a41c8ec964c243d202089310d5c111d0c8373a5da114eb9438df20",
+      "sourceSHA256": "c1f933614e248a12e1b91f2ddaf1d742bfd82a480add5df0aeb14101c6fa91ab",
+      "productSHA256": "6cc4993fc1e453716cfde7e511179070cd73aece7459659463190fa22670f6c7"
+    },
+    {
+      "id": "Debian",
+      "manifestSHA256": "f66a7054cf7f06fc5330bd4ee9cac08b4622f3e89814725b7eb01ca4e96b85fb",
+      "sourceSHA256": "9aa6635641efbe1668349c32d5ef21c9d7aa416eb48d93ed098b0426d2132a37",
+      "productSHA256": "581ce63b499609c0d7326fd7346cfc7ab288baaae4e5dab6b3830d3ca3334d3f"
+    },
+    {
+      "id": "RockyLinux",
+      "manifestSHA256": "db52793e5ea998caf362c1ed41434fc49582a2d5435b117d240bcc21e7dad893",
+      "sourceSHA256": "a2fe16787fcd215f808873f0d0210b6f3241da1fcb31025c8dd5329975fb9ccf",
+      "productSHA256": "003e5f502032ca265c5801aee3dee0ceb6da1fcd86ab56bcd843d7008edc12c7"
+    },
+    {
+      "id": "Alpine",
+      "manifestSHA256": "089773b8234fe3bed89599699829b6ffbd68b60a11a46edbf7da92ea7804f3db",
+      "sourceSHA256": "014edfc513dba8efbe215129a7363a1c15dfa548e1e0116072dc9a70b3ade91b",
+      "productSHA256": "283ffae210767de2eb1c009659b15fbb42bedc8793e851ed05105fe88d37a0ad"
+    },
+    {
+      "id": "AlibabaCloudLinux",
+      "manifestSHA256": "784e51b72c794b3893540276d3c05c0cadfe55fc198833af33130e96ee58fcc4",
+      "sourceSHA256": "0a91c931051294633a1c924deb0b399d017ad921dd988c4bfa3f68967ece69cb",
+      "productSHA256": "af9970ab405477ba0fff6fd007731ca85eaea32da3ee60165526adec29ab3384"
+    },
+    {
+      "id": "FreeBSD",
+      "manifestSHA256": "905f70d3c5d88768b940032a7df02cb44314b57c5127609260dea8e11f38d897",
+      "sourceSHA256": "6a379b6f466a33393cdb8dab25f4b5549edbd465ea506f86a23ce6b980aa301e",
+      "productSHA256": "11368247dda72e4982fa665059cd5c9e4dac9366a1d0fe964160c9956c6a9e93"
+    }
+  ]
+}

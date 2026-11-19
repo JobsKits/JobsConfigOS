@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "id": "RockyLinux",
+  "title": "RockyLinux 新系统配置管理",
+  "platform": "RockyLinux",
+  "kind": "interpreted-tcl-tk-gui-runtime",
+  "packagedAtShanghai": "2026-11-17T14:07:30.929809+08:00",
+  "sourceEntry": "GuiRuntime/安装面板/UnixManager.tcl/UnixManager.tcl",
+  "buildEntries": [],
+  "launchEntry": "GuiRuntime/RockyLinux/【RockyLinux】🧰新系统配置管理.sh/【RockyLinux】🧰新系统配置管理.sh",
+  "dependencies": [
+    "匹配的RockyLinux x64/ARM64桌面；具体最低OS版本尚未实机锁定",
+    "Tcl/Tk 8.6+、DISPLAY；Wayland需XWayland；写任务需root或可用PolicyKit图形授权",
+    "这是解释型GUI成品运行包，保留完整同平台CLI/共享资源；不是ELF、AppImage或内嵌Tk的独立二进制"
+  ],
+  "verified": [
+    "打包器复核归档逐文件SHA-256与ZIP完整性；此项不是目标系统GUI运行结论",
+    "共享模型与本机Tk隔离验证的历史记录见随包说明；不外推目标发行版已运行"
+  ],
+  "pending": [
+    "RockyLinux原生桌面、字体/辅助技术、PolicyKit和真实系统包事务未验",
+    "运行依赖Tcl/Tk和图形桌面，不自动安装GUI运行时"
+  ],
+  "artifactValidation": {
+    "kind": "interpreted-tcl-tk-gui-runtime",
+    "requiresTclTk": true,
+    "standaloneElf": false
+  },
+  "archivePolicy": {
+    "fixedZipTimestamp": "1980-01-01T00:00:00",
+    "sourceContentUnchanged": true,
+    "preserveRelativeLayout": true,
+    "secretsAndCachesExcluded": true
+  },
+  "archives": {
+    "source": {
+      "file": "source.zip",
+      "sha256": "a2fe16787fcd215f808873f0d0210b6f3241da1fcb31025c8dd5329975fb9ccf",
+      "bytes": 67461,
+      "entries": [
+        {
+          "path": "GuiRuntime/RockyLinux/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6200,
+          "sha256": "b06cc14ae3aa6e8090a4a1b328b1f9ea6b834e2e2f1cb096fcc7b0514167aa8e"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🆕新系统配置.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1936,
+          "sha256": "3392591c698b93a74cd7900c7b0ccd03aa09b2946f6b041c471cbf5f5c4d69b6"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🆕新系统配置.sh/【RockyLinux】🆕新系统配置.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 51030,
+          "sha256": "9cd3500f46b952b97746d427f5e41c40a1546972c49fe779d3afa05136810c5b"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🧰新系统配置管理.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5316,
+          "sha256": "8017d3ba768d23804bec378b52e01759bbace15fedbb2943c476d3fec5ef0995"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🧰新系统配置管理.sh/【RockyLinux】🧰新系统配置管理.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 5047,
+          "sha256": "86b72c9b0b7ef2b9f2de32a3e0170b8d86cc688c2c1136076739232355f81f47"
+        },
+        {
+          "path": "GuiRuntime/安装面板/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4313,
+          "sha256": "f4fe0929780c476a97a6db420760487e795d13f41db65c5348533dfba9fd7b1c"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Resources/UnixTranslations.dict",
+          "type": "file",
+          "mode": "0o644",
+          "size": 79990,
+          "sha256": "aaf5ac0ffc203770e1269b4cdfde86fdb5168411cb246291c5e3ba5eff6d91fb"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1078,
+          "sha256": "ddb67730480d4cd717224c3671abc48eaab5a4e431abe665b76bf87c16dccf8c"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixManagerTests.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 931,
+          "sha256": "bd8d45f8f28e9aaa7881ed77120a61e96868523878e26be3f6b4764a9157c172"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixManagerTests.tcl/UnixManagerTests.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5251,
+          "sha256": "fc3a93171464d3be0b92a152cc8d6314de528deaac7536dda67cc52700a6340f"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixNativeUiTests.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1722,
+          "sha256": "3fe4d206a3575735134fde39e9656d410b4b18f5041e4e663ad907f4ab21dfaf"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Tests/UnixNativeUiTests.tcl/UnixNativeUiTests.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6968,
+          "sha256": "be40e506c39f564f39e05d0e3fb1705880c0d96f73ae5f06a158fa8016a81275"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/ManagerCore.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 9984,
+          "sha256": "472e802ac41050e9b216b4df528258ba446992ac40e840d745e4ec41ce4004e0"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 753,
+          "sha256": "286ae793c792af6300a005611441076946d136d0382a1aef6c56126f2e158eff"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 815,
+          "sha256": "76d4ced65bf6d5ef64f58bcd77db9a456beb01902995142ef64d1384a65fc160"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/RunBackend.sh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 546,
+          "sha256": "5775c16672715386bfdb7b73fe9f0d245b778fbbc47d89c61d99b6093d57d028"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/UnixManager.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 26128,
+          "sha256": "bf3f01bb259bf0c1e3b55665beb0d835e8d33eddcd25e56f861358f6ac6c1eb6"
+        }
+      ]
+    },
+    "product": {
+      "file": "product.zip",
+      "sha256": "003e5f502032ca265c5801aee3dee0ceb6da1fcd86ab56bcd843d7008edc12c7",
+      "bytes": 59052,
+      "entries": [
+        {
+          "path": "GuiRuntime/RockyLinux/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6200,
+          "sha256": "b06cc14ae3aa6e8090a4a1b328b1f9ea6b834e2e2f1cb096fcc7b0514167aa8e"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🆕新系统配置.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1936,
+          "sha256": "3392591c698b93a74cd7900c7b0ccd03aa09b2946f6b041c471cbf5f5c4d69b6"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🆕新系统配置.sh/【RockyLinux】🆕新系统配置.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 51030,
+          "sha256": "9cd3500f46b952b97746d427f5e41c40a1546972c49fe779d3afa05136810c5b"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🧰新系统配置管理.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5316,
+          "sha256": "8017d3ba768d23804bec378b52e01759bbace15fedbb2943c476d3fec5ef0995"
+        },
+        {
+          "path": "GuiRuntime/RockyLinux/【RockyLinux】🧰新系统配置管理.sh/【RockyLinux】🧰新系统配置管理.sh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 5047,
+          "sha256": "86b72c9b0b7ef2b9f2de32a3e0170b8d86cc688c2c1136076739232355f81f47"
+        },
+        {
+          "path": "GuiRuntime/安装面板/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4313,
+          "sha256": "f4fe0929780c476a97a6db420760487e795d13f41db65c5348533dfba9fd7b1c"
+        },
+        {
+          "path": "GuiRuntime/安装面板/Resources/UnixTranslations.dict",
+          "type": "file",
+          "mode": "0o644",
+          "size": 79990,
+          "sha256": "aaf5ac0ffc203770e1269b4cdfde86fdb5168411cb246291c5e3ba5eff6d91fb"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/ManagerCore.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 9984,
+          "sha256": "472e802ac41050e9b216b4df528258ba446992ac40e840d745e4ec41ce4004e0"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 753,
+          "sha256": "286ae793c792af6300a005611441076946d136d0382a1aef6c56126f2e158eff"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 815,
+          "sha256": "76d4ced65bf6d5ef64f58bcd77db9a456beb01902995142ef64d1384a65fc160"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/RunBackend.sh/RunBackend.sh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 546,
+          "sha256": "5775c16672715386bfdb7b73fe9f0d245b778fbbc47d89c61d99b6093d57d028"
+        },
+        {
+          "path": "GuiRuntime/安装面板/UnixManager.tcl/UnixManager.tcl",
+          "type": "file",
+          "mode": "0o644",
+          "size": 26128,
+          "sha256": "bf3f01bb259bf0c1e3b55665beb0d835e8d33eddcd25e56f861358f6ac6c1eb6"
+        }
+      ]
+    }
+  }
+}

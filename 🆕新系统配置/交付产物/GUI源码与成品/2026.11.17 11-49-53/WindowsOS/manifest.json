@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "id": "WindowsOS",
+  "title": "WindowsOS 新系统配置管理",
+  "platform": "WindowsOS",
+  "kind": "windows-pe-launcher-and-powershell-runtime",
+  "packagedAtShanghai": "2026-11-17T11:49:53.597733+08:00",
+  "sourceEntry": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/【WindowsOS】🧰新系统配置管理.ps1",
+  "buildEntries": [
+    "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/JobsSystemSetupManager.csproj"
+  ],
+  "launchEntry": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/JobsSystemSetupManager.exe",
+  "dependencies": [
+    "Windows 10 1809 64位及以上目标；.NET Framework 4.7.2或兼容后续4.x、Windows PowerShell 5.1和WinForms；目标机验收仍待核",
+    "EXE为AnyCPU托管GUI启动器，不是Native AOT或自包含运行时；必须保留本包PowerShell GUI、同平台CLI和运行资源，安装任务需要WinGet及实际授权"
+  ],
+  "verified": [
+    "打包器复核归档逐文件SHA-256与ZIP完整性；此项不是目标系统GUI运行结论",
+    "真实EXE存在及PE头/架构字段核验；不将其作为WindowsGUI运行结论"
+  ],
+  "pending": [
+    "目标Windows上的EXE双击、WinForms/UAC/托盘、真实WinGet包事务未由打包器验收"
+  ],
+  "artifactValidation": {
+    "file": "JobsSystemSetupManager.exe",
+    "sha256": "92340f6402f1ba46fffba68f3bfb05e39be795ea932346d5f99a7070856dbc3b",
+    "peMachine": "0x014c",
+    "machineDescription": "i386/AnyCPU candidate",
+    "nativeWindowsExecutionVerifiedByPackager": false,
+    "buildReceiptFileSHA256": "d69a577b7a6eb73503c4250484256deb1128872a11440e8ccaab1c314c573d5e",
+    "buildReceipt": {
+      "schemaVersion": 1,
+      "product": "JobsSystemSetupManager",
+      "artifactKind": "Windows GUI PE / .NET Framework managed launcher",
+      "targetFramework": "net472",
+      "targetFrameworkMoniker": ".NETFramework,Version=v4.7.2",
+      "architecture": "AnyCPU",
+      "clrFlags": {
+        "ILOnly": true,
+        "Requires32Bit": false,
+        "Prefers32Bit": false
+      },
+      "nativeAot": false,
+      "selfContained": false,
+      "authenticodeSigned": false,
+      "actualBuildUtc": "2026-11-17T03:36:29Z",
+      "toolchain": {
+        "hostOS": "macOS",
+        "dotnetSdk": "11.0.100",
+        "configuration": "Release",
+        "warnings": 0,
+        "errors": 0,
+        "referencePackage": {
+          "id": "Microsoft.NETFramework.ReferenceAssemblies.net472",
+          "version": "1.0.3",
+          "source": "https://api.nuget.org/v3/index.json",
+          "contentHash": "0E7evZXHXaDYYiLRfpyXvCh+yzM2rNTyuZDI+ZO7UUqSc6GfjePiXTdqJGtgIKUwdI81tzQKmaWprnUiPj9hAw=="
+        }
+      },
+      "sourceFiles": [
+        {
+          "path": "Launcher/JobsSystemSetupManager.csproj",
+          "sha256": "d37ef860cd06bd69fb001aa7ef0a42f7040aad44cd35b6302d3c4e5b69c4f034"
+        },
+        {
+          "path": "Launcher/Program.cs",
+          "sha256": "e110393a516052613728150cd61a054a3c00d02929eeec50506d2fd76fbf5c0b"
+        },
+        {
+          "path": "Launcher/app.manifest",
+          "sha256": "24c977b920af0f07c2470d37db5679e870a9ed69e8e567aa30c12b7da299fe1d"
+        },
+        {
+          "path": "Launcher/NuGet.Config",
+          "sha256": "9d361c9b2ddfc06d1110b04bd36b47d476d92481521f660e609e112356a39db2"
+        },
+        {
+          "path": "Launcher/packages.lock.json",
+          "sha256": "6aa1d0a592cddcc1239dcecbeac05d608245ccd5ad91f6cacf3d5b99fff81a40"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "JobsSystemSetupManager.exe",
+          "sha256": "92340f6402f1ba46fffba68f3bfb05e39be795ea932346d5f99a7070856dbc3b",
+          "sizeBytes": 11776
+        },
+        {
+          "path": "JobsSystemSetupManager.exe.config",
+          "sha256": "435ea23443d8dd98eeb707aad9d3a5c1fe6046f8d76647a44d495d94ea4597ef",
+          "sizeBytes": 171
+        }
+      ],
+      "requiredRuntime": {
+        "operatingSystem": "Windows 10 1809 64-bit or later; target-machine acceptance pending",
+        "framework": ".NET Framework 4.7.2 or compatible later 4.x",
+        "host": "System Windows PowerShell 5.1 and WinForms",
+        "payloadRelativeToExecutable": [
+          "JobsSystemSetupManager.exe.config",
+          "【WindowsOS】🧰新系统配置管理.ps1",
+          "Resources/PanelTranslations.json",
+          "Resources/PanelWorker.cs",
+          "../【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.ps1"
+        ]
+      },
+      "nativeWindowsRun": false,
+      "verification": {
+        "isolatedAssertions": 18,
+        "windowsProcessesStarted": false,
+        "guiInteraction": "not tested",
+        "realInstallationOrUninstallation": "not performed"
+      }
+    },
+    "sourceAndOutputHashesMatchReceipt": true
+  },
+  "archivePolicy": {
+    "fixedZipTimestamp": "1980-01-01T00:00:00",
+    "sourceContentUnchanged": true,
+    "preserveRelativeLayout": true,
+    "secretsAndCachesExcluded": true
+  },
+  "archives": {
+    "source": {
+      "file": "source.zip",
+      "sha256": "93a91aab69b84af7ef0ae2aa6a65606be8359b8a02a7652186d1b458cf6eca51",
+      "bytes": 89015,
+      "entries": [
+        {
+          "path": "WindowsOS/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4652,
+          "sha256": "c2f568c37c98f21f797573dec66638df75e59aec32a60c7ed492162552eeb21f"
+        },
+        {
+          "path": "WindowsOS/Tests/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1094,
+          "sha256": "7ed22f1e2397e496e2fe7d4057482e5124b076add40810cd47e3515071872c4e"
+        },
+        {
+          "path": "WindowsOS/Tests/WindowsBootstrap.Tests.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1198,
+          "sha256": "388ddb8263f7a273ab9eb98d4bb97b277d2a0f73b1316263c60fb0bc9954ee15"
+        },
+        {
+          "path": "WindowsOS/Tests/WindowsBootstrap.Tests.ps1/WindowsBootstrap.Tests.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 13294,
+          "sha256": "2229980ca8d5330244d59827b5f649e86f8f52abffc1639067a7997958600baa"
+        },
+        {
+          "path": "WindowsOS/Tests/WindowsPanel.Tests.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1262,
+          "sha256": "6f3b03db4c021adc6f04ec701f4af43496dde79acf9a331855fa23afb2780358"
+        },
+        {
+          "path": "WindowsOS/Tests/WindowsPanel.Tests.ps1/WindowsPanel.Tests.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6189,
+          "sha256": "4f7b80a47eda737d1ad9fe8f160886a13552099aa53b46d40443371f0a63fb43"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1838,
+          "sha256": "7476a202aba4429c249ec6833edf287765bb423c192b2ca877a5714172dc53fd"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/【WindowsOS】↩️卸载新系统配置.cmd",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1007,
+          "sha256": "c4605c25eea9fb7290d854fe88497ff840ffb6c0be2b43144c4a7e446c174b60"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/【WindowsOS】↩️卸载新系统配置.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1004,
+          "sha256": "859f32fe6eef6fc5b804864f8e40ac6a16b6b27fab8f9fb03de614fa1d3780e6"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🆕新系统配置.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 8431,
+          "sha256": "46664a6f7d58eb714fe9d62f860e6e0fa95350b6551d9b0851274438db036e67"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.cmd",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1007,
+          "sha256": "c4605c25eea9fb7290d854fe88497ff840ffb6c0be2b43144c4a7e446c174b60"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 45270,
+          "sha256": "7a7c56b94f6d8c3bfc133828ec5985d0850376427101a6e40695910ab1a7c946"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/JobsSystemSetupManager.exe",
+          "type": "file",
+          "mode": "0o644",
+          "size": 11776,
+          "sha256": "92340f6402f1ba46fffba68f3bfb05e39be795ea932346d5f99a7070856dbc3b"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/JobsSystemSetupManager.exe.config",
+          "type": "file",
+          "mode": "0o644",
+          "size": 171,
+          "sha256": "435ea23443d8dd98eeb707aad9d3a5c1fe6046f8d76647a44d495d94ea4597ef"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/JobsSystemSetupManager.csproj",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1559,
+          "sha256": "d37ef860cd06bd69fb001aa7ef0a42f7040aad44cd35b6302d3c4e5b69c4f034"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/NuGet.Config",
+          "type": "file",
+          "mode": "0o644",
+          "size": 403,
+          "sha256": "9d361c9b2ddfc06d1110b04bd36b47d476d92481521f660e609e112356a39db2"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/Program.cs",
+          "type": "file",
+          "mode": "0o644",
+          "size": 9803,
+          "sha256": "e110393a516052613728150cd61a054a3c00d02929eeec50506d2fd76fbf5c0b"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 8887,
+          "sha256": "8e2812719f334d4a3df80de67f1c752e8d3e4d554c37cf25b00f16f9c378814a"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/app.manifest",
+          "type": "file",
+          "mode": "0o644",
+          "size": 691,
+          "sha256": "24c977b920af0f07c2470d37db5679e870a9ed69e8e567aa30c12b7da299fe1d"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Launcher/packages.lock.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 359,
+          "sha256": "6aa1d0a592cddcc1239dcecbeac05d608245ccd5ad91f6cacf3d5b99fff81a40"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/LauncherBuildReceipt.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2741,
+          "sha256": "d69a577b7a6eb73503c4250484256deb1128872a11440e8ccaab1c314c573d5e"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6454,
+          "sha256": "53c52b938b2d598e63bad0bee8296509f1ce426ad2ab0e81fbd367a87d30566e"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Resources/PanelTranslations.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 78393,
+          "sha256": "327c1c1db53714eaad2f5f7632c5b2f291394dad05027f11700afbd3955e1d86"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Resources/PanelWorker.cs",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2048,
+          "sha256": "5c6e2d38fbc756a344b76eb43b56dbdcfc6940ea211c4158960ef83738e08d9f"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/【WindowsOS】🧰新系统配置管理.cmd",
+          "type": "file",
+          "mode": "0o644",
+          "size": 850,
+          "sha256": "380aee0164d5ab5fa4affcaa324c5577e3a82f9278ac719a0d0bc84c4b235d13"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/【WindowsOS】🧰新系统配置管理.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 40021,
+          "sha256": "11c8c380bb5688881dd99816fecbaef65123c7757c4226b1aa6bef14d891d3bf"
+        }
+      ]
+    },
+    "product": {
+      "file": "product.zip",
+      "sha256": "9eec83d3b4774c9097d46a5e5657e037a61b83ed70338da73660bde1987f7a3f",
+      "bytes": 68168,
+      "entries": [
+        {
+          "path": "WindowsOS/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4652,
+          "sha256": "c2f568c37c98f21f797573dec66638df75e59aec32a60c7ed492162552eeb21f"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1838,
+          "sha256": "7476a202aba4429c249ec6833edf287765bb423c192b2ca877a5714172dc53fd"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/【WindowsOS】↩️卸载新系统配置.cmd",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1007,
+          "sha256": "c4605c25eea9fb7290d854fe88497ff840ffb6c0be2b43144c4a7e446c174b60"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】↩️卸载新系统配置.ps1/【WindowsOS】↩️卸载新系统配置.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1004,
+          "sha256": "859f32fe6eef6fc5b804864f8e40ac6a16b6b27fab8f9fb03de614fa1d3780e6"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🆕新系统配置.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 8431,
+          "sha256": "46664a6f7d58eb714fe9d62f860e6e0fa95350b6551d9b0851274438db036e67"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.cmd",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1007,
+          "sha256": "c4605c25eea9fb7290d854fe88497ff840ffb6c0be2b43144c4a7e446c174b60"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🆕新系统配置.ps1/【WindowsOS】🆕新系统配置.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 45270,
+          "sha256": "7a7c56b94f6d8c3bfc133828ec5985d0850376427101a6e40695910ab1a7c946"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/JobsSystemSetupManager.exe",
+          "type": "file",
+          "mode": "0o644",
+          "size": 11776,
+          "sha256": "92340f6402f1ba46fffba68f3bfb05e39be795ea932346d5f99a7070856dbc3b"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/JobsSystemSetupManager.exe.config",
+          "type": "file",
+          "mode": "0o644",
+          "size": 171,
+          "sha256": "435ea23443d8dd98eeb707aad9d3a5c1fe6046f8d76647a44d495d94ea4597ef"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/LauncherBuildReceipt.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2741,
+          "sha256": "d69a577b7a6eb73503c4250484256deb1128872a11440e8ccaab1c314c573d5e"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6454,
+          "sha256": "53c52b938b2d598e63bad0bee8296509f1ce426ad2ab0e81fbd367a87d30566e"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Resources/PanelTranslations.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 78393,
+          "sha256": "327c1c1db53714eaad2f5f7632c5b2f291394dad05027f11700afbd3955e1d86"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/Resources/PanelWorker.cs",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2048,
+          "sha256": "5c6e2d38fbc756a344b76eb43b56dbdcfc6940ea211c4158960ef83738e08d9f"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/【WindowsOS】🧰新系统配置管理.cmd",
+          "type": "file",
+          "mode": "0o644",
+          "size": 850,
+          "sha256": "380aee0164d5ab5fa4affcaa324c5577e3a82f9278ac719a0d0bc84c4b235d13"
+        },
+        {
+          "path": "WindowsOS/【WindowsOS】🧰新系统配置管理.ps1/【WindowsOS】🧰新系统配置管理.ps1",
+          "type": "file",
+          "mode": "0o644",
+          "size": 40021,
+          "sha256": "11c8c380bb5688881dd99816fecbaef65123c7757c4226b1aa6bef14d891d3bf"
+        }
+      ]
+    }
+  }
+}

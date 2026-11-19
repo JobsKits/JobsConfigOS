@@ -1,0 +1,2940 @@
+{
+  "schemaVersion": 1,
+  "id": "MacOS-Environment",
+  "title": "MacOS 环境配置管理",
+  "platform": "MacOS",
+  "kind": "native-app",
+  "packagedAtShanghai": "2026-11-17T11:49:53.597733+08:00",
+  "sourceEntry": "JobsMacEnvVarConfigs/安装面板/Sources/EnvironmentManager.swift",
+  "buildEntries": [
+    "JobsMacEnvVarConfigs/安装面板/【MacOS】构建安装面板.command/【MacOS】构建安装面板.command"
+  ],
+  "launchEntry": "【MacOS】🌍环境配置管理.app",
+  "dependencies": [
+    "macOS 13+；App自带GUI二进制、后端和终端配置运行资源",
+    "实际环境安装/卸载遵循用户授权与受管收据；重建需要Xcode/Swift命令行工具"
+  ],
+  "verified": [
+    "打包器复核归档逐文件SHA-256与ZIP完整性；此项不是目标系统GUI运行结论",
+    "Mac构建收据Swift源码SHA、资源Payload逐项及完整覆盖校验"
+  ],
+  "pending": [
+    "另一台Mac/AirDrop、所有组件真实部署/恢复及权限验收未由打包器执行"
+  ],
+  "artifactValidation": {
+    "receipt": {
+      "profile": "env",
+      "builtAtUTC": "2026-11-17T03:31:04Z",
+      "sourceSHA256": "c27ab9b331649371a9aca752038cbf021d3dc485810b95fc45fd4db3b0e6dac3"
+    },
+    "swiftSourceSHA256": "c27ab9b331649371a9aca752038cbf021d3dc485810b95fc45fd4db3b0e6dac3",
+    "resourceCount": 175,
+    "signatureVerifiedOnMacOS": true
+  },
+  "archivePolicy": {
+    "fixedZipTimestamp": "1980-01-01T00:00:00",
+    "sourceContentUnchanged": true,
+    "preserveRelativeLayout": true,
+    "secretsAndCachesExcluded": true
+  },
+  "archives": {
+    "source": {
+      "file": "source.zip",
+      "sha256": "85b1db0592f294fe424f136bb12a5168283e9c68c41d0bed830c1bda71e0748d",
+      "bytes": 1589779,
+      "entries": [
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.bash_profile",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5145,
+          "sha256": "9079eb760a51e6b2b4231dd7662f4463f11e6e0688496f1f3f42de4f3397e25d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.bashrc",
+          "type": "file",
+          "mode": "0o600",
+          "size": 88,
+          "sha256": "1c55e19e2eeeb4605a8ed36cf8b093c4ed25e4d228d87d4a45abbe7499fcb319"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.zlogin",
+          "type": "file",
+          "mode": "0o600",
+          "size": 67,
+          "sha256": "0da4ca1e3bd6df9bbb8ab59246965ea183c04a6f6f58884d94c59995c8282c77"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.zlogout",
+          "type": "file",
+          "mode": "0o600",
+          "size": 67,
+          "sha256": "0da4ca1e3bd6df9bbb8ab59246965ea183c04a6f6f58884d94c59995c8282c77"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.zprofile",
+          "type": "file",
+          "mode": "0o600",
+          "size": 466,
+          "sha256": "961d2dda1bbda5db4afaabb629f5f24b2b8ae0961ed9b396050f3e283b6c720e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.zshenv",
+          "type": "file",
+          "mode": "0o600",
+          "size": 67,
+          "sha256": "0da4ca1e3bd6df9bbb8ab59246965ea183c04a6f6f58884d94c59995c8282c77"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/.zshrc",
+          "type": "file",
+          "mode": "0o600",
+          "size": 747,
+          "sha256": "74e5a4e5a97d003dff03d0783a0261e44c630c3973dd4b308f3a5abd19cbda51"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/Sys/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2383,
+          "sha256": "517c242d76e8b2b8eec9019b05cd5f18c29262283427f19f37af0aad304cc52e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/icon.png",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5683,
+          "sha256": "091af5dd268f022ee9a7967e98fea2257ac96739d3a6e181341c29c29bda6283"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 11814,
+          "sha256": "fd102c9bd9b37c0b16849d4044cc0fa519a815b1a67d04280d1a7d765a925399"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4234,
+          "sha256": "5b865fe2582167036d1063a6a323a3e249bacf4cf819751fab74b7d1e00a92a6"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/Tests/【MacOS】flutter_sdk_network_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1144,
+          "sha256": "62bde1f8cb26bb3bbacbecfad9cabe2bf410cb01f4b25c94d0963b29b1accb27"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/Tests/【MacOS】flutter_sdk_network_tests.zsh/【MacOS】flutter_sdk_network_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 49655,
+          "sha256": "a65f53407045f036053625b9086109b21e8c17b33e9e353b0934e66236e979d5"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 16492,
+          "sha256": "f1a19e63821241512f014a3e58f6e74cef84914d03113b5023ffea62cc4fdea2"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/bin/git",
+          "type": "file",
+          "mode": "0o700",
+          "size": 764,
+          "sha256": "e103457e204aad5252e5be37456c155f29e44e958567cf69f56e0b4fdf9cfaaa"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/bin/【MacOS】git.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1645,
+          "sha256": "61a520760cebea0291807ee6d784a8534c944a98c736b3ea1199372f9a511896"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/bin/【MacOS】git.zsh/【MacOS】git.zsh",
+          "type": "file",
+          "mode": "0o700",
+          "size": 51326,
+          "sha256": "8edc2c232e20ddca491cebecabab672573a382d297ff2b69db5bbf798197aec3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/http_fixture.pl/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1371,
+          "sha256": "6aca02cdd9c27400ad64579bc7ab35043867a071b9de182b27b364724cc41648"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/http_fixture.pl/http_fixture.pl",
+          "type": "file",
+          "mode": "0o700",
+          "size": 3786,
+          "sha256": "d576efd57360385ca7c66dea2e09607f2988160c0922833b3666f7d622ae0188"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/【MacOS】integration.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1414,
+          "sha256": "3cb56ad318662f3d7be846ea65409d3d88b396103fed5ee781d960f346a038d4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/【MacOS】integration.zsh/【MacOS】integration.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 45186,
+          "sha256": "1e96e04c0d4d44e4b667b4a27fb36872b0490a0c4b8f937b38c31e9217a40e34"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/【MacOS】routes.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1399,
+          "sha256": "16cad537a620033ec1b3036a1666f51e39908cbaabe396bfd0aa35c068594ad3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/【MacOS】routes.zsh/【MacOS】routes.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 57627,
+          "sha256": "350a45d4b84e97adaff94fc89aa7fab7f2cca20933b10a5c1a33ad3098119ac4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/【MacOS】run.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1390,
+          "sha256": "3544189093c92b40c5b2f8144d459f86dbe5c80d50dfa037157fd0be7a055825"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/tests/【MacOS】run.zsh/【MacOS】run.zsh",
+          "type": "file",
+          "mode": "0o700",
+          "size": 2044,
+          "sha256": "85b76f8b3c287648ec17243a98e6680a409db550cc94bb4b21a669606a1c590f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/【MacOS】rollback.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1419,
+          "sha256": "7d1503db64454f2ab37dd5f1604345f58b6cb5f8a9fc7c7bcf1933a30e7ace11"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/jobs_git_network_strategy/【MacOS】rollback.command/【MacOS】rollback.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 54247,
+          "sha256": "3eb8e09dc2c643a59341fbfc3128f13b3819c97966d2923a99649260f2081a9d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】FlutterSDK命令适配.sh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2693,
+          "sha256": "84da9bb3454e533528e14c429d8d5513c18618eedef4c3bbc9c5a9bf14c2327b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】FlutterSDK命令适配.sh/【MacOS】FlutterSDK命令适配.sh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 57147,
+          "sha256": "50cd9af3b38e9865c3c32201864ccc571e202c54eb9d9caa54a93f00cb3f7c91"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】FlutterSDK网络入口.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 952,
+          "sha256": "eda93ec6147337f67cc063476650ed415a52f45bedfcfe78934c38a5e4fe6c61"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】FlutterSDK网络入口.zsh/【MacOS】FlutterSDK网络入口.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2140,
+          "sha256": "4d74189f84af98b77457713cef4e2905c5a8e0ba0c499dce669d1f4d04e0069b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】FlutterSDK网络选路.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 8157,
+          "sha256": "1cae1af88e52b95f09565375af568b7ded27526dd0d89ba0b586d836d2d99d7b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】FlutterSDK网络选路.zsh/【MacOS】FlutterSDK网络选路.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 80683,
+          "sha256": "35dad07891a50d5b54c478bb8cebbe9f204280e113889123effb738149acc3d9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】SDK获取重试.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1469,
+          "sha256": "6c63215fb728e832fa85aa7f76bab74d7274a6c3c03fc6d308623e880507b805"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】SDK获取重试.zsh/【MacOS】SDK获取重试.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4765,
+          "sha256": "80b77913d39760ec03df2f2095fd436b4310a9f4cda3299732c9ad1181838d2c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】jobs_flutter_lib.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1431,
+          "sha256": "48bff2bedb7eac86e547e100e37fb5dd249334a2b9093b06df2494e092e28f86"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】jobs_flutter_lib.zsh/【MacOS】jobs_flutter_lib.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 43845,
+          "sha256": "c48ad25c401ff834628509429cf139c1a4a2567658c9190e2e2407ee673c249e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】jobs_path_lib.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1422,
+          "sha256": "41b6fecd9c81572a530e44500737cda7951ad44d7f9a6dba47572e6d41771dad"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】jobs_path_lib.zsh/【MacOS】jobs_path_lib.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2637,
+          "sha256": "91f6da65f38afc29e42fe96a5751cad7da6c07bf53ccde3c59fa64e08f372ed3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】jobs_session_lib.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1431,
+          "sha256": "9684340ec708634818f29d44167473021cca49ea275730d34375365c28fdab49"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/_lib/【MacOS】jobs_session_lib.zsh/【MacOS】jobs_session_lib.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 9481,
+          "sha256": "5bd980993d14c879e8e562b99ee866dd1588e822857afc70e7cddea7b034904d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 19666,
+          "sha256": "f57ebe871c6a1018465c77c74538d3d972c640006249b9087a6a355d1579faac"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/Tests/CacheScopeTests.rb/CacheScopeTests.rb",
+          "type": "file",
+          "mode": "0o644",
+          "size": 14315,
+          "sha256": "f32a9fae23a2689c84f74ee95e83a0a97c237c5b461a0fd330ee71f371d753bd"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/Tests/CacheScopeTests.rb/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3050,
+          "sha256": "ea9bd1bad638ddf303489c941e36881e6852ce33359acc5543ca5f76ef7f55f1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/Tests/PromptStyleTests.rb/PromptStyleTests.rb",
+          "type": "file",
+          "mode": "0o644",
+          "size": 8510,
+          "sha256": "d9afa32399ca4822856b43c0f8fd0571af74fc8c782061eaacdd55ef1fd02992"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/Tests/PromptStyleTests.rb/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2598,
+          "sha256": "a8c91005b7362e889f73c875fb52ecec11ce8bd6387f799b519fc47cb4ec63e9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/Tests/【MacOS】SimulatorOrphanTests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3819,
+          "sha256": "0ac337c236808062c78e071774b49d8aa4f9f8bfecd44a7705238d6ff4ae9412"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/Tests/【MacOS】SimulatorOrphanTests.zsh/【MacOS】SimulatorOrphanTests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 51049,
+          "sha256": "9c5f88d80fa1552678f86d77a81fc896a181d34291d36a0f2e2de8edc6ffbd0a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/clean.command/clean.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 114818,
+          "sha256": "9d5e9bb772130bec1f45f2442298bdbd406fec9dd7a67e594e6f5ff44afb7eef"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】a.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2816,
+          "sha256": "3ef57207f1bdbe36ee20d1863fa4fe31011107a24248325da413016e5ab95cbd"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】a.command/【MacOS】a.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55238,
+          "sha256": "4cd16aefb8e2c4598c59cf567539d07ccae2dd54022977f793304c61bf0d6d74"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】apk.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4023,
+          "sha256": "151c3a311fe2f84f9e689214325bf707e68f5a293915d0fc5d1ca07a75dd0175"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】apk.command/【MacOS】apk.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55341,
+          "sha256": "b1c94377b1f91f79815986be1ac6c6e603752058e72ccf922c54dd37b4c7c7ea"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】b.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2795,
+          "sha256": "9a777d34f6b11149a7eca80f8e17aa1b26442563be844b9762fc030162154df2"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】b.command/【MacOS】b.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55223,
+          "sha256": "0218d11d67bbbc8b4344d870fd7478038862c2b2358de17be496c11a0fa8e3f4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】buildCheck.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3961,
+          "sha256": "475e8608c65b0a050e246165c556c068f2a38e88f620ab86394a3a4eabc3f24e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】buildCheck.command/【MacOS】buildCheck.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55469,
+          "sha256": "8ed7dc97099ed6d8dc1bf4f43e31af2f56bb930cb3d4ac1cba071817e740874f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】c.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3184,
+          "sha256": "28203f79ec7ee86aab953588261338ecd81c4a01798d82ca7f18456a3567ad02"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】c.command/【MacOS】c.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55305,
+          "sha256": "0df71767294852c3daf3a70d17a986d3061b9e8cb529df45638bfd7f0ccfa1cf"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】check.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3217,
+          "sha256": "c2e3a893a878366bbb3fa1ba79cec7b0b7bb81231d9b887e0b2fc742af7f0e20"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】check.command/【MacOS】check.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55428,
+          "sha256": "f3ad19475a640c92302f16656c76a9c1fe06e6456276cfba9cfd31c029cead5a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】check1.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2911,
+          "sha256": "8fc135d3f281b814c1796df59d63554634c0ae458327dc231b2d0020d45004bb"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】check1.command/【MacOS】check1.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55430,
+          "sha256": "02ec04c6e67043b08fd02dab4af4ac080a1e7e66c1f5b2824958749bbc189709"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 7237,
+          "sha256": "b511c90f7a653cc9d8128eb02ca4147c643137a0106d3f6d337e2b07e80e5c74"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/chrome-extension/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 991,
+          "sha256": "a381d8313ef920b9aef16abd928680e020ba673da4b30bcba3207f8f91f354c3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/chrome-extension/background.js",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1612,
+          "sha256": "94a9789724ff956ce71c5be3dfc6d1d5f23c8a55c418c3c2d2ab517998b062a7"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/chrome-extension/clear.html",
+          "type": "file",
+          "mode": "0o600",
+          "size": 458,
+          "sha256": "5ca4346e79d5c4cf4f6db77c368e743af6d1adcfccbe43fdcc95247e84c2f223"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/chrome-extension/clear.js",
+          "type": "file",
+          "mode": "0o600",
+          "size": 771,
+          "sha256": "9da00e512afa8990d74e6051ab0e1fa3e4ab99b7de5ab9f1b01d1d8ddd0de6a2"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/chrome-extension/manifest.json",
+          "type": "file",
+          "mode": "0o600",
+          "size": 951,
+          "sha256": "e2a059798f01e5d16531e8dd1c4ead1257be7cdddd73f04e0a7abbf4944e1c9e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】clr.command/【MacOS】clr.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 119596,
+          "sha256": "f259f507ca8d1fd42aede65161a67102d306359de824f34a7a78ee1fe4c3c486"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】code.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1196,
+          "sha256": "368a3411805e53b9d90de18d2981e75ce4e3df577c6deb1d0cef1c97c6ead4b1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】code.command/【MacOS】code.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 56311,
+          "sha256": "2e92c0ba8bcee9545ac35e1206eff69d1c5be5fc4159b1d219290e78b6e99d88"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】codemap.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8028,
+          "sha256": "6e84db6c6b5f5eb6c40c220a4252b23c7f4bf2615beb02bf1f3e657ee936f0e8"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】codemap.command/【MacOS】codemap.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 61943,
+          "sha256": "8ce02e0a425e434803edfc5398874b622d4e6579cc5e6a49619b54dcf981402f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】config.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3319,
+          "sha256": "b2d0987e243712fc8a5ea7db8c14462a490eaf9d1491b29ccef52b6fa4a69f62"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】config.command/【MacOS】config.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55426,
+          "sha256": "7f335bac8fafb67cef379dbff59ff49d9e0d0e57e8460cc53ca47d41bbfdc1fd"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】cor.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3992,
+          "sha256": "be235838fbbd553377bb0cb423f6cc622d8f9998119049ffd7983f57102b04b9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】cor.command/【MacOS】cor.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 66468,
+          "sha256": "83fec5cd5503eb556f56e938a84382705dbf89fa2c4e89e60cf5d74c094cda55"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】d.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3138,
+          "sha256": "d20259093f582c5cce8d9a478124e5ea9632d2fd7de92f55b07df0c349153fa4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】d.command/【MacOS】d.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55300,
+          "sha256": "8eee7a28387a8378a224f12fa270cbb82201e19f19074b9ec613b079a9824260"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】decode.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3921,
+          "sha256": "f7ec737b7437cfdf95efcab68557ab0a4d050712fffebf114955a6d60b367c63"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】decode.command/【MacOS】decode.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 93062,
+          "sha256": "daebcb87dc3a4ea635262c5413fc633f4c63e5e7a57210c19ee4c601ad6acc1a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】df.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 10663,
+          "sha256": "3199b0baa5e43b9a5ad0f210cdc311192216c5cd7db01ad2ac8b056bdb7b4494"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】df.command/【MacOS】df.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 110610,
+          "sha256": "3eeddbc1dbaa68df57b8d49da83c89cb66f4fbb5371e84813044bed72094f6e9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】download.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 6369,
+          "sha256": "838044fbb2c56ca27e9602510100af17bf7b7066069811e2ff2ceff55da6797c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】download.command/【MacOS】download.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 73648,
+          "sha256": "2a0f52af7e76fc0fc844b8dafb779eacce9bce6a47ea596c879e7c6a3688cf60"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】dq.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3150,
+          "sha256": "009e188eca1cd841054796bcc4bdeffdf96ab0f706528f5c0db009a890598dc0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】dq.command/【MacOS】dq.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 57515,
+          "sha256": "44190097fc819c31a3af75c688f6dc56d027400f7bc2a84dddca7d072d2316fb"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】entrypoints.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5718,
+          "sha256": "fc5aaa4bfe1d7eab6c2427d77438bb331eaa5b4d456a6608b135aec3d069ab48"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】entrypoints.command/【MacOS】entrypoints.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 10832,
+          "sha256": "044044d669fa1e3df58ae3b17eb29aa9965b14f903fe4265b842325d9fdd2af7"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】fixfvm.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2923,
+          "sha256": "56ed44ff1c8ee0b43e9c417458d18359b4f4f50fc7eac1a385babb84efe90224"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】fixfvm.command/【MacOS】fixfvm.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55366,
+          "sha256": "fa465d315641a82074f1048afafbe23ec1cc325106f3179ec6c58449cae42498"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】flat.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4345,
+          "sha256": "022c6858eef4bd7cbcaafc0c51be94f799d63cf72395ea6d0a63d650ba4bdbfa"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】flat.command/【MacOS】flat.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 95351,
+          "sha256": "67e6e2dc870b0c65061d22090c7989dfde7a9862048037f4dc8fabab53ea51e9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】flutter_project.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2804,
+          "sha256": "cc31b39686acc7fd34665ac982659b50aebc9e3487f9223c08d4367f77de71b0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】flutter_project.command/【MacOS】flutter_project.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 2587,
+          "sha256": "eb9cf5ddbe0d4ad8f3e98cc4f2e077add6f289a319783ca59c8b110f86ebf234"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】frun.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5686,
+          "sha256": "922fc299202102fb1fd90ab35ee778cc5b11c2a560baab9e79808f660fc21644"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】frun.command/【MacOS】frun.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 39731,
+          "sha256": "dfaa122409b1b4756b4bb72deabdd97409ead4f346892988afc24f75f783de53"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】gif.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4422,
+          "sha256": "e7faff83ddeebe192fb43a9081dbf7456e72db460b78593b0692fd5fe771f257"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】gif.command/【MacOS】gif.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 113894,
+          "sha256": "a355b9e46ade13b0599e53b726ab6b41667e0144e80f1d02fdda1f7f7b2b5ab4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】i.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5460,
+          "sha256": "15b66dcaeed0a78760f8d6931e5de34f02de23015368133ec417f5acbd5aef36"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】i.command/【MacOS】i.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 53050,
+          "sha256": "53e281b49ac2d3b0289d0f623590fe137eda8ba01a38e6c84b6cb9019652c9c0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】install.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 21881,
+          "sha256": "ce87716cebdebb7ab98b7ba5bedd3ca1c991533b3e1db96859af38bb4e753f8c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】install.command/【MacOS】install.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 112564,
+          "sha256": "7d129877eaf96a86312df8a79a9c2252ea203117b653e65727de1c4752886e7f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】install_jdk17.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4390,
+          "sha256": "901e55d52fd2f7eaf51b2cf27c69d37c1442a3cf5cab71d252dc6337521c82d6"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】install_jdk17.command/【MacOS】install_jdk17.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 78605,
+          "sha256": "70f9d238b5051af6b6d45069fd523fdeadca065fcb1d61724f90f73d8a6be205"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】ipa.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3531,
+          "sha256": "56b3d0824be3c562197d9fc1335c6327758901136acbc7787686a19b2dcce41a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】ipa.command/【MacOS】ipa.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55363,
+          "sha256": "6f063fb736f542517b2fe40950506e0b10c21316d2e1d9ccb9e7d1b2aed884da"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsAsyncDeadline/JobsAsyncDeadline.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1443,
+          "sha256": "c86b8bc270ba389b15f23169870883c5dd759eb3f8314dd88dbd40dbea7f8cb4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsCountdownPanel/JobsCountdownPanel.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1281,
+          "sha256": "088390bb5086c5413a591c1751118149fd83b970b12ac47f9d7c4559bd5153f1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsCountdownView/JobsCountdownView.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4052,
+          "sha256": "7c757acdf9eb441c1251d16591263d9a42eefdddb4ef93d0f0397087c94d23d1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecorderCLI/JobsRecorderCLI.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 14446,
+          "sha256": "9c806796e46dea6bfac41a633d349eb9680c918f0413597b23064728cd20dc22"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecorderFailure/JobsRecorderFailure.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 439,
+          "sha256": "52d82bbf15672f589934f706e3f104b6f0a3da22e6912ef2ac40676d12686c82"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecorderOptions/JobsRecorderOptions.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2942,
+          "sha256": "c262232ae9a1c4ba4d56ef35c09e87a9905ec0aba969c2478541962bf70f10ff"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecordingCountdown/JobsRecordingCountdown.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1793,
+          "sha256": "3c55626641d7beedaf98cc1fe052ad94330948516ffe68b22e9e3c89c466a09c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecordingDestination/JobsRecordingDestination.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3581,
+          "sha256": "c5fe4f66da4606a079568fed84ceef854ee940a546c89c49dfc0a085144532a5"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecordingLifetime/JobsRecordingLifetime.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3343,
+          "sha256": "2e54850d4c4208f6b434eb5ac9ca7d2128192984be3be6efa3a5fc94073f7e64"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsRecordingSession/JobsRecordingSession.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 13571,
+          "sha256": "96dda9d016603e89fe77f8a9d68d3217b8ae99ae5e0afa3f7baa25218d93584c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsWindowCatalog/JobsWindowCatalog.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6893,
+          "sha256": "3672cee46be85b56c8183f2217c4e8f7b1b95d9972e372c6bc59e3b2ca651882"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/JobsWindowToken/JobsWindowToken.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1013,
+          "sha256": "d12545ec23251393190c5ccf4b56c3e62a11492aeb0b4773bb2d3531d89aa7ac"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Core/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6115,
+          "sha256": "5bbc2d5aff6166b848b8c86c974ec1c36b61407ed49e6ac389315c2bbe92e53f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 23277,
+          "sha256": "98f3c0867f72b114150196c2f86dc7a77cdc4625e31836456c0b4cc58e72206f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】倒计时测试.command/Fixtures/JobsCountdownClickView/JobsCountdownClickView.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 400,
+          "sha256": "5c1b12d654c5fc25b32c88352d8c3984699724518d73c673a4e05910c53a2d68"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】倒计时测试.command/Fixtures/JobsCountdownTestState/JobsCountdownTestState.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 498,
+          "sha256": "8573451047c26e2f1f3f9562b6318e9d48c6ffae4f927fa0acb5f39cfe616ce1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】倒计时测试.command/Fixtures/JobsCountdownUITests/JobsCountdownUITests.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 12951,
+          "sha256": "a6dac45f48dadc72931b7926b91c252d243eb5a0ea7e8e55a26df10531fd3095"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】倒计时测试.command/Fixtures/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1565,
+          "sha256": "7d01505b5e928af516cb176624e933a18479597115e5882257307452b125c1df"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】倒计时测试.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4090,
+          "sha256": "92136925f2229415d0361d140f1e9e3bba0925ee5d3c69653ec9cc9977f876ca"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】倒计时测试.command/【MacOS】倒计时测试.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 35886,
+          "sha256": "db3ba42b6c1a65ba9965536c0979a4f201a86662d6ff0e50b746dfcc947c3e70"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】窗口录屏测试.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 7038,
+          "sha256": "51f29e77718d37ed1266c0fe17c8cd456b93bff16c31fa700e6fae3892e4654f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/Tests/【MacOS】窗口录屏测试.command/【MacOS】窗口录屏测试.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 70379,
+          "sha256": "b3a8ae87259899ea4a08d6e088a81d8364190e8194b104268453f060620633d1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】jrecord.command/【MacOS】jrecord.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 96932,
+          "sha256": "21a3251e905781e6b4f2f1b26a6b7f15e9dee4b6dbca21ea823ad4f2b1edafae"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】list.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 9632,
+          "sha256": "1d452ff93f8a431a665ec7397436d6215266c992abe2406c82dcb097ac18bce3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】list.command/Tests/【MacOS】ListConfirmTests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2958,
+          "sha256": "8620683ce5ee14f6468b0e7fb73b8e190553959a330afb69ef09815433e6950a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】list.command/Tests/【MacOS】ListConfirmTests.zsh/【MacOS】ListConfirmTests.zsh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 40287,
+          "sha256": "526ca124df0f0441cb6e93b2d5253d1f343c82b229b32264b87ac07502a7bf1b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】list.command/【MacOS】list.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 91430,
+          "sha256": "d172262f92be6e42dc107bd877c323e8c65f5b0ee32a283e4a565d400fddbbf7"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】m5c.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3152,
+          "sha256": "fa185cae49bea3a61a6618bf4d07a8d878c6f5073e77b688745d715881f752d0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】m5c.command/【MacOS】m5c.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 59507,
+          "sha256": "88cd0b2f9decee6a98a743d7fababa8502680d8f501589b0f77d7c3e27bb67a9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】merge.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5926,
+          "sha256": "d1365e80e84f0a3aa31b4fba4afdcad7ee048797c0e16e8f18c0387f7ede597c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】merge.command/【MacOS】merge.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 67820,
+          "sha256": "994b46d87beb20f0c398e40bc1c79ba823267bb7c036972c13eef68907fd1102"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】orc.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 7868,
+          "sha256": "8f0546d45b04600c303d9010411f728e92ee9d9784b7fc956fd012e52dd5ec6e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】orc.command/【MacOS】orc.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 44606,
+          "sha256": "d604e1eb4305982a4f8b870f135331b08f8e0070c71e0e4d17de9bf9ed69505d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】pods.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3612,
+          "sha256": "b7b3279503ac0d5de25298e21ecadf7e8141d285bd622715fe9d289e527f3b38"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】pods.command/【MacOS】pods.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 99983,
+          "sha256": "a9bc21952c3dd4b21446dd0ed8ed63eeab2cb0fd046b3b0f569a018c391a52e3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】rb.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2850,
+          "sha256": "b3cdef1d14981a718ff3fdbe38d39f0bacec2615783e46bf77a72ce15230f8b2"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】rb.command/【MacOS】rb.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55276,
+          "sha256": "d4a7d0ee03c0898636bd40e7ed488799f9aa3dfed22f846e9c359132b0f83625"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】repair_gem_extensions.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8009,
+          "sha256": "7761f3e5b1b14b96f8f67c6556f83d623a467c843fd089dc26f4d7c73893fc7b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】repair_gem_extensions.command/Tests/native_extensions_test.rb/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1401,
+          "sha256": "be1e9f3a16284d6668a7924bdc25fe77df17b14939a849085d536ee6cd6c2f15"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】repair_gem_extensions.command/Tests/native_extensions_test.rb/native_extensions_test.rb",
+          "type": "file",
+          "mode": "0o600",
+          "size": 25067,
+          "sha256": "0c4ddd0ded780d87dfccac743397e23badbeb9ac8429e63a223c6f89be692371"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】repair_gem_extensions.command/Tests/【MacOS】update_integration_test.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1450,
+          "sha256": "d56517d43c0e68df9944438fabe53f40b5f1c06cd6e9fefcea190fefa840f1da"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】repair_gem_extensions.command/Tests/【MacOS】update_integration_test.zsh/【MacOS】update_integration_test.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 43999,
+          "sha256": "4b3ad5b0b9da1d6d2c5d505d5c1d3e3542ec92b1334ec81929be9b07e0ce5cf1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】repair_gem_extensions.command/【MacOS】repair_gem_extensions.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 61983,
+          "sha256": "878aa1376d070dc4ebf3bc6dc430cf627550d2ce08ee307e0328080524590369"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】runtime_init.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2728,
+          "sha256": "70b7ea1ece2f788753779ce06499138bd137d2afb989b08ae2c440e4b96fb00e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】runtime_init.command/【MacOS】runtime_init.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 1181,
+          "sha256": "61d5a52f966eee6cac9035ec9dc501ef8cb909fd0ebbd8cb2fc508e2bd0c4838"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】save.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2880,
+          "sha256": "a72cbef121c0284782b90df57dfb7c9b9aa6c15135fa698c48dcd76ebab014aa"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】save.command/【MacOS】save.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55338,
+          "sha256": "283cccdaaf8b0be7f4c1e414f219883ad0591435671a564b98e4f3f9409120e0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】shell.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3555,
+          "sha256": "9fdab4416dfb6cefb1d183d08e6f3e279c7a4d44d68e758da766362c10f5bb9d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】shell.command/【MacOS】shell.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 61842,
+          "sha256": "b6a6c1f8b859dfaba3fab074976ac97ce4cdbbdecf37d74f0b3d70b84c3a647c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】simios.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2907,
+          "sha256": "97b4ae05a66566394afd3351d85e2c391c022b52d0862a9548dcef6bc1cdb60e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】simios.command/【MacOS】simios.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 44544,
+          "sha256": "745881cc78ec1826d4b8a947be9237f553d89641745882acf72d880679027972"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】split.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 5766,
+          "sha256": "d1f466f81eb5be6cd31fbb19b8ad50297ccbc1c17d5df9fca5cdd56b6f69d0e6"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】split.command/Tests/【MacOS】FilePartsTests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3604,
+          "sha256": "60ed77a1598f0f428b0cc47b6862d5c1442c69871202f7b1401c61d347fe6c15"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】split.command/Tests/【MacOS】FilePartsTests.zsh/【MacOS】FilePartsTests.zsh",
+          "type": "file",
+          "mode": "0o755",
+          "size": 21981,
+          "sha256": "ed52d32d9f28e38bd3b7e677f3067a6278767d832d8c2417cfe65cf38f9dd600"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】split.command/【MacOS】split.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 74160,
+          "sha256": "6a9aacf980a0bf43f28d381a299c4e63cd349c82fd722ca59a27a80080a3cc0c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】to.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8774,
+          "sha256": "29961cd6be1a0ab0e007a52730738e9cfba2d44ab787a3059a35a9f1a03230b3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】to.command/【MacOS】to.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 84321,
+          "sha256": "6ca217c12181f59bb3fd83655a248d64c0ca11efad62bdd346e653f8aa442df5"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】trs.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4666,
+          "sha256": "6dab86509af261300be533060a856a175b4b19202d44e159e15d51121959ad6c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】trs.command/【MacOS】trs.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 88448,
+          "sha256": "89aa2cc93a68e2c14c0aab5e53b18de8eceb037b52e52199790d427041d15be1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】ts.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4212,
+          "sha256": "92bd4120c73f174595c40738e5882ee8ecc12606be4c01c7236b96e9ab565630"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】ts.command/【MacOS】ts.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 97890,
+          "sha256": "ca2274c5a48ad59ef17820a3aba5301920e5cc647673ff783f83a8d94c719f2b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】tts.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 12811,
+          "sha256": "8ae709a3d510ce7dd02de1790bbe4c79e151a46b7a87a7a804bda551fc8fc2b7"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】tts.command/【MacOS】tts.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 142015,
+          "sha256": "2c12858d5cc95a431107a91d3dd14bf2b3bf3e39196303cd3404109c289e49e6"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 50940,
+          "sha256": "aa95e3305c0d3d4b06575a184196f9febd075db22d96196eee9f269da8207304"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/cocoapods_proxy_tests.rb/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1398,
+          "sha256": "b60de848345592278eba7cffb5540fda1f08a0375a2868e15064695409489cca"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/cocoapods_proxy_tests.rb/cocoapods_proxy_tests.rb",
+          "type": "file",
+          "mode": "0o600",
+          "size": 28562,
+          "sha256": "e37f564bc658de223dc037d12654082e7fa41c788cbc24a6a8f53eab991d7bf1"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】android_sdk_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3434,
+          "sha256": "ed81d8b8101e5f156dfa08ec85c7a1133573cc24c1ddb607c4ab6bf01c3dbf2a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】android_sdk_tests.zsh/【MacOS】android_sdk_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 44492,
+          "sha256": "3ccc4bfbdd339735e0c40bb7d9b55fbc1375a2aea1478397ab132685cbdaf5c8"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】brew_diagnostics_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2181,
+          "sha256": "053da680b3cd0da56fce47708eae8d1ff0fbda2bc1b78cfc03303d696395eb6a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】brew_diagnostics_tests.zsh/【MacOS】brew_diagnostics_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 35758,
+          "sha256": "e2600eb81e0ddc06bfb101e4c4295640a283387aff8700ead605611327b0f2e6"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】cocoapods_network_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1450,
+          "sha256": "51e22c76f378f1c4f0a6765677fbe7e787d86083489c6214972c3baea6029de0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】cocoapods_network_tests.zsh/【MacOS】cocoapods_network_tests.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 74314,
+          "sha256": "84ef4671e801d58e19509eb83b3d43b5cc846d2d51487f79783181c8bc1e5896"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】entrypoint_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1429,
+          "sha256": "aaf7c1b5abc82e8875cb79eeeb1f0a28436c381211b56f915bfd17ff7037118a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】entrypoint_tests.zsh/【MacOS】entrypoint_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 39245,
+          "sha256": "5601311f2b75e063aa5ba361325152b4ffdd270781fcfe986e50b6ac6ddc701d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】flutter_gem_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1432,
+          "sha256": "93ada536c9196fb2d6ad5274cf06bd6e9d82cc738bb99c867a9b64e67ae58336"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】flutter_gem_tests.zsh/【MacOS】flutter_gem_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 49159,
+          "sha256": "75054cdceca6760fd743f365780df2a6cbd7d3aecb9418fe58494b422c20cc5b"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】homebrew_network_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1447,
+          "sha256": "a5813fd69861736e4671a26bf98b7c2a11b1d987ad0a2667da48440fe82881b7"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】homebrew_network_tests.zsh/【MacOS】homebrew_network_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 45160,
+          "sha256": "f469a8c0ee77866d6a4573d198b6032534e1570a51b649c11709d251193666dc"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】ruby_runtime_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2217,
+          "sha256": "ac655b87b3a8e18fe5a04fb1ea659c530387e308f4cdfa0d0bc4186967937c97"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】ruby_runtime_tests.zsh/【MacOS】ruby_runtime_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 33972,
+          "sha256": "4b981cdbd1411a5392d67a8392f422ba62b6471b7da99585d3b74b43cba24315"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】update_audit_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1435,
+          "sha256": "90d598bb718b529f3fe2ca2c8c9685d39f9fdb3d51ff0bce5f1cea1bcaa6342e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】update_audit_tests.zsh/【MacOS】update_audit_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 47148,
+          "sha256": "61f486eb283cd64f5b3e3c7fe52dbee4e00768d9ae177e762099fc681f6be8ef"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】update_result_tests.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1438,
+          "sha256": "f24b4c5e590027c5ac380fe8a81f504f6dbbfca8fcc730adf24a0c0bf70d8e2d"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/Tests/【MacOS】update_result_tests.zsh/【MacOS】update_result_tests.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 51663,
+          "sha256": "caf0b6f33e23b03a03a800b1d9bd2e02be8160e9cab9f2bda4a361cc53025f21"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】update.command/【MacOS】update.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 256050,
+          "sha256": "073d16d7b790eba4563148a5a10a3f54fe8d2ff81764b11fe22631a816f8a7da"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】x.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2822,
+          "sha256": "f40de0169ce2f367a963536ee7c0e8bbfc6c5aaf70768f185e9341cd7b8ed8d0"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】x.command/【MacOS】x.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55235,
+          "sha256": "c211e39e7e9ea39d77c3623383919853875761a57d4bed659dc07c8d0ea06343"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】zz.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2871,
+          "sha256": "82e238728d6f155b03d0a7e5ce42af0170096be7c8ab105bcd799cde1d6c94a2"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】zz.command/【MacOS】zz.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55313,
+          "sha256": "d653a887d91fc8d14d8763ca2edf16d87864dcc64ae73ed09e555266c63d61b8"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.Tests.mjs/GlobalMarkdownToc.Tests.mjs",
+          "type": "file",
+          "mode": "0o644",
+          "size": 8919,
+          "sha256": "3bb7102ad633df353f907f7da90c81f76851d97f4a4ee17df654b13c33b3af66"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.Tests.mjs/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1634,
+          "sha256": "02ce4bd8dfcad3a8f1ec89002e68f2b229e303014405f5b859d43df3e79f2a92"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.mjs/GlobalMarkdownToc.mjs",
+          "type": "file",
+          "mode": "0o644",
+          "size": 74086,
+          "sha256": "c231a296ac50934de6eda9d0790e8dbea8599f0e670fb0b9b30754bf125959ac"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.mjs/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1816,
+          "sha256": "590afaddb69636b1f3eae516650284a30af49e0065d964194240c4c467718056"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/MarkdownToc.mjs/MarkdownToc.mjs",
+          "type": "file",
+          "mode": "0o644",
+          "size": 88849,
+          "sha256": "c4dc4e1b0d317390c46c13a965ff85c98caebf9ac867080a57409c9cc3b3af93"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/MarkdownToc.mjs/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1728,
+          "sha256": "709810f9cc230c605fe661d6061775c9c4ef211bc5494b869ba0b569a325a474"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6677,
+          "sha256": "32f7546b9f2900ed138182c55e47ff3c93b17d06cf05ec692ff8fe9d4d0aa5a8"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/【MacOS】⚙️配置全局Markdown目录过滤器.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 52207,
+          "sha256": "c43243326b6d35490b86122041b9f9fda1fb182f0223f1eaf241cb3b48a3d55c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/sync_env.txt",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1372,
+          "sha256": "bbbda331392c2a0130d7dcc719e63277fbc6a84ab7eb240ac6f7e6b75b00e736"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 3694,
+          "sha256": "15e6bf73f563f38490c96045e1729c5bdfc1cf333f34efb269b44a06f77b5d42"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/aliases.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 88,
+          "sha256": "017a85cb5861ce1554b42e24c0a7cf5ee579d5123101318db10c388064ebaf50"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】git_behavior.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1419,
+          "sha256": "e9c25374cf23c871e2d6194452521397ab738cf05737dd49ceba5beda3d0399f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】git_behavior.zsh/【MacOS】git_behavior.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1794,
+          "sha256": "b06c5a12f5ee9e66324616f01308008650c39d88bee8eddc421663d73d6c3ec4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】local.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1398,
+          "sha256": "212f71365bd80be9890f91fb0fab7dfccfed7f36c843fb1abcb87dab1b8c200c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】local.zsh/【MacOS】local.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1835,
+          "sha256": "565912cf95e50a4c9a9cd30b34f125328c9cdf3a48a5be587e84bb9170bfcf13"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】path_drag_resolver.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1437,
+          "sha256": "495948a1d6b43d216a7a204de866ef01a63afd5c0d34c7cb896a36a3ab340325"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】path_drag_resolver.zsh/【MacOS】path_drag_resolver.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4701,
+          "sha256": "cd9f378bfcdb11ef4f1ba6474fa0f61491bba03afad398e1f2c6a5fd6a13ed9a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】shell_behavior.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1425,
+          "sha256": "c4429e5785cc773f2571b89fad80cb21e34c5a8a4403d8fa6e9beb603198c8ff"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/custom/【MacOS】shell_behavior.zsh/【MacOS】shell_behavior.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 665,
+          "sha256": "bbbb8590b15be1b4836a64ed5c77573bb4a67a0eca71e24db37f16f71eb3c32c"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/【MacOS】bootstrap.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1410,
+          "sha256": "e2b206fae15e8e0daf05b31d1ebb155f6e69e90ca6bab1a377aa400b65361046"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/【MacOS】bootstrap.zsh/【MacOS】bootstrap.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1989,
+          "sha256": "29b5c899a377fd7198b6c1b6bf0b45748b8aba7c1b516e27a6f10bf8e68f550f"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/【MacOS】env_methods.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1416,
+          "sha256": "6c109945eaff9f8fd077c0a08be81d58efb90be278f35a1b779e545193376b9e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/【MacOS】env_methods.zsh/【MacOS】env_methods.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5783,
+          "sha256": "0789a124526585d01252124e74b36c64264523fd68204e8bef33f82cec0780a4"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/【MacOS】user_mounts.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 1416,
+          "sha256": "214f3886d407b204e673aa8834ac4f2a0b068d4e5806ebf9fa5a1d27dd99d3d2"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/zsh/【MacOS】user_mounts.zsh/【MacOS】user_mounts.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 901,
+          "sha256": "edae4b290e9d8ce31fbbf2fdea5903eacb2771f51c6458d29346ef9f56ccf18a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/【MacOS】环境管理后端.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 7830,
+          "sha256": "e2ef629c4ac4cbb704294cf1cd462a1ca7d3dc8da839d7b675b31e28f48d110e"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/【MacOS】环境管理后端.command/Tests/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 705,
+          "sha256": "5dd38e3af30ae35983aefda22c23badc457fc0dcea6578292beea3fa886576c9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/【MacOS】环境管理后端.command/Tests/【MacOS】环境后端回归.zsh/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 2311,
+          "sha256": "80889a6e4ffa3383e28685568ed3e6302db6da0857353747d85b812f7eeccf12"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/【MacOS】环境管理后端.command/Tests/【MacOS】环境后端回归.zsh/【MacOS】环境后端回归.zsh",
+          "type": "file",
+          "mode": "0o644",
+          "size": 12020,
+          "sha256": "705bcfae60b096b90ab97ec82de5c299c7d91f8dd6167a444cc1f064463d072a"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/【MacOS】环境管理后端.command/【MacOS】环境管理后端.command",
+          "type": "file",
+          "mode": "0o744",
+          "size": 41357,
+          "sha256": "d6e2155e395a150cf3456fb955cfc356563ab2f726933de6ca2feaa95897e7c9"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/安装面板/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 6853,
+          "sha256": "9f8f16e83038a32999f085edd756689e7bb78029bba8b9a26a00c28c8612e361"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/安装面板/Resources/BuildProfile.txt",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4,
+          "sha256": "367c9b4686a777259cfcbff592b674e7c523655a2eb413cf37e8125a72bb5cad"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/安装面板/Resources/PanelTranslations.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 68802,
+          "sha256": "e1762bb430ca49a69ae1ec9250dc86aff6a0284ca1757b1bbb5804d0139f8ad7"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/安装面板/Sources/EnvironmentManager.swift",
+          "type": "file",
+          "mode": "0o644",
+          "size": 67757,
+          "sha256": "c27ab9b331649371a9aca752038cbf021d3dc485810b95fc45fd4db3b0e6dac3"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/安装面板/【MacOS】构建安装面板.command/README.md",
+          "type": "file",
+          "mode": "0o644",
+          "size": 4086,
+          "sha256": "f353b7491dab411d6a4aa1eba8a55149100e0db021526e083507bfac7630faf6"
+        },
+        {
+          "path": "JobsMacEnvVarConfigs/安装面板/【MacOS】构建安装面板.command/【MacOS】构建安装面板.command",
+          "type": "file",
+          "mode": "0o755",
+          "size": 42238,
+          "sha256": "835c3cea108fe45db3aa90671943cb7ce33ac713190e0b1528598037d422caf7"
+        }
+      ]
+    },
+    "product": {
+      "file": "product.zip",
+      "sha256": "1c66ca728702d5435863f575d91347a29ed33b668c8fb494f36007ea0aee79bb",
+      "bytes": 1794695,
+      "entries": [
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Info.plist",
+          "type": "file",
+          "mode": "0o600",
+          "size": 870,
+          "sha256": "a3bedd661dfb4b4fc80eb62316d06dd34cd3806c435cafc975e4a7f77cf09d07"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/MacOS/JobsEnvironmentManager",
+          "type": "file",
+          "mode": "0o755",
+          "size": 731344,
+          "sha256": "50a38e663c08426063340bff95a769ae0eb17576a8e239efd63657628aaf5e34"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/BuildReceipt.plist",
+          "type": "file",
+          "mode": "0o600",
+          "size": 389,
+          "sha256": "c72492185b2ad2356251b808d8b92eaeb68cbcaa2a43bb5953b822ce807177cd"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/JobsEnvironmentManager.icns",
+          "type": "file",
+          "mode": "0o600",
+          "size": 264359,
+          "sha256": "a6afa3c9cf1f06f9b90282b2f3269a230fc69618793eac1f2454dd867c0ec879"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/PanelConfiguration.json",
+          "type": "file",
+          "mode": "0o600",
+          "size": 187,
+          "sha256": "62d56728071b70049c643b830ef962465ae90d6481e752f8371bfefbe4e5bc03"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/PanelTranslations.json",
+          "type": "file",
+          "mode": "0o644",
+          "size": 68802,
+          "sha256": "e1762bb430ca49a69ae1ec9250dc86aff6a0284ca1757b1bbb5804d0139f8ad7"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/Payload.sha256",
+          "type": "file",
+          "mode": "0o600",
+          "size": 22859,
+          "sha256": "d6515efc3c2dea19139d6635ebe143295b1976b325dfd6d313a8c0f14f81b2d6"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.bash_profile",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5145,
+          "sha256": "9079eb760a51e6b2b4231dd7662f4463f11e6e0688496f1f3f42de4f3397e25d"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.bashrc",
+          "type": "file",
+          "mode": "0o600",
+          "size": 88,
+          "sha256": "1c55e19e2eeeb4605a8ed36cf8b093c4ed25e4d228d87d4a45abbe7499fcb319"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.zlogin",
+          "type": "file",
+          "mode": "0o600",
+          "size": 67,
+          "sha256": "0da4ca1e3bd6df9bbb8ab59246965ea183c04a6f6f58884d94c59995c8282c77"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.zlogout",
+          "type": "file",
+          "mode": "0o600",
+          "size": 67,
+          "sha256": "0da4ca1e3bd6df9bbb8ab59246965ea183c04a6f6f58884d94c59995c8282c77"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.zprofile",
+          "type": "file",
+          "mode": "0o600",
+          "size": 466,
+          "sha256": "961d2dda1bbda5db4afaabb629f5f24b2b8ae0961ed9b396050f3e283b6c720e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.zshenv",
+          "type": "file",
+          "mode": "0o600",
+          "size": 67,
+          "sha256": "0da4ca1e3bd6df9bbb8ab59246965ea183c04a6f6f58884d94c59995c8282c77"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/.zshrc",
+          "type": "file",
+          "mode": "0o600",
+          "size": 747,
+          "sha256": "74e5a4e5a97d003dff03d0783a0261e44c630c3973dd4b308f3a5abd19cbda51"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/Sys/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2383,
+          "sha256": "517c242d76e8b2b8eec9019b05cd5f18c29262283427f19f37af0aad304cc52e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 11814,
+          "sha256": "fd102c9bd9b37c0b16849d4044cc0fa519a815b1a67d04280d1a7d765a925399"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4234,
+          "sha256": "5b865fe2582167036d1063a6a323a3e249bacf4cf819751fab74b7d1e00a92a6"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/jobs_git_network_strategy/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 16492,
+          "sha256": "f1a19e63821241512f014a3e58f6e74cef84914d03113b5023ffea62cc4fdea2"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/jobs_git_network_strategy/bin/git",
+          "type": "file",
+          "mode": "0o700",
+          "size": 764,
+          "sha256": "e103457e204aad5252e5be37456c155f29e44e958567cf69f56e0b4fdf9cfaaa"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/jobs_git_network_strategy/bin/【MacOS】git.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1645,
+          "sha256": "61a520760cebea0291807ee6d784a8534c944a98c736b3ea1199372f9a511896"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/jobs_git_network_strategy/bin/【MacOS】git.zsh/【MacOS】git.zsh",
+          "type": "file",
+          "mode": "0o700",
+          "size": 51326,
+          "sha256": "8edc2c232e20ddca491cebecabab672573a382d297ff2b69db5bbf798197aec3"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/jobs_git_network_strategy/【MacOS】rollback.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1419,
+          "sha256": "7d1503db64454f2ab37dd5f1604345f58b6cb5f8a9fc7c7bcf1933a30e7ace11"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/jobs_git_network_strategy/【MacOS】rollback.command/【MacOS】rollback.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 54247,
+          "sha256": "3eb8e09dc2c643a59341fbfc3128f13b3819c97966d2923a99649260f2081a9d"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】FlutterSDK命令适配.sh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2693,
+          "sha256": "84da9bb3454e533528e14c429d8d5513c18618eedef4c3bbc9c5a9bf14c2327b"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】FlutterSDK命令适配.sh/【MacOS】FlutterSDK命令适配.sh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 57147,
+          "sha256": "50cd9af3b38e9865c3c32201864ccc571e202c54eb9d9caa54a93f00cb3f7c91"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】FlutterSDK网络入口.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 952,
+          "sha256": "eda93ec6147337f67cc063476650ed415a52f45bedfcfe78934c38a5e4fe6c61"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】FlutterSDK网络入口.zsh/【MacOS】FlutterSDK网络入口.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2140,
+          "sha256": "4d74189f84af98b77457713cef4e2905c5a8e0ba0c499dce669d1f4d04e0069b"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】FlutterSDK网络选路.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8157,
+          "sha256": "1cae1af88e52b95f09565375af568b7ded27526dd0d89ba0b586d836d2d99d7b"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】FlutterSDK网络选路.zsh/【MacOS】FlutterSDK网络选路.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 80683,
+          "sha256": "35dad07891a50d5b54c478bb8cebbe9f204280e113889123effb738149acc3d9"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】SDK获取重试.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1469,
+          "sha256": "6c63215fb728e832fa85aa7f76bab74d7274a6c3c03fc6d308623e880507b805"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】SDK获取重试.zsh/【MacOS】SDK获取重试.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4765,
+          "sha256": "80b77913d39760ec03df2f2095fd436b4310a9f4cda3299732c9ad1181838d2c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】jobs_flutter_lib.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1431,
+          "sha256": "48bff2bedb7eac86e547e100e37fb5dd249334a2b9093b06df2494e092e28f86"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】jobs_flutter_lib.zsh/【MacOS】jobs_flutter_lib.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 43845,
+          "sha256": "c48ad25c401ff834628509429cf139c1a4a2567658c9190e2e2407ee673c249e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】jobs_path_lib.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1422,
+          "sha256": "41b6fecd9c81572a530e44500737cda7951ad44d7f9a6dba47572e6d41771dad"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】jobs_path_lib.zsh/【MacOS】jobs_path_lib.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2637,
+          "sha256": "91f6da65f38afc29e42fe96a5751cad7da6c07bf53ccde3c59fa64e08f372ed3"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】jobs_session_lib.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1431,
+          "sha256": "9684340ec708634818f29d44167473021cca49ea275730d34375365c28fdab49"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/_lib/【MacOS】jobs_session_lib.zsh/【MacOS】jobs_session_lib.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 9481,
+          "sha256": "5bd980993d14c879e8e562b99ee866dd1588e822857afc70e7cddea7b034904d"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/clean.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 19666,
+          "sha256": "f57ebe871c6a1018465c77c74538d3d972c640006249b9087a6a355d1579faac"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/clean.command/clean.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 114818,
+          "sha256": "9d5e9bb772130bec1f45f2442298bdbd406fec9dd7a67e594e6f5ff44afb7eef"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】a.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2816,
+          "sha256": "3ef57207f1bdbe36ee20d1863fa4fe31011107a24248325da413016e5ab95cbd"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】a.command/【MacOS】a.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55238,
+          "sha256": "4cd16aefb8e2c4598c59cf567539d07ccae2dd54022977f793304c61bf0d6d74"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】apk.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4023,
+          "sha256": "151c3a311fe2f84f9e689214325bf707e68f5a293915d0fc5d1ca07a75dd0175"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】apk.command/【MacOS】apk.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55341,
+          "sha256": "b1c94377b1f91f79815986be1ac6c6e603752058e72ccf922c54dd37b4c7c7ea"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】b.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2795,
+          "sha256": "9a777d34f6b11149a7eca80f8e17aa1b26442563be844b9762fc030162154df2"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】b.command/【MacOS】b.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55223,
+          "sha256": "0218d11d67bbbc8b4344d870fd7478038862c2b2358de17be496c11a0fa8e3f4"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】buildCheck.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3961,
+          "sha256": "475e8608c65b0a050e246165c556c068f2a38e88f620ab86394a3a4eabc3f24e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】buildCheck.command/【MacOS】buildCheck.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55469,
+          "sha256": "8ed7dc97099ed6d8dc1bf4f43e31af2f56bb930cb3d4ac1cba071817e740874f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】c.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3184,
+          "sha256": "28203f79ec7ee86aab953588261338ecd81c4a01798d82ca7f18456a3567ad02"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】c.command/【MacOS】c.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55305,
+          "sha256": "0df71767294852c3daf3a70d17a986d3061b9e8cb529df45638bfd7f0ccfa1cf"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】check.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3217,
+          "sha256": "c2e3a893a878366bbb3fa1ba79cec7b0b7bb81231d9b887e0b2fc742af7f0e20"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】check.command/【MacOS】check.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55428,
+          "sha256": "f3ad19475a640c92302f16656c76a9c1fe06e6456276cfba9cfd31c029cead5a"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】check1.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2911,
+          "sha256": "8fc135d3f281b814c1796df59d63554634c0ae458327dc231b2d0020d45004bb"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】check1.command/【MacOS】check1.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55430,
+          "sha256": "02ec04c6e67043b08fd02dab4af4ac080a1e7e66c1f5b2824958749bbc189709"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 7237,
+          "sha256": "b511c90f7a653cc9d8128eb02ca4147c643137a0106d3f6d337e2b07e80e5c74"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/chrome-extension/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 991,
+          "sha256": "a381d8313ef920b9aef16abd928680e020ba673da4b30bcba3207f8f91f354c3"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/chrome-extension/background.js",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1612,
+          "sha256": "94a9789724ff956ce71c5be3dfc6d1d5f23c8a55c418c3c2d2ab517998b062a7"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/chrome-extension/clear.html",
+          "type": "file",
+          "mode": "0o600",
+          "size": 458,
+          "sha256": "5ca4346e79d5c4cf4f6db77c368e743af6d1adcfccbe43fdcc95247e84c2f223"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/chrome-extension/clear.js",
+          "type": "file",
+          "mode": "0o600",
+          "size": 771,
+          "sha256": "9da00e512afa8990d74e6051ab0e1fa3e4ab99b7de5ab9f1b01d1d8ddd0de6a2"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/chrome-extension/manifest.json",
+          "type": "file",
+          "mode": "0o600",
+          "size": 951,
+          "sha256": "e2a059798f01e5d16531e8dd1c4ead1257be7cdddd73f04e0a7abbf4944e1c9e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】clr.command/【MacOS】clr.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 119596,
+          "sha256": "f259f507ca8d1fd42aede65161a67102d306359de824f34a7a78ee1fe4c3c486"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】code.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1196,
+          "sha256": "368a3411805e53b9d90de18d2981e75ce4e3df577c6deb1d0cef1c97c6ead4b1"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】code.command/【MacOS】code.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 56311,
+          "sha256": "2e92c0ba8bcee9545ac35e1206eff69d1c5be5fc4159b1d219290e78b6e99d88"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】codemap.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8028,
+          "sha256": "6e84db6c6b5f5eb6c40c220a4252b23c7f4bf2615beb02bf1f3e657ee936f0e8"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】codemap.command/【MacOS】codemap.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 61943,
+          "sha256": "8ce02e0a425e434803edfc5398874b622d4e6579cc5e6a49619b54dcf981402f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】config.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3319,
+          "sha256": "b2d0987e243712fc8a5ea7db8c14462a490eaf9d1491b29ccef52b6fa4a69f62"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】config.command/【MacOS】config.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55426,
+          "sha256": "7f335bac8fafb67cef379dbff59ff49d9e0d0e57e8460cc53ca47d41bbfdc1fd"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】cor.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3992,
+          "sha256": "be235838fbbd553377bb0cb423f6cc622d8f9998119049ffd7983f57102b04b9"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】cor.command/【MacOS】cor.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 66468,
+          "sha256": "83fec5cd5503eb556f56e938a84382705dbf89fa2c4e89e60cf5d74c094cda55"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】d.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3138,
+          "sha256": "d20259093f582c5cce8d9a478124e5ea9632d2fd7de92f55b07df0c349153fa4"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】d.command/【MacOS】d.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55300,
+          "sha256": "8eee7a28387a8378a224f12fa270cbb82201e19f19074b9ec613b079a9824260"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】decode.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3921,
+          "sha256": "f7ec737b7437cfdf95efcab68557ab0a4d050712fffebf114955a6d60b367c63"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】decode.command/【MacOS】decode.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 93062,
+          "sha256": "daebcb87dc3a4ea635262c5413fc633f4c63e5e7a57210c19ee4c601ad6acc1a"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】df.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 10663,
+          "sha256": "3199b0baa5e43b9a5ad0f210cdc311192216c5cd7db01ad2ac8b056bdb7b4494"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】df.command/【MacOS】df.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 110610,
+          "sha256": "3eeddbc1dbaa68df57b8d49da83c89cb66f4fbb5371e84813044bed72094f6e9"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】download.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 6369,
+          "sha256": "838044fbb2c56ca27e9602510100af17bf7b7066069811e2ff2ceff55da6797c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】download.command/【MacOS】download.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 73648,
+          "sha256": "2a0f52af7e76fc0fc844b8dafb779eacce9bce6a47ea596c879e7c6a3688cf60"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】dq.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3150,
+          "sha256": "009e188eca1cd841054796bcc4bdeffdf96ab0f706528f5c0db009a890598dc0"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】dq.command/【MacOS】dq.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 57515,
+          "sha256": "44190097fc819c31a3af75c688f6dc56d027400f7bc2a84dddca7d072d2316fb"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】entrypoints.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5718,
+          "sha256": "fc5aaa4bfe1d7eab6c2427d77438bb331eaa5b4d456a6608b135aec3d069ab48"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】entrypoints.command/【MacOS】entrypoints.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 10832,
+          "sha256": "044044d669fa1e3df58ae3b17eb29aa9965b14f903fe4265b842325d9fdd2af7"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】fixfvm.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2923,
+          "sha256": "56ed44ff1c8ee0b43e9c417458d18359b4f4f50fc7eac1a385babb84efe90224"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】fixfvm.command/【MacOS】fixfvm.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55366,
+          "sha256": "fa465d315641a82074f1048afafbe23ec1cc325106f3179ec6c58449cae42498"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】flat.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4345,
+          "sha256": "022c6858eef4bd7cbcaafc0c51be94f799d63cf72395ea6d0a63d650ba4bdbfa"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】flat.command/【MacOS】flat.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 95351,
+          "sha256": "67e6e2dc870b0c65061d22090c7989dfde7a9862048037f4dc8fabab53ea51e9"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】flutter_project.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2804,
+          "sha256": "cc31b39686acc7fd34665ac982659b50aebc9e3487f9223c08d4367f77de71b0"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】flutter_project.command/【MacOS】flutter_project.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 2587,
+          "sha256": "eb9cf5ddbe0d4ad8f3e98cc4f2e077add6f289a319783ca59c8b110f86ebf234"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】frun.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5686,
+          "sha256": "922fc299202102fb1fd90ab35ee778cc5b11c2a560baab9e79808f660fc21644"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】frun.command/【MacOS】frun.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 39731,
+          "sha256": "dfaa122409b1b4756b4bb72deabdd97409ead4f346892988afc24f75f783de53"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】gif.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4422,
+          "sha256": "e7faff83ddeebe192fb43a9081dbf7456e72db460b78593b0692fd5fe771f257"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】gif.command/【MacOS】gif.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 113894,
+          "sha256": "a355b9e46ade13b0599e53b726ab6b41667e0144e80f1d02fdda1f7f7b2b5ab4"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】i.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5460,
+          "sha256": "15b66dcaeed0a78760f8d6931e5de34f02de23015368133ec417f5acbd5aef36"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】i.command/【MacOS】i.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 53050,
+          "sha256": "53e281b49ac2d3b0289d0f623590fe137eda8ba01a38e6c84b6cb9019652c9c0"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】install.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 21881,
+          "sha256": "ce87716cebdebb7ab98b7ba5bedd3ca1c991533b3e1db96859af38bb4e753f8c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】install.command/【MacOS】install.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 112564,
+          "sha256": "7d129877eaf96a86312df8a79a9c2252ea203117b653e65727de1c4752886e7f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】install_jdk17.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4390,
+          "sha256": "901e55d52fd2f7eaf51b2cf27c69d37c1442a3cf5cab71d252dc6337521c82d6"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】install_jdk17.command/【MacOS】install_jdk17.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 78605,
+          "sha256": "70f9d238b5051af6b6d45069fd523fdeadca065fcb1d61724f90f73d8a6be205"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】ipa.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3531,
+          "sha256": "56b3d0824be3c562197d9fc1335c6327758901136acbc7787686a19b2dcce41a"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】ipa.command/【MacOS】ipa.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55363,
+          "sha256": "6f063fb736f542517b2fe40950506e0b10c21316d2e1d9ccb9e7d1b2aed884da"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsAsyncDeadline/JobsAsyncDeadline.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1443,
+          "sha256": "c86b8bc270ba389b15f23169870883c5dd759eb3f8314dd88dbd40dbea7f8cb4"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsCountdownPanel/JobsCountdownPanel.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1281,
+          "sha256": "088390bb5086c5413a591c1751118149fd83b970b12ac47f9d7c4559bd5153f1"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsCountdownView/JobsCountdownView.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4052,
+          "sha256": "7c757acdf9eb441c1251d16591263d9a42eefdddb4ef93d0f0397087c94d23d1"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecorderCLI/JobsRecorderCLI.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 14446,
+          "sha256": "9c806796e46dea6bfac41a633d349eb9680c918f0413597b23064728cd20dc22"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecorderFailure/JobsRecorderFailure.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 439,
+          "sha256": "52d82bbf15672f589934f706e3f104b6f0a3da22e6912ef2ac40676d12686c82"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecorderOptions/JobsRecorderOptions.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2942,
+          "sha256": "c262232ae9a1c4ba4d56ef35c09e87a9905ec0aba969c2478541962bf70f10ff"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecordingCountdown/JobsRecordingCountdown.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1793,
+          "sha256": "3c55626641d7beedaf98cc1fe052ad94330948516ffe68b22e9e3c89c466a09c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecordingDestination/JobsRecordingDestination.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3581,
+          "sha256": "c5fe4f66da4606a079568fed84ceef854ee940a546c89c49dfc0a085144532a5"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecordingLifetime/JobsRecordingLifetime.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3343,
+          "sha256": "2e54850d4c4208f6b434eb5ac9ca7d2128192984be3be6efa3a5fc94073f7e64"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsRecordingSession/JobsRecordingSession.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 13571,
+          "sha256": "96dda9d016603e89fe77f8a9d68d3217b8ae99ae5e0afa3f7baa25218d93584c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsWindowCatalog/JobsWindowCatalog.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 6893,
+          "sha256": "3672cee46be85b56c8183f2217c4e8f7b1b95d9972e372c6bc59e3b2ca651882"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/JobsWindowToken/JobsWindowToken.swift",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1013,
+          "sha256": "d12545ec23251393190c5ccf4b56c3e62a11492aeb0b4773bb2d3531d89aa7ac"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/Core/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 6115,
+          "sha256": "5bbc2d5aff6166b848b8c86c974ec1c36b61407ed49e6ac389315c2bbe92e53f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 23277,
+          "sha256": "98f3c0867f72b114150196c2f86dc7a77cdc4625e31836456c0b4cc58e72206f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】jrecord.command/【MacOS】jrecord.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 96932,
+          "sha256": "21a3251e905781e6b4f2f1b26a6b7f15e9dee4b6dbca21ea823ad4f2b1edafae"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】list.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 9632,
+          "sha256": "1d452ff93f8a431a665ec7397436d6215266c992abe2406c82dcb097ac18bce3"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】list.command/【MacOS】list.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 91430,
+          "sha256": "d172262f92be6e42dc107bd877c323e8c65f5b0ee32a283e4a565d400fddbbf7"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】m5c.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3152,
+          "sha256": "fa185cae49bea3a61a6618bf4d07a8d878c6f5073e77b688745d715881f752d0"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】m5c.command/【MacOS】m5c.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 59507,
+          "sha256": "88cd0b2f9decee6a98a743d7fababa8502680d8f501589b0f77d7c3e27bb67a9"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】merge.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5926,
+          "sha256": "d1365e80e84f0a3aa31b4fba4afdcad7ee048797c0e16e8f18c0387f7ede597c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】merge.command/【MacOS】merge.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 67820,
+          "sha256": "994b46d87beb20f0c398e40bc1c79ba823267bb7c036972c13eef68907fd1102"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】orc.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 7868,
+          "sha256": "8f0546d45b04600c303d9010411f728e92ee9d9784b7fc956fd012e52dd5ec6e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】orc.command/【MacOS】orc.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 44606,
+          "sha256": "d604e1eb4305982a4f8b870f135331b08f8e0070c71e0e4d17de9bf9ed69505d"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】pods.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3612,
+          "sha256": "b7b3279503ac0d5de25298e21ecadf7e8141d285bd622715fe9d289e527f3b38"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】pods.command/【MacOS】pods.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 99983,
+          "sha256": "a9bc21952c3dd4b21446dd0ed8ed63eeab2cb0fd046b3b0f569a018c391a52e3"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】rb.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2850,
+          "sha256": "b3cdef1d14981a718ff3fdbe38d39f0bacec2615783e46bf77a72ce15230f8b2"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】rb.command/【MacOS】rb.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55276,
+          "sha256": "d4a7d0ee03c0898636bd40e7ed488799f9aa3dfed22f846e9c359132b0f83625"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】repair_gem_extensions.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8009,
+          "sha256": "7761f3e5b1b14b96f8f67c6556f83d623a467c843fd089dc26f4d7c73893fc7b"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】repair_gem_extensions.command/【MacOS】repair_gem_extensions.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 61983,
+          "sha256": "878aa1376d070dc4ebf3bc6dc430cf627550d2ce08ee307e0328080524590369"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】runtime_init.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2728,
+          "sha256": "70b7ea1ece2f788753779ce06499138bd137d2afb989b08ae2c440e4b96fb00e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】runtime_init.command/【MacOS】runtime_init.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 1181,
+          "sha256": "61d5a52f966eee6cac9035ec9dc501ef8cb909fd0ebbd8cb2fc508e2bd0c4838"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】save.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2880,
+          "sha256": "a72cbef121c0284782b90df57dfb7c9b9aa6c15135fa698c48dcd76ebab014aa"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】save.command/【MacOS】save.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55338,
+          "sha256": "283cccdaaf8b0be7f4c1e414f219883ad0591435671a564b98e4f3f9409120e0"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】shell.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3555,
+          "sha256": "9fdab4416dfb6cefb1d183d08e6f3e279c7a4d44d68e758da766362c10f5bb9d"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】shell.command/【MacOS】shell.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 61842,
+          "sha256": "b6a6c1f8b859dfaba3fab074976ac97ce4cdbbdecf37d74f0b3d70b84c3a647c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】simios.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2907,
+          "sha256": "97b4ae05a66566394afd3351d85e2c391c022b52d0862a9548dcef6bc1cdb60e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】simios.command/【MacOS】simios.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 44544,
+          "sha256": "745881cc78ec1826d4b8a947be9237f553d89641745882acf72d880679027972"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】split.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5766,
+          "sha256": "d1f466f81eb5be6cd31fbb19b8ad50297ccbc1c17d5df9fca5cdd56b6f69d0e6"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】split.command/【MacOS】split.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 74160,
+          "sha256": "6a9aacf980a0bf43f28d381a299c4e63cd349c82fd722ca59a27a80080a3cc0c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】to.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8774,
+          "sha256": "29961cd6be1a0ab0e007a52730738e9cfba2d44ab787a3059a35a9f1a03230b3"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】to.command/【MacOS】to.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 84321,
+          "sha256": "6ca217c12181f59bb3fd83655a248d64c0ca11efad62bdd346e653f8aa442df5"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】trs.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4666,
+          "sha256": "6dab86509af261300be533060a856a175b4b19202d44e159e15d51121959ad6c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】trs.command/【MacOS】trs.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 88448,
+          "sha256": "89aa2cc93a68e2c14c0aab5e53b18de8eceb037b52e52199790d427041d15be1"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】ts.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4212,
+          "sha256": "92bd4120c73f174595c40738e5882ee8ecc12606be4c01c7236b96e9ab565630"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】ts.command/【MacOS】ts.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 97890,
+          "sha256": "ca2274c5a48ad59ef17820a3aba5301920e5cc647673ff783f83a8d94c719f2b"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】tts.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 12811,
+          "sha256": "8ae709a3d510ce7dd02de1790bbe4c79e151a46b7a87a7a804bda551fc8fc2b7"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】tts.command/【MacOS】tts.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 142015,
+          "sha256": "2c12858d5cc95a431107a91d3dd14bf2b3bf3e39196303cd3404109c289e49e6"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】update.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 50940,
+          "sha256": "aa95e3305c0d3d4b06575a184196f9febd075db22d96196eee9f269da8207304"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】update.command/【MacOS】update.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 256050,
+          "sha256": "073d16d7b790eba4563148a5a10a3f54fe8d2ff81764b11fe22631a816f8a7da"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】x.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2822,
+          "sha256": "f40de0169ce2f367a963536ee7c0e8bbfc6c5aaf70768f185e9341cd7b8ed8d0"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】x.command/【MacOS】x.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55235,
+          "sha256": "c211e39e7e9ea39d77c3623383919853875761a57d4bed659dc07c8d0ea06343"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】zz.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 2871,
+          "sha256": "82e238728d6f155b03d0a7e5ce42af0170096be7c8ab105bcd799cde1d6c94a2"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】zz.command/【MacOS】zz.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 55313,
+          "sha256": "d653a887d91fc8d14d8763ca2edf16d87864dcc64ae73ed09e555266c63d61b8"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.Tests.mjs/GlobalMarkdownToc.Tests.mjs",
+          "type": "file",
+          "mode": "0o600",
+          "size": 8919,
+          "sha256": "3bb7102ad633df353f907f7da90c81f76851d97f4a4ee17df654b13c33b3af66"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.Tests.mjs/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1634,
+          "sha256": "02ce4bd8dfcad3a8f1ec89002e68f2b229e303014405f5b859d43df3e79f2a92"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.mjs/GlobalMarkdownToc.mjs",
+          "type": "file",
+          "mode": "0o600",
+          "size": 74086,
+          "sha256": "c231a296ac50934de6eda9d0790e8dbea8599f0e670fb0b9b30754bf125959ac"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/GlobalMarkdownToc.mjs/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1816,
+          "sha256": "590afaddb69636b1f3eae516650284a30af49e0065d964194240c4c467718056"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/MarkdownToc.mjs/MarkdownToc.mjs",
+          "type": "file",
+          "mode": "0o600",
+          "size": 88849,
+          "sha256": "c4dc4e1b0d317390c46c13a965ff85c98caebf9ac867080a57409c9cc3b3af93"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/MarkdownToc.mjs/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1728,
+          "sha256": "709810f9cc230c605fe661d6061775c9c4ef211bc5494b869ba0b569a325a474"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 6677,
+          "sha256": "32f7546b9f2900ed138182c55e47ff3c93b17d06cf05ec692ff8fe9d4d0aa5a8"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/scripts/【MacOS】⚙️配置全局Markdown目录过滤器.command/【MacOS】⚙️配置全局Markdown目录过滤器.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 52207,
+          "sha256": "c43243326b6d35490b86122041b9f9fda1fb182f0223f1eaf241cb3b48a3d55c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/sync_env.txt",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1372,
+          "sha256": "bbbda331392c2a0130d7dcc719e63277fbc6a84ab7eb240ac6f7e6b75b00e736"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 3694,
+          "sha256": "15e6bf73f563f38490c96045e1729c5bdfc1cf333f34efb269b44a06f77b5d42"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/aliases.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 88,
+          "sha256": "017a85cb5861ce1554b42e24c0a7cf5ee579d5123101318db10c388064ebaf50"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】git_behavior.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1419,
+          "sha256": "e9c25374cf23c871e2d6194452521397ab738cf05737dd49ceba5beda3d0399f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】git_behavior.zsh/【MacOS】git_behavior.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1794,
+          "sha256": "b06c5a12f5ee9e66324616f01308008650c39d88bee8eddc421663d73d6c3ec4"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】local.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1398,
+          "sha256": "212f71365bd80be9890f91fb0fab7dfccfed7f36c843fb1abcb87dab1b8c200c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】local.zsh/【MacOS】local.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1835,
+          "sha256": "565912cf95e50a4c9a9cd30b34f125328c9cdf3a48a5be587e84bb9170bfcf13"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】path_drag_resolver.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1437,
+          "sha256": "495948a1d6b43d216a7a204de866ef01a63afd5c0d34c7cb896a36a3ab340325"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】path_drag_resolver.zsh/【MacOS】path_drag_resolver.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 4701,
+          "sha256": "cd9f378bfcdb11ef4f1ba6474fa0f61491bba03afad398e1f2c6a5fd6a13ed9a"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】shell_behavior.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1425,
+          "sha256": "c4429e5785cc773f2571b89fad80cb21e34c5a8a4403d8fa6e9beb603198c8ff"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/custom/【MacOS】shell_behavior.zsh/【MacOS】shell_behavior.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 665,
+          "sha256": "bbbb8590b15be1b4836a64ed5c77573bb4a67a0eca71e24db37f16f71eb3c32c"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/【MacOS】bootstrap.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1410,
+          "sha256": "e2b206fae15e8e0daf05b31d1ebb155f6e69e90ca6bab1a377aa400b65361046"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/【MacOS】bootstrap.zsh/【MacOS】bootstrap.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1989,
+          "sha256": "29b5c899a377fd7198b6c1b6bf0b45748b8aba7c1b516e27a6f10bf8e68f550f"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/【MacOS】env_methods.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1416,
+          "sha256": "6c109945eaff9f8fd077c0a08be81d58efb90be278f35a1b779e545193376b9e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/【MacOS】env_methods.zsh/【MacOS】env_methods.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 5783,
+          "sha256": "0789a124526585d01252124e74b36c64264523fd68204e8bef33f82cec0780a4"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/【MacOS】user_mounts.zsh/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 1416,
+          "sha256": "214f3886d407b204e673aa8834ac4f2a0b068d4e5806ebf9fa5a1d27dd99d3d2"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/zsh/【MacOS】user_mounts.zsh/【MacOS】user_mounts.zsh",
+          "type": "file",
+          "mode": "0o600",
+          "size": 901,
+          "sha256": "edae4b290e9d8ce31fbbf2fdea5903eacb2771f51c6458d29346ef9f56ccf18a"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/【MacOS】环境管理后端.command/README.md",
+          "type": "file",
+          "mode": "0o600",
+          "size": 7830,
+          "sha256": "e2ef629c4ac4cbb704294cf1cd462a1ca7d3dc8da839d7b675b31e28f48d110e"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/Resources/package/【MacOS】环境管理后端.command/【MacOS】环境管理后端.command",
+          "type": "file",
+          "mode": "0o700",
+          "size": 41357,
+          "sha256": "d6e2155e395a150cf3456fb955cfc356563ab2f726933de6ca2feaa95897e7c9"
+        },
+        {
+          "path": "【MacOS】🌍环境配置管理.app/Contents/_CodeSignature/CodeResources",
+          "type": "file",
+          "mode": "0o600",
+          "size": 60068,
+          "sha256": "8face6968c0f01f07523a1dc278d66d600327079d2efb2ab8020832a90877f4f"
+        }
+      ]
+    }
+  }
+}
